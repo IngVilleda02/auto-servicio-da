@@ -1,0 +1,7 @@
+# Solo se publican index.html, privacidad.html, robots.txt, css/, js/ e img/
+build.py
+data/
+artifact/
+README.md
+DESIGN.md
+.gitignore

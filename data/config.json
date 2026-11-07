@@ -1,0 +1,209 @@
+{
+  "_ayuda": "Edita este archivo y ejecuta 'py build.py' para regenerar el sitio. Un campo vacío ('') se omite de la página; no se muestran avisos de pendiente al público.",
+  "negocio": {
+    "nombre": "Auto Servicio D&A",
+    "nombreMapa": "Hojalateria y pintura D&A",
+    "descripcionCorta": "Hojalatería y pintura, taller mecánico, alineación y balanceo, y refacciones a tu medida en San Juan del Río, Querétaro.",
+    "direccion": "Av. 4 Ote. N° 97, Camino a Sta. Cruz, Sta. Cruz Nieto, La Loma, 76804 San Juan del Río, Qro.",
+    "ciudad": "San Juan del Río, Querétaro",
+    "telefonoMostrar": "427 202 5184",
+    "telefonoTel": "+524272025184",
+    "whatsappMostrar": "+52 427 202 5184",
+    "whatsappNumero": "524272025184",
+    "correo": "",
+    "dominio": "",
+    "zonaHoraria": "America/Mexico_City",
+    "fechaPrivacidad": "7 de noviembre de 2026",
+    "responsable": "Auto Servicio D&A"
+  },
+  "mapa": {
+    "enlaceGoogleMaps": "https://maps.app.goo.gl/PJaJwuukKGx1fx8SA",
+    "lat": 20.4004334,
+    "lng": -99.976916,
+    "instruccionesLlegada": "Sobre Av. 4 Ote., en el camino a Santa Cruz Nieto, colonia La Loma. Usa “Cómo llegar” para abrir la ruta en Google Maps."
+  },
+  "portada": {
+    "ancha": "portada-ancha",
+    "anchaDims": [
+      3940,
+      2500
+    ],
+    "alta": "portada-alta",
+    "altaDims": [
+      3940,
+      5960
+    ],
+    "alt": "Auto clásico con la pintura desgastada, estacionado de noche en una calle"
+  },
+  "horarios": [
+    {
+      "dia": "Lunes",
+      "abre": "09:00",
+      "cierra": "18:00"
+    },
+    {
+      "dia": "Martes",
+      "abre": "09:00",
+      "cierra": "18:00"
+    },
+    {
+      "dia": "Miércoles",
+      "abre": "09:00",
+      "cierra": "18:00"
+    },
+    {
+      "dia": "Jueves",
+      "abre": "09:00",
+      "cierra": "18:00"
+    },
+    {
+      "dia": "Viernes",
+      "abre": "09:00",
+      "cierra": "18:00"
+    },
+    {
+      "dia": "Sábado",
+      "abre": "09:00",
+      "cierra": "13:00"
+    },
+    {
+      "dia": "Domingo",
+      "abre": "",
+      "cierra": ""
+    }
+  ],
+  "servicios": [
+    {
+      "id": "hojalateria",
+      "titulo": "Hojalatería y reparación de carrocería",
+      "descripcion": "Reparación de golpes y abolladuras, y restauración de piezas de carrocería.",
+      "aplicacion": "Para daños por choque, golpes menores o piezas deformadas.",
+      "imagen": "cofre-preparacion",
+      "alt": "Cofre desmontado con la superficie en preparación dentro del taller"
+    },
+    {
+      "id": "pintura",
+      "titulo": "Pintura automotriz, pulido y acabado",
+      "descripcion": "Pintura, retoques, pulido y acabado para devolver la estética del vehículo.",
+      "aplicacion": "Para piezas reparadas, retoques o pintura de carrocería.",
+      "imagen": "pintura-cabina",
+      "alt": "Vehículo gris cubierto con papel y plástico de enmascarado dentro de la cabina de pintura"
+    },
+    {
+      "id": "mecanico",
+      "titulo": "Taller mecánico",
+      "descripcion": "Reparación mecánica y trabajo en suspensión.",
+      "aplicacion": "Para revisión o reparación mecánica de tu vehículo.",
+      "imagenes": [
+        {
+          "nombre": "motor-cofre",
+          "alt": "Camioneta blanca con el cofre abierto y el motor a la vista dentro de un taller"
+        },
+        {
+          "nombre": "llanta-impacto",
+          "alt": "Mecánico aflojando las tuercas de una llanta con pistola de impacto"
+        }
+      ]
+    },
+    {
+      "id": "alineacion",
+      "titulo": "Alineación y balanceo",
+      "descripcion": "Servicio completo de alineación y balanceo.",
+      "aplicacion": "Para cuidar el desgaste de llantas y la dirección del vehículo.",
+      "imagen": "alineacion-balanceo",
+      "alt": "Vehículo blanco sobre la plataforma de alineación con sensores en las ruedas"
+    },
+    {
+      "id": "refacciones",
+      "titulo": "Refacciones a tu medida",
+      "descripcion": "Consigue las refacciones que tu reparación necesita.",
+      "aplicacion": "Cuando tu reparación requiere piezas. Se incluyen en la cotización.",
+      "imagen": "suspension-desmontada",
+      "alt": "Piezas de suspensión retiradas de un vehículo, junto a herramientas"
+    }
+  ],
+  "qualitas": {
+    "titulo": "Trabajamos de la mano con Qualitas",
+    "texto": "Si tu vehículo está asegurado con Qualitas, te acompañamos desde el reporte del siniestro hasta la entrega de la reparación."
+  },
+  "proyectos": [
+    {
+      "id": "cabina-pintura",
+      "nombre": "Vehículo gris en cabina de pintura",
+      "categoria": "Hojalatería y pintura",
+      "imagen": "pintura-cabina",
+      "ancho": 1600,
+      "alto": 1200,
+      "alt": "Vehículo gris con papel de enmascarado y plástico sobre el parabrisas y la rejilla dentro de la cabina de pintura",
+      "situacion": "Vehículo con la zona delantera reparada, listo para pintura.",
+      "servicio": "Hojalatería y pintura: protección de zonas y aplicación de acabado.",
+      "resultado": "En la fotografía se ve el cofre y la salpicadera con capa uniforme, mientras el resto del vehículo permanece cubierto."
+    },
+    {
+      "id": "cofre-preparado",
+      "nombre": "Cofre en preparación",
+      "categoria": "Hojalatería y pintura",
+      "imagen": "cofre-preparacion",
+      "ancho": 1599,
+      "alto": 899,
+      "alt": "Cofre levantado con la superficie en preparación y marcas oscuras de guía",
+      "situacion": "Cofre con el trabajo de superficie en proceso dentro del taller.",
+      "servicio": "Preparación de superficie para pintura.",
+      "resultado": "En la fotografía se ve la superficie lisa con marcas oscuras de guía."
+    },
+    {
+      "id": "suspension",
+      "nombre": "Suspensión desmontada",
+      "categoria": "Taller mecánico",
+      "imagen": "suspension-desmontada",
+      "ancho": 899,
+      "alto": 1599,
+      "alt": "Dos amortiguadores retirados junto a herramientas, con la zona delantera del vehículo abierta",
+      "situacion": "Vehículo con la zona delantera abierta para trabajar en la suspensión.",
+      "servicio": "Taller mecánico: retiro de amortiguadores y resorte.",
+      "resultado": "En la fotografía se ven las piezas retiradas junto a las herramientas de trabajo."
+    },
+    {
+      "id": "alineacion",
+      "nombre": "Alineación y balanceo",
+      "categoria": "Alineación y balanceo",
+      "imagen": "alineacion-balanceo",
+      "ancho": 1280,
+      "alto": 720,
+      "alt": "Vehículo blanco sobre la plataforma de alineación con sensores instalados en las ruedas",
+      "situacion": "Vehículo en el área de alineación del taller.",
+      "servicio": "Alineación y balanceo con equipo de medición.",
+      "resultado": "En la fotografía se ve el vehículo sobre la plataforma con sensores colocados en las ruedas."
+    }
+  ],
+  "resenas": [
+    {
+      "autor": "Armando Chapa",
+      "texto": "Excelente trabajo a precio justo y la pintura de muy buena calidad lleva dos años como recién pintado."
+    },
+    {
+      "autor": "Manolo Sánchez",
+      "texto": "Excelente servicio, me arreglaron facia de kia forte en minutos y a un súper precio. Altamente Recomendado …"
+    },
+    {
+      "autor": "Manuel Mota",
+      "texto": "Me gusta por qué dan un buen servicio y son muy amables y queda uno bien con el trabajo que hacen exelente"
+    },
+    {
+      "autor": "jose antonio ramirez",
+      "texto": "Excelente atencion ,entregan muy bien su trabajo"
+    }
+  ],
+  "procesoParticular": [
+    "Comparte tu requerimiento de reparación.",
+    "Revisamos materiales, refacciones y servicios extras.",
+    "Recibes una cotización con alcance y condiciones.",
+    "Reparamos y coordinamos la entrega después de tu aprobación, con seguimiento personalizado."
+  ],
+  "procesoQualitas": [
+    "Damos seguimiento a tu reporte de siniestro con enlaces virtuales de cada paso.",
+    "Entregas el vehículo para evaluación y se genera la cotización.",
+    "Recibes una cotización con alcance y condiciones, de acuerdo con el enlace de Qualitas.",
+    "Reparamos y coordinamos la entrega después de la aprobación, con seguimiento personalizado."
+  ]
+}

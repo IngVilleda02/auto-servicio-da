@@ -1,0 +1,5 @@
+# Versión integrada para el artefacto de revisión (se regenera con build.py)
+artifact/
+__pycache__/
+.vercel/
+.impeccable/
