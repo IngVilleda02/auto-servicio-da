@@ -22,6 +22,17 @@ Sitio estático, sin Node. Se genera con Python desde un solo archivo de datos.
 - **Horario:** `horarios` (formato 24 h; domingo vacío = cerrado). El estado “Abierto ahora” usa `zonaHoraria`.
 - **Dominio definitivo:** al llenar `negocio.dominio` se activan canonical, `url` en datos estructurados y se quita `noindex`. Después genera `sitemap.xml` y quita el `Disallow: /` de `robots.txt` (el build lo hace solo).
 
+## Publicación
+
+- Repositorio (privado): https://github.com/IngVilleda02/auto-servicio-da
+- Vercel: proyecto `auto-servicio-da` del equipo IngVilleda. Producción: https://auto-servicio-da.vercel.app
+- Cada `git push` a `main` despliega solo en producción. Flujo para un cambio:
+  1. Edita `data/config.json` (o CSS/JS) y ejecuta `py build.py`.
+  2. `git add -A`, `git commit -m "..."` y `git push`.
+- `index.html` y `privacidad.html` se guardan ya generados en el repositorio: Vercel no ejecuta `build.py`.
+- `.vercelignore` evita publicar `build.py`, `data/`, `README.md` y `DESIGN.md`.
+- Las imágenes se cachean un día porque sus nombres no llevan versión. Si quieres caché larga, cambia el nombre del archivo cada vez que reemplaces una foto.
+
 ## Variables de entorno
 
 Ninguna. No hay servidor, claves ni APIs. El mapa usa el embed público de Google sin clave.
