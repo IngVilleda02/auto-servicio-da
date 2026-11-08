@@ -18,7 +18,12 @@ Sitio estático, sin Node. Se genera con Python desde un solo archivo de datos.
 ## Cómo cambiar cosas
 
 - **Datos y textos:** edita `data/config.json` y ejecuta `py build.py`. Un campo vacío (`""`) se omite sin dejar rastro (por ejemplo `correo`, `dominio`).
-- **Agregar un trabajo:** copia la foto a una carpeta, genera variantes de 480, 800 y 1200 px de ancho como `img/<nombre>-480.jpg`, añade el objeto en `proyectos` (con `ancho` y `alto` originales) y ejecuta `py build.py`. Si añades un servicio con foto nueva, agrega sus dimensiones en `DIMS` dentro de `build.py`.
+- **Agregar una foto a la galería de un servicio** (el portafolio vive en "Lo que hacemos en el taller"):
+  1. Prepárala (crea las versiones de 480, 800 y 1200 px en `img/`):
+     `powershell -ExecutionPolicy Bypass -File tools\nueva-foto.ps1 -Origen "C:\ruta\foto.jpg" -Nombre "pintura-puerta-azul"`
+  2. En `data/config.json`, dentro del servicio, agrega a `galeria`: `{ "nombre": "pintura-puerta-azul", "alt": "Descripción de lo que se ve", "pie": "Texto opcional bajo la foto" }`.
+  3. Ejecuta `py build.py`. Las miniaturas, el contador "Ver galería · n fotos" y el visor se actualizan solos.
+- **Portada de un servicio:** son las primeras fotos de su `galeria`; `"portada": 2` muestra dos (como en Taller mecánico). `"foco": "50% 60%"` ajusta el encuadre de una foto recortada.
 - **Horario:** `horarios` (formato 24 h; domingo vacío = cerrado). El estado “Abierto ahora” usa `zonaHoraria`.
 - **Dominio definitivo:** al llenar `negocio.dominio` se activan canonical, `url` en datos estructurados y se quita `noindex`. Después genera `sitemap.xml` y quita el `Disallow: /` de `robots.txt` (el build lo hace solo).
 

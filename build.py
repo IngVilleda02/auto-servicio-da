@@ -29,15 +29,40 @@ def variants(name):
     return sorted(out)
 
 
-def pic(name, w, h, sizes, alt, cls="", eager=False):
+def jpeg_size(path):
+    """Ancho y alto de un JPEG leyendo su marcador SOF (sin dependencias)."""
+    with open(path, "rb") as f:
+        data = f.read()
+    i = 2
+    while i < len(data):
+        if data[i] != 0xFF:
+            i += 1
+            continue
+        marker = data[i + 1]
+        if marker in (0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7, 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF):
+            h = int.from_bytes(data[i + 5:i + 7], "big")
+            w = int.from_bytes(data[i + 7:i + 9], "big")
+            return w, h
+        i += 2 + int.from_bytes(data[i + 2:i + 4], "big")
+    raise ValueError(f"No se pudo leer el tamaño de {path}")
+
+
+def check_image(name):
+    if not variants(name):
+        raise SystemExit(f"Falta la imagen '{name}' en img/. Prepárala con tools\\nueva-foto.ps1.")
+
+
+def pic(name, sizes, alt, cls="", eager=False, style=""):
+    check_image(name)
     vs = variants(name)
     srcset = ", ".join(f"img/{name}-{v}.jpg {v}w" for v in vs)
     mid = min(vs, key=lambda v: abs(v - 800))
-    hh = round(h * mid / w)
+    w, h = jpeg_size(IMG_DIR / f"{name}-{mid}.jpg")
     load = 'fetchpriority="high"' if eager else 'loading="lazy" decoding="async"'
     c = f' class="{cls}"' if cls else ""
-    return (f'<img{c} src="img/{name}-{mid}.jpg" srcset="{srcset}" sizes="{sizes}" '
-            f'width="{mid}" height="{hh}" alt="{esc(alt)}" {load}>')
+    st = f' data-foco="{esc(style)}"' if style else ""
+    return (f'<img{c}{st} src="img/{name}-{mid}.jpg" srcset="{srcset}" sizes="{sizes}" '
+            f'width="{w}" height="{h}" alt="{esc(alt)}" {load}>')
 
 
 def srcset_of(name):
@@ -46,19 +71,6 @@ def srcset_of(name):
 
 def largest(name):
     return f"img/{name}-{max(variants(name))}.jpg"
-
-
-# Dimensiones originales por imagen (para reservar espacio)
-DIMS = {"pintura-cabina": (1600, 1200), "cofre-preparacion": (1599, 899),
-        "suspension-desmontada": (899, 1599), "alineacion-balanceo": (1280, 720),
-        "motor-cofre": (3807, 5710), "llanta-impacto": (4160, 6240)}
-
-
-def service_images(sv):
-    """Un servicio puede tener 'imagen' + 'alt' o una lista 'imagenes' de {nombre, alt}."""
-    if sv.get("imagenes"):
-        return sv["imagenes"]
-    return [{"nombre": sv["imagen"], "alt": sv["alt"]}]
 
 WA_LINK = f"https://wa.me/{N['whatsappNumero']}"
 MAP_OPEN = M["enlaceGoogleMaps"]
@@ -109,7 +121,7 @@ def jsonld():
     return json.dumps(data, ensure_ascii=False)
 
 
-NAV = [("Servicios y cómo trabajamos", "#servicios"), ("Trabajos", "#trabajos"),
+NAV = [("Servicios y cómo trabajamos", "#servicios"),
        ("Contacto", "#contacto")]
 
 LOGO = f'<img src="img/logo-da.png" width="320" height="170" alt="{esc(N["nombre"])}">'
@@ -169,61 +181,87 @@ def footer(home):
 </footer>'''
 
 
+ARROW = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>'
+GRID_ICON = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1h5v5H1zM8 1h5v5H8zM1 8h5v5H1zM8 8h5v5H8z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>'
+
+
+def fotos_word(n):
+    return "1 foto" if n == 1 else f"{n} fotos"
+
+
+def thumbs_html(sv):
+    fotos = sv["galeria"]
+    out = []
+    for j, f in enumerate(fotos[:4]):
+        check_image(f["nombre"])
+        small = variants(f["nombre"])[0]
+        w, h = jpeg_size(IMG_DIR / f"{f['nombre']}-{small}.jpg")
+        extra = len(fotos) - 4 if (j == 3 and len(fotos) > 4) else 0
+        more = f'<span class="thumb__more" aria-hidden="true">+{extra}</span>' if extra else ""
+        label = f"Ver foto {j + 1} de {len(fotos)} de {sv['titulo']}"
+        foco = f' data-foco="{esc(f["foco"])}"' if f.get("foco") else ""
+        out.append(f'<a class="thumb" href="{largest(f["nombre"])}" data-gal="{esc(sv["id"])}" data-index="{j}" aria-label="{esc(label)}">'
+                   f'<img{foco} src="img/{f["nombre"]}-{small}.jpg" width="{w}" height="{h}" alt="" loading="lazy" decoding="async">{more}</a>')
+    return "".join(out)
+
+
 def services_html():
-    arrow = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>'
     rows, previews = [], []
     for i, sv in enumerate(CFG["servicios"]):
-        imgs = service_images(sv)
-        multi = len(imgs) > 1
+        fotos = sv["galeria"]
+        cover = fotos[:max(1, int(sv.get("portada", 1)))]
+        multi = len(cover) > 1
         act = " is-active" if i == 0 else ""
-        mobile = "".join(pic(im["nombre"], *DIMS[im["nombre"]], "50vw" if multi else "100vw", im["alt"], "svc__img")
-                         for im in imgs)
+        mobile = "".join(pic(f["nombre"], "50vw" if multi else "100vw", f["alt"], "svc__img", style=f.get("foco", ""))
+                         for f in cover)
         rows.append(f"""<li class="svc{act}" data-svc="{esc(sv['id'])}">
   <h3>{esc(sv['titulo'])}</h3>
   <p>{esc(sv['descripcion'])}</p>
   <p class="svc__use"><strong>Aplicación:</strong> {esc(sv['aplicacion'])}</p>
   <div class="svc__imgs{' svc__imgs--2' if multi else ''}">{mobile}</div>
-  <a class="link-arrow" href="#contacto" data-service="{esc(sv['titulo'])}">Cotizar este servicio {arrow}</a>
+  <div class="svc__gallery">
+    <div class="thumbs">{thumbs_html(sv)}</div>
+  </div>
+  <div class="svc__actions">
+    <a class="link-arrow" href="{largest(fotos[0]['nombre'])}" data-gal="{esc(sv['id'])}" data-index="0">Ver galería · {fotos_word(len(fotos))} {GRID_ICON}</a>
+    <a class="link-arrow" href="#contacto" data-service="{esc(sv['titulo'])}">Cotizar este servicio {ARROW}</a>
+  </div>
 </li>""")
         shots = []
-        for im in imgs:
-            vs = variants(im["nombre"])
-            srcset = ", ".join(f"img/{im['nombre']}-{v}.jpg {v}w" for v in vs)
-            shots.append(f'<img src="img/{im["nombre"]}-800.jpg" srcset="{srcset}" sizes="{"280px" if multi else "560px"}" alt="" loading="lazy" decoding="async">')
+        for f in cover:
+            foco = f' data-foco="{esc(f["foco"])}"' if f.get("foco") else ""
+            mid = min(variants(f["nombre"]), key=lambda v: abs(v - 800))
+            load = 'decoding="async"' if i == 0 else 'loading="lazy" decoding="async"'
+            shots.append(f'<img{foco} src="img/{f["nombre"]}-{mid}.jpg" srcset="{srcset_of(f["nombre"])}" '
+                         f'sizes="{"280px" if multi else "560px"}" alt="" {load}>')
         previews.append(f'<div class="svc-shot{act}{" svc-shot--2" if multi else ""}" data-for="{esc(sv["id"])}">{"".join(shots)}</div>')
     return ('<div class="svc-wrap"><ul class="svc-list">' + "\n".join(rows) + '</ul>'
             '<div class="svc-preview" aria-hidden="true">' + "".join(previews) + '</div></div>')
 
 
+def gallery_json():
+    data = {}
+    for sv in CFG["servicios"]:
+        fotos = []
+        for f in sv["galeria"]:
+            big = max(variants(f["nombre"]))
+            w, h = jpeg_size(IMG_DIR / f"{f['nombre']}-{big}.jpg")
+            fotos.append({"src": f"img/{f['nombre']}-{big}.jpg", "srcset": srcset_of(f["nombre"]),
+                          "alt": f["alt"], "pie": f.get("pie", ""), "w": w, "h": h})
+        data[sv["id"]] = {"titulo": sv["titulo"], "fotos": fotos}
+    # </ dentro de JSON no debe cerrar la etiqueta script
+    return json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
+
+
+def title_lines(name):
+    """Divide el nombre en dos líneas (primera palabra / resto) para la animación de entrada."""
+    first, _, rest = name.partition(" ")
+    lines = [first, rest] if rest else [first]
+    return " ".join(f'<span class="title-line"><span class="title-ink">{esc(t)}</span></span>' for t in lines)
+
+
 def steps(items):
     return "\n".join(f"<li><span>{esc(t)}</span></li>" for t in items)
-
-
-def projects_html():
-    cats = []
-    for p in CFG["proyectos"]:
-        if p["categoria"] not in cats:
-            cats.append(p["categoria"])
-    chips = '<button class="chip" type="button" data-filter="all" aria-pressed="true">Todos</button>' + "".join(
-        f'<button class="chip" type="button" data-filter="{esc(c)}" aria-pressed="false">{esc(c)}</button>' for c in cats)
-    cards = []
-    for p in CFG["proyectos"]:
-        cards.append(f'''<article class="project" data-cat="{esc(p['categoria'])}" data-name="{esc(p['nombre'])}"
-  data-large="{largest(p['imagen'])}" data-situacion="{esc(p['situacion'])}" data-servicio="{esc(p['servicio'])}" data-resultado="{esc(p['resultado'])}">
-  <button class="project__open" type="button" aria-label="Ampliar fotografía: {esc(p['nombre'])}">
-    {pic(p['imagen'], p['ancho'], p['alto'], "(min-width:1024px) 600px, (min-width:720px) 50vw, 100vw", p['alt'])}
-  </button>
-  <div class="project__body">
-    <span class="project__tag">{esc(p['categoria'])}</span>
-    <h3>{esc(p['nombre'])}</h3>
-    <dl class="facts">
-      <div><dt>Situación</dt><dd>{esc(p['situacion'])}</dd></div>
-      <div><dt>Servicio</dt><dd>{esc(p['servicio'])}</dd></div>
-      <div><dt>Resultado</dt><dd>{esc(p['resultado'])}</dd></div>
-    </dl>
-  </div>
-</article>''')
-    return chips, "\n".join(cards)
 
 
 STAR = "9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"
@@ -235,11 +273,25 @@ def stars():
 
 
 def reviews_html():
-    return "\n".join(f"""<figure class="review">
+    total = len(CFG["resenas"])
+    slides = "\n".join(f"""<figure class="review" role="group" aria-roledescription="opinión" aria-label="{i + 1} de {total}">
   {stars()}
   <blockquote><p>{esc(r['texto'])}</p></blockquote>
   <figcaption>{esc(r['autor'])}</figcaption>
-</figure>""" for r in CFG["resenas"])
+</figure>""" for i, r in enumerate(CFG["resenas"]))
+    prev = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M13 7H2M6.5 2.5 2 7l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>'
+    return f"""<div class="carousel" id="reviews-carousel" role="region" aria-roledescription="carrusel" aria-label="Opiniones de clientes">
+  <div class="carousel__viewport">
+    <div class="carousel__track" id="reviews-track" aria-live="off">
+{slides}
+    </div>
+  </div>
+  <div class="carousel__controls js-only">
+    <span class="carousel__count" aria-hidden="true"><span data-carousel-current>1</span> / {total}</span>
+    <button class="carousel__toggle" type="button" data-carousel-toggle>Pausar</button>
+    <span class="carousel__progress" aria-hidden="true"><span data-carousel-bar></span></span>
+  </div>
+</div>"""
 
 
 def service_options():
@@ -252,7 +304,6 @@ def service_options():
 
 
 def home_body():
-    chips, cards = projects_html()
     email_dt = (f'<div><dt>Correo</dt><dd><a href="mailto:{esc(N["correo"])}">{esc(N["correo"])}</a></dd></div>'
                 if N["correo"] else "")
     hours_json = json.dumps({"tz": N["zonaHoraria"], "days": CFG["horarios"]}, ensure_ascii=False)
@@ -266,11 +317,11 @@ def home_body():
          width="{P['anchaDims'][0]}" height="{P['anchaDims'][1]}" alt="{esc(P['alt'])}" fetchpriority="high">
   </picture>
   <div class="wrap hero__inner">
-    <h1 id="h1">{esc(N['nombre'])}</h1>
+    <h1 id="h1" class="hero__title">{title_lines(N['nombre'])}</h1>
     <p class="hero__lead">Hojalatería y pintura de alta calidad. La diferencia está en cada detalle. Restauramos la estética de tu auto con precisión, acabados impecables y atención personalizada.</p>
     <div class="hero__ctas">
       <a class="btn btn--primary" href="#contacto">Solicitar cotización</a>
-      <a class="btn btn--light" href="#trabajos">Trabajos</a>
+      <a class="btn btn--light" href="#servicios">Trabajos</a>
     </div>
   </div>
 </section>
@@ -288,7 +339,7 @@ def home_body():
   <div class="wrap">
     <div class="section__head">
       <h2 id="h-servicios">Lo que hacemos en el taller</h2>
-      <p class="lead">Cada servicio incluye seguimiento personal de tu vehículo.</p>
+      <p class="lead">Cada servicio incluye seguimiento personal de tu vehículo. Abre su galería para ver trabajos realizados.</p>
     </div>
 {services_html()}
   </div>
@@ -318,39 +369,22 @@ def home_body():
   </div>
 </section>
 
-<section class="section" id="trabajos" aria-labelledby="h-trabajos">
-  <div class="wrap">
-    <div class="section__head">
-      <h2 id="h-trabajos">Fotografías reales del taller</h2>
-      <p class="lead">Trabajos en proceso y terminados dentro de nuestras instalaciones. Toca una imagen para ampliarla.</p>
-    </div>
-    <div class="filters" role="group" aria-label="Filtrar trabajos por servicio">
-      {chips}
-    </div>
-    <p class="sr-only" id="filter-live" role="status" aria-live="polite"></p>
-    <div class="projects" id="projects">
-{cards}
-    </div>
-  </div>
-</section>
-
 <dialog class="lightbox" id="lightbox" aria-labelledby="lb-title">
-  <div class="lightbox__inner">
-    <div class="lightbox__img"><img data-lb-img alt="" width="800" height="600"></div>
-    <div class="lightbox__text">
-      <span class="project__tag" data-lb-cat></span>
+  <div class="lightbox__head">
+    <div>
       <h3 id="lb-title" data-lb-title></h3>
-      <dl class="facts">
-        <div><dt>Situación</dt><dd data-lb-situacion></dd></div>
-        <div><dt>Servicio</dt><dd data-lb-servicio></dd></div>
-        <div><dt>Resultado</dt><dd data-lb-resultado></dd></div>
-      </dl>
-      <div class="lightbox__nav">
-        <button class="btn btn--sm" type="button" data-lb-prev>Anterior</button>
-        <button class="btn btn--sm" type="button" data-lb-next>Siguiente</button>
-        <button class="btn btn--sm btn--primary" type="button" data-lb-close>Cerrar</button>
-      </div>
+      <p class="lightbox__count" data-lb-count aria-live="polite"></p>
     </div>
+    <button class="lightbox__close" type="button" data-lb-close aria-label="Cerrar galería"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2 2 12" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+  </div>
+  <figure class="lightbox__figure">
+    <img data-lb-img alt="" width="1200" height="800">
+    <figcaption data-lb-pie></figcaption>
+  </figure>
+  <div class="lightbox__nav">
+    <button class="carousel__btn carousel__btn--light" type="button" data-lb-prev aria-label="Foto anterior"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M13 7H2M6.5 2.5 2 7l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+    <div class="lightbox__strip" data-lb-strip></div>
+    <button class="carousel__btn carousel__btn--light" type="button" data-lb-next aria-label="Foto siguiente">{ARROW}</button>
   </div>
 </dialog>
 
@@ -360,9 +394,7 @@ def home_body():
       <h2 id="h-resenas">Lo que dicen nuestros clientes</h2>
       <p class="reviews__src">Reseñas publicadas en Google Maps, transcritas tal como aparecen.</p>
     </div>
-    <div class="reviews__grid">
 {reviews_html()}
-    </div>
   </div>
 </section>
 
@@ -470,6 +502,7 @@ def home_body():
 </main>
 {footer(True)}
 <script type="application/json" id="hours-data">{hours_json}</script>
+<script type="application/json" id="gallery-data">{gallery_json()}</script>
 <script type="application/ld+json">{jsonld()}</script>
 '''
 

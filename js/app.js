@@ -94,75 +94,169 @@
     });
   }
 
-  /* ---------- Filtros y galería ---------- */
-  function initProjects() {
-    var grid = document.getElementById("projects");
-    if (!grid) return;
-    var chips = document.querySelectorAll("[data-filter]");
-    var cards = Array.prototype.slice.call(grid.querySelectorAll(".project"));
-    var live = document.getElementById("filter-live");
-    chips.forEach(function (chip) {
-      chip.addEventListener("click", function () {
-        var f = chip.getAttribute("data-filter");
-        chips.forEach(function (c) { c.setAttribute("aria-pressed", c === chip ? "true" : "false"); });
-        var n = 0;
-        cards.forEach(function (card) {
-          var show = f === "all" || card.getAttribute("data-cat") === f;
-          card.hidden = !show;
-          if (show) n++;
-        });
-        if (live) live.textContent = n + (n === 1 ? " trabajo mostrado" : " trabajos mostrados");
-      });
+  /* ---------- Encuadre de fotos (data-foco = object-position) ---------- */
+  function initFoco() {
+    document.querySelectorAll("img[data-foco]").forEach(function (img) {
+      img.style.objectPosition = img.getAttribute("data-foco");
     });
+  }
 
+  /* ---------- Galería por servicio ---------- */
+  function initGallery() {
+    var dataEl = document.getElementById("gallery-data");
     var dlg = document.getElementById("lightbox");
-    if (!dlg || typeof dlg.showModal !== "function") return;
+    if (!dataEl || !dlg || typeof dlg.showModal !== "function") return;
+    var data;
+    try { data = JSON.parse(dataEl.textContent); } catch (err) { return; }
     var img = dlg.querySelector("[data-lb-img]");
     var title = dlg.querySelector("[data-lb-title]");
-    var cat = dlg.querySelector("[data-lb-cat]");
-    var sit = dlg.querySelector("[data-lb-situacion]");
-    var srv = dlg.querySelector("[data-lb-servicio]");
-    var res = dlg.querySelector("[data-lb-resultado]");
-    var current = null, opener = null;
+    var count = dlg.querySelector("[data-lb-count]");
+    var pie = dlg.querySelector("[data-lb-pie]");
+    var strip = dlg.querySelector("[data-lb-strip]");
+    var prevBtn = dlg.querySelector("[data-lb-prev]");
+    var nextBtn = dlg.querySelector("[data-lb-next]");
+    var gal = null, index = 0, opener = null;
 
-    function visible() { return cards.filter(function (c) { return !c.hidden; }); }
-    function render(card) {
-      current = card;
-      var t = card.querySelector(".project__open img");
-      img.src = card.getAttribute("data-large");
-      img.srcset = "";
-      img.alt = t.alt;
-      title.textContent = card.getAttribute("data-name");
-      cat.textContent = card.getAttribute("data-cat");
-      sit.textContent = card.getAttribute("data-situacion");
-      srv.textContent = card.getAttribute("data-servicio");
-      res.textContent = card.getAttribute("data-resultado");
+    function smallest(srcset) { return (srcset.split(",")[0] || "").trim().split(" ")[0]; }
+
+    function show(i) {
+      var fotos = gal.fotos;
+      index = (i + fotos.length) % fotos.length;
+      var f = fotos[index];
+      img.srcset = f.srcset;
+      img.sizes = "(min-width: 1024px) 80vw, 100vw";
+      img.src = f.src;
+      img.width = f.w; img.height = f.h;
+      img.alt = f.alt;
+      pie.textContent = f.pie || "";
+      pie.hidden = !f.pie;
+      count.textContent = "Foto " + (index + 1) + " de " + fotos.length;
+      strip.querySelectorAll("button").forEach(function (b, j) {
+        b.setAttribute("aria-current", j === index ? "true" : "false");
+      });
+      var single = fotos.length < 2;
+      prevBtn.hidden = single; nextBtn.hidden = single;
     }
-    function step(delta) {
-      var list = visible();
-      if (!list.length) return;
-      var i = list.indexOf(current);
-      render(list[(i + delta + list.length) % list.length]);
-    }
-    grid.addEventListener("click", function (e) {
-      var btn = e.target.closest(".project__open");
-      if (!btn) return;
-      opener = btn;
-      render(btn.closest(".project"));
+
+    function open(id, i, from) {
+      gal = data[id];
+      if (!gal || !gal.fotos.length) return;
+      opener = from;
+      title.textContent = gal.titulo;
+      strip.textContent = "";
+      gal.fotos.forEach(function (f, j) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "lightbox__thumb";
+        b.setAttribute("aria-label", "Ver foto " + (j + 1));
+        var t = document.createElement("img");
+        t.src = smallest(f.srcset); t.alt = ""; t.loading = "lazy";
+        b.appendChild(t);
+        b.addEventListener("click", function () { show(j); });
+        strip.appendChild(b);
+      });
+      strip.hidden = gal.fotos.length < 2;
+      show(i);
       dlg.showModal();
+    }
+
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest("[data-gal]");
+      if (!a) return;
+      e.preventDefault();
+      open(a.getAttribute("data-gal"), parseInt(a.getAttribute("data-index"), 10) || 0, a);
     });
+    prevBtn.addEventListener("click", function () { show(index - 1); });
+    nextBtn.addEventListener("click", function () { show(index + 1); });
     dlg.querySelector("[data-lb-close]").addEventListener("click", function () { dlg.close(); });
-    dlg.querySelector("[data-lb-prev]").addEventListener("click", function () { step(-1); });
-    dlg.querySelector("[data-lb-next]").addEventListener("click", function () { step(1); });
     dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
     dlg.addEventListener("keydown", function (e) {
-      if (e.key === "ArrowLeft") step(-1);
-      if (e.key === "ArrowRight") step(1);
+      if (!gal) return;
+      if (e.key === "ArrowLeft") show(index - 1);
+      if (e.key === "ArrowRight") show(index + 1);
+    });
+    var touchX = null;
+    img.addEventListener("pointerdown", function (e) { touchX = e.clientX; });
+    img.addEventListener("pointerup", function (e) {
+      if (touchX === null) return;
+      var dx = e.clientX - touchX; touchX = null;
+      if (Math.abs(dx) > 40) show(index + (dx < 0 ? 1 : -1));
     });
     dlg.addEventListener("close", function () {
-      img.removeAttribute("src");
+      img.removeAttribute("srcset"); img.removeAttribute("src");
       if (opener && document.contains(opener)) opener.focus();
     });
+  }
+
+  /* ---------- Carrusel de reseñas ---------- */
+  function initCarousel() {
+    var root = document.getElementById("reviews-carousel");
+    if (!root) return;
+    var track = root.querySelector(".carousel__track");
+    var slides = Array.prototype.slice.call(track.children);
+    if (slides.length < 2) return;
+    var current = root.querySelector("[data-carousel-current]");
+    var toggle = root.querySelector("[data-carousel-toggle]");
+    var bar = root.querySelector("[data-carousel-bar]");
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var DELAY = 7000;
+    // Siempre avanza solo; con movimiento reducido cambia sin deslizar.
+    var index = 0, timer = null, playing = true, hovered = false;
+
+    root.classList.add("is-enhanced");
+    if (reduce) root.classList.add("is-reduced");
+
+    function go(i, user) {
+      index = (i + slides.length) % slides.length;
+      track.style.transform = "translateX(" + (-100 * index) + "%)";
+      slides.forEach(function (s, j) {
+        var on = j === index;
+        s.setAttribute("aria-hidden", on ? "false" : "true");
+        if ("inert" in s) s.inert = !on;
+      });
+      current.textContent = index + 1;
+      track.setAttribute("aria-live", user ? "polite" : "off");
+      restart();
+    }
+    function restart() {
+      clearTimeout(timer);
+      bar.classList.remove("is-running");
+      void bar.offsetWidth; // reinicia la animación de la barra
+      if (playing && !hovered && !document.hidden) {
+        bar.style.animationDuration = DELAY + "ms";
+        bar.classList.add("is-running");
+        timer = setTimeout(function () { go(index + 1, false); }, DELAY);
+      }
+    }
+    function setPlaying(p) {
+      playing = p;
+      toggle.textContent = p ? "Pausar" : "Reproducir";
+      toggle.setAttribute("aria-label", p ? "Pausar el carrusel" : "Reproducir el carrusel");
+      restart();
+    }
+
+    toggle.addEventListener("click", function () { setPlaying(!playing); });
+    root.addEventListener("mouseenter", function () { hovered = true; restart(); });
+    root.addEventListener("mouseleave", function () { hovered = false; restart(); });
+    root.addEventListener("focusin", function () { hovered = true; restart(); });
+    root.addEventListener("focusout", function (e) {
+      if (!root.contains(e.relatedTarget)) { hovered = false; restart(); }
+    });
+    root.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") go(index - 1, true);
+      if (e.key === "ArrowRight") go(index + 1, true);
+    });
+    document.addEventListener("visibilitychange", restart);
+    var startX = null;
+    track.addEventListener("pointerdown", function (e) { startX = e.clientX; });
+    track.addEventListener("pointerup", function (e) {
+      if (startX === null) return;
+      var dx = e.clientX - startX; startX = null;
+      if (Math.abs(dx) > 40) go(index + (dx < 0 ? 1 : -1), true);
+    });
+
+    setPlaying(playing);
+    go(0, false);
   }
 
   /* ---------- Mapa bajo demanda ---------- */
@@ -307,7 +401,9 @@
     initMenu();
     initHours();
     initServices();
-    initProjects();
+    initFoco();
+    initGallery();
+    initCarousel();
     initMap();
     initForm();
   });

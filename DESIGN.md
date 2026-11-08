@@ -35,5 +35,7 @@ Dirección: **showroom de taller**, inspirada en la organización y el ritmo edi
 - **Filtros:** pestañas de texto con subrayado de 3px.
 
 ## Movimiento
-- Un solo momento: al cargar, la foto del hero se asienta (escala 1.06 → 1) y el texto sube 28px, desde un estado ya visible.
-- Cruce de opacidad en la vista previa de servicios. Todo se anula con `prefers-reduced-motion`.
+- Momento principal: al cargar, cada línea del título se descubre de izquierda a derecha como cinta de enmascarar que se despega (`clip-path`), con un filo blanco de 2px que viaja en el corte y desaparece al final. La foto del hero se asienta (escala 1.06 → 1) y después suben el texto y los botones.
+- Reseñas: carrusel automático (7 s por reseña) con barra de progreso, contador y botón Pausar; se detiene al pasar el cursor o enfocarlo. Sin flechas.
+- Cruce de opacidad en la vista previa de servicios.
+- `prefers-reduced-motion`: sin animaciones de entrada (el título aparece completo) y el carrusel cambia de reseña sin deslizar.

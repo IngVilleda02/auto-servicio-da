@@ -23,7 +23,6 @@
     <button class="btn btn--sm menu-toggle js-only" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menú</button>
     <nav class="nav" id="site-nav" aria-label="Principal">
       <a href="#servicios">Servicios y cómo trabajamos</a>
-<a href="#trabajos">Trabajos</a>
 <a href="#contacto">Contacto</a>
       <a class="btn btn--primary btn--sm" href="#contacto">Solicitar cotización</a>
     </nav>
@@ -37,11 +36,11 @@
          width="3940" height="2500" alt="Auto clásico con la pintura desgastada, estacionado de noche en una calle" fetchpriority="high">
   </picture>
   <div class="wrap hero__inner">
-    <h1 id="h1">Auto Servicio D&amp;A</h1>
+    <h1 id="h1" class="hero__title"><span class="title-line"><span class="title-ink">Auto</span></span> <span class="title-line"><span class="title-ink">Servicio D&amp;A</span></span></h1>
     <p class="hero__lead">Hojalatería y pintura de alta calidad. La diferencia está en cada detalle. Restauramos la estética de tu auto con precisión, acabados impecables y atención personalizada.</p>
     <div class="hero__ctas">
       <a class="btn btn--primary" href="#contacto">Solicitar cotización</a>
-      <a class="btn btn--light" href="#trabajos">Trabajos</a>
+      <a class="btn btn--light" href="#servicios">Trabajos</a>
     </div>
   </div>
 </section>
@@ -59,43 +58,73 @@
   <div class="wrap">
     <div class="section__head">
       <h2 id="h-servicios">Lo que hacemos en el taller</h2>
-      <p class="lead">Cada servicio incluye seguimiento personal de tu vehículo.</p>
+      <p class="lead">Cada servicio incluye seguimiento personal de tu vehículo. Abre su galería para ver trabajos realizados.</p>
     </div>
 <div class="svc-wrap"><ul class="svc-list"><li class="svc is-active" data-svc="hojalateria">
   <h3>Hojalatería y reparación de carrocería</h3>
   <p>Reparación de golpes y abolladuras, y restauración de piezas de carrocería.</p>
   <p class="svc__use"><strong>Aplicación:</strong> Para daños por choque, golpes menores o piezas deformadas.</p>
-  <div class="svc__imgs"><img class="svc__img" src="img/cofre-preparacion-800.jpg" srcset="img/cofre-preparacion-480.jpg 480w, img/cofre-preparacion-800.jpg 800w, img/cofre-preparacion-1200.jpg 1200w" sizes="100vw" width="800" height="450" alt="Cofre desmontado con la superficie en preparación dentro del taller" loading="lazy" decoding="async"></div>
-  <a class="link-arrow" href="#contacto" data-service="Hojalatería y reparación de carrocería">Cotizar este servicio <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+  <div class="svc__imgs"><img class="svc__img" data-foco="50% 62%" src="img/pulido-carroceria-800.jpg" srcset="img/pulido-carroceria-480.jpg 480w, img/pulido-carroceria-800.jpg 800w, img/pulido-carroceria-1200.jpg 1200w" sizes="100vw" width="800" height="2096" alt="Pulido de la carrocería de un auto oscuro con pulidora orbital" loading="lazy" decoding="async"></div>
+  <div class="svc__gallery">
+    <div class="thumbs"><a class="thumb" href="img/pulido-carroceria-1200.jpg" data-gal="hojalateria" data-index="0" aria-label="Ver foto 1 de 2 de Hojalatería y reparación de carrocería"><img data-foco="50% 62%" src="img/pulido-carroceria-480.jpg" width="480" height="1258" alt="" loading="lazy" decoding="async"></a><a class="thumb" href="img/cofre-preparacion-1200.jpg" data-gal="hojalateria" data-index="1" aria-label="Ver foto 2 de 2 de Hojalatería y reparación de carrocería"><img src="img/cofre-preparacion-480.jpg" width="480" height="270" alt="" loading="lazy" decoding="async"></a></div>
+  </div>
+  <div class="svc__actions">
+    <a class="link-arrow" href="img/pulido-carroceria-1200.jpg" data-gal="hojalateria" data-index="0">Ver galería · 2 fotos <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1h5v5H1zM8 1h5v5H8zM1 8h5v5H1zM8 8h5v5H8z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+    <a class="link-arrow" href="#contacto" data-service="Hojalatería y reparación de carrocería">Cotizar este servicio <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+  </div>
 </li>
 <li class="svc" data-svc="pintura">
   <h3>Pintura automotriz, pulido y acabado</h3>
   <p>Pintura, retoques, pulido y acabado para devolver la estética del vehículo.</p>
   <p class="svc__use"><strong>Aplicación:</strong> Para piezas reparadas, retoques o pintura de carrocería.</p>
-  <div class="svc__imgs"><img class="svc__img" src="img/pintura-cabina-800.jpg" srcset="img/pintura-cabina-480.jpg 480w, img/pintura-cabina-800.jpg 800w, img/pintura-cabina-1200.jpg 1200w, img/pintura-cabina-1600.jpg 1600w" sizes="100vw" width="800" height="600" alt="Vehículo gris cubierto con papel y plástico de enmascarado dentro de la cabina de pintura" loading="lazy" decoding="async"></div>
-  <a class="link-arrow" href="#contacto" data-service="Pintura automotriz, pulido y acabado">Cotizar este servicio <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+  <div class="svc__imgs"><img class="svc__img" src="img/pintura-defensa-800.jpg" srcset="img/pintura-defensa-480.jpg 480w, img/pintura-defensa-800.jpg 800w, img/pintura-defensa-1200.jpg 1200w" sizes="100vw" width="800" height="787" alt="Pintor con traje protector aplicando pintura a una defensa con pistola de aire" loading="lazy" decoding="async"></div>
+  <div class="svc__gallery">
+    <div class="thumbs"><a class="thumb" href="img/pintura-defensa-1200.jpg" data-gal="pintura" data-index="0" aria-label="Ver foto 1 de 2 de Pintura automotriz, pulido y acabado"><img src="img/pintura-defensa-480.jpg" width="480" height="472" alt="" loading="lazy" decoding="async"></a><a class="thumb" href="img/pintura-cabina-1600.jpg" data-gal="pintura" data-index="1" aria-label="Ver foto 2 de 2 de Pintura automotriz, pulido y acabado"><img src="img/pintura-cabina-480.jpg" width="480" height="360" alt="" loading="lazy" decoding="async"></a></div>
+  </div>
+  <div class="svc__actions">
+    <a class="link-arrow" href="img/pintura-defensa-1200.jpg" data-gal="pintura" data-index="0">Ver galería · 2 fotos <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1h5v5H1zM8 1h5v5H8zM1 8h5v5H1zM8 8h5v5H8z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+    <a class="link-arrow" href="#contacto" data-service="Pintura automotriz, pulido y acabado">Cotizar este servicio <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+  </div>
 </li>
 <li class="svc" data-svc="mecanico">
   <h3>Taller mecánico</h3>
   <p>Reparación mecánica y trabajo en suspensión.</p>
   <p class="svc__use"><strong>Aplicación:</strong> Para revisión o reparación mecánica de tu vehículo.</p>
   <div class="svc__imgs svc__imgs--2"><img class="svc__img" src="img/motor-cofre-800.jpg" srcset="img/motor-cofre-480.jpg 480w, img/motor-cofre-800.jpg 800w, img/motor-cofre-1200.jpg 1200w" sizes="50vw" width="800" height="1200" alt="Camioneta blanca con el cofre abierto y el motor a la vista dentro de un taller" loading="lazy" decoding="async"><img class="svc__img" src="img/llanta-impacto-800.jpg" srcset="img/llanta-impacto-480.jpg 480w, img/llanta-impacto-800.jpg 800w, img/llanta-impacto-1200.jpg 1200w" sizes="50vw" width="800" height="1200" alt="Mecánico aflojando las tuercas de una llanta con pistola de impacto" loading="lazy" decoding="async"></div>
-  <a class="link-arrow" href="#contacto" data-service="Taller mecánico">Cotizar este servicio <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+  <div class="svc__gallery">
+    <div class="thumbs"><a class="thumb" href="img/motor-cofre-1200.jpg" data-gal="mecanico" data-index="0" aria-label="Ver foto 1 de 3 de Taller mecánico"><img src="img/motor-cofre-480.jpg" width="480" height="720" alt="" loading="lazy" decoding="async"></a><a class="thumb" href="img/llanta-impacto-1200.jpg" data-gal="mecanico" data-index="1" aria-label="Ver foto 2 de 3 de Taller mecánico"><img src="img/llanta-impacto-480.jpg" width="480" height="720" alt="" loading="lazy" decoding="async"></a><a class="thumb" href="img/suspension-desmontada-800.jpg" data-gal="mecanico" data-index="2" aria-label="Ver foto 3 de 3 de Taller mecánico"><img src="img/suspension-desmontada-480.jpg" width="480" height="854" alt="" loading="lazy" decoding="async"></a></div>
+  </div>
+  <div class="svc__actions">
+    <a class="link-arrow" href="img/motor-cofre-1200.jpg" data-gal="mecanico" data-index="0">Ver galería · 3 fotos <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1h5v5H1zM8 1h5v5H8zM1 8h5v5H1zM8 8h5v5H8z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+    <a class="link-arrow" href="#contacto" data-service="Taller mecánico">Cotizar este servicio <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+  </div>
 </li>
 <li class="svc" data-svc="alineacion">
   <h3>Alineación y balanceo</h3>
   <p>Servicio completo de alineación y balanceo.</p>
   <p class="svc__use"><strong>Aplicación:</strong> Para cuidar el desgaste de llantas y la dirección del vehículo.</p>
-  <div class="svc__imgs"><img class="svc__img" src="img/alineacion-balanceo-800.jpg" srcset="img/alineacion-balanceo-480.jpg 480w, img/alineacion-balanceo-800.jpg 800w, img/alineacion-balanceo-1200.jpg 1200w" sizes="100vw" width="800" height="450" alt="Vehículo blanco sobre la plataforma de alineación con sensores en las ruedas" loading="lazy" decoding="async"></div>
-  <a class="link-arrow" href="#contacto" data-service="Alineación y balanceo">Cotizar este servicio <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+  <div class="svc__imgs"><img class="svc__img" src="img/alineacion-plataforma-800.jpg" srcset="img/alineacion-plataforma-480.jpg 480w, img/alineacion-plataforma-800.jpg 800w, img/alineacion-plataforma-1200.jpg 1200w" sizes="100vw" width="800" height="450" alt="Auto blanco sobre la plataforma de alineación con sensores en las ruedas, en el taller" loading="lazy" decoding="async"></div>
+  <div class="svc__gallery">
+    <div class="thumbs"><a class="thumb" href="img/alineacion-plataforma-1200.jpg" data-gal="alineacion" data-index="0" aria-label="Ver foto 1 de 1 de Alineación y balanceo"><img src="img/alineacion-plataforma-480.jpg" width="480" height="270" alt="" loading="lazy" decoding="async"></a></div>
+  </div>
+  <div class="svc__actions">
+    <a class="link-arrow" href="img/alineacion-plataforma-1200.jpg" data-gal="alineacion" data-index="0">Ver galería · 1 foto <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1h5v5H1zM8 1h5v5H8zM1 8h5v5H1zM8 8h5v5H8z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+    <a class="link-arrow" href="#contacto" data-service="Alineación y balanceo">Cotizar este servicio <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+  </div>
 </li>
 <li class="svc" data-svc="refacciones">
   <h3>Refacciones a tu medida</h3>
   <p>Consigue las refacciones que tu reparación necesita.</p>
   <p class="svc__use"><strong>Aplicación:</strong> Cuando tu reparación requiere piezas. Se incluyen en la cotización.</p>
-  <div class="svc__imgs"><img class="svc__img" src="img/suspension-desmontada-800.jpg" srcset="img/suspension-desmontada-480.jpg 480w, img/suspension-desmontada-800.jpg 800w" sizes="100vw" width="800" height="1423" alt="Piezas de suspensión retiradas de un vehículo, junto a herramientas" loading="lazy" decoding="async"></div>
-  <a class="link-arrow" href="#contacto" data-service="Refacciones a tu medida">Cotizar este servicio <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
-</li></ul><div class="svc-preview" aria-hidden="true"><div class="svc-shot is-active" data-for="hojalateria"><img src="img/cofre-preparacion-800.jpg" srcset="img/cofre-preparacion-480.jpg 480w, img/cofre-preparacion-800.jpg 800w, img/cofre-preparacion-1200.jpg 1200w" sizes="560px" alt="" loading="lazy" decoding="async"></div><div class="svc-shot" data-for="pintura"><img src="img/pintura-cabina-800.jpg" srcset="img/pintura-cabina-480.jpg 480w, img/pintura-cabina-800.jpg 800w, img/pintura-cabina-1200.jpg 1200w, img/pintura-cabina-1600.jpg 1600w" sizes="560px" alt="" loading="lazy" decoding="async"></div><div class="svc-shot svc-shot--2" data-for="mecanico"><img src="img/motor-cofre-800.jpg" srcset="img/motor-cofre-480.jpg 480w, img/motor-cofre-800.jpg 800w, img/motor-cofre-1200.jpg 1200w" sizes="280px" alt="" loading="lazy" decoding="async"><img src="img/llanta-impacto-800.jpg" srcset="img/llanta-impacto-480.jpg 480w, img/llanta-impacto-800.jpg 800w, img/llanta-impacto-1200.jpg 1200w" sizes="280px" alt="" loading="lazy" decoding="async"></div><div class="svc-shot" data-for="alineacion"><img src="img/alineacion-balanceo-800.jpg" srcset="img/alineacion-balanceo-480.jpg 480w, img/alineacion-balanceo-800.jpg 800w, img/alineacion-balanceo-1200.jpg 1200w" sizes="560px" alt="" loading="lazy" decoding="async"></div><div class="svc-shot" data-for="refacciones"><img src="img/suspension-desmontada-800.jpg" srcset="img/suspension-desmontada-480.jpg 480w, img/suspension-desmontada-800.jpg 800w" sizes="560px" alt="" loading="lazy" decoding="async"></div></div></div>
+  <div class="svc__imgs"><img class="svc__img" src="img/refacciones-motor-800.jpg" srcset="img/refacciones-motor-480.jpg 480w, img/refacciones-motor-800.jpg 800w, img/refacciones-motor-1200.jpg 1200w" sizes="100vw" width="800" height="1067" alt="Bloques de motor desmontados sobre una mesa de trabajo" loading="lazy" decoding="async"></div>
+  <div class="svc__gallery">
+    <div class="thumbs"><a class="thumb" href="img/refacciones-motor-1200.jpg" data-gal="refacciones" data-index="0" aria-label="Ver foto 1 de 1 de Refacciones a tu medida"><img src="img/refacciones-motor-480.jpg" width="480" height="640" alt="" loading="lazy" decoding="async"></a></div>
+  </div>
+  <div class="svc__actions">
+    <a class="link-arrow" href="img/refacciones-motor-1200.jpg" data-gal="refacciones" data-index="0">Ver galería · 1 foto <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1h5v5H1zM8 1h5v5H8zM1 8h5v5H1zM8 8h5v5H8z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+    <a class="link-arrow" href="#contacto" data-service="Refacciones a tu medida">Cotizar este servicio <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+  </div>
+</li></ul><div class="svc-preview" aria-hidden="true"><div class="svc-shot is-active" data-for="hojalateria"><img data-foco="50% 62%" src="img/pulido-carroceria-800.jpg" srcset="img/pulido-carroceria-480.jpg 480w, img/pulido-carroceria-800.jpg 800w, img/pulido-carroceria-1200.jpg 1200w" sizes="560px" alt="" decoding="async"></div><div class="svc-shot" data-for="pintura"><img src="img/pintura-defensa-800.jpg" srcset="img/pintura-defensa-480.jpg 480w, img/pintura-defensa-800.jpg 800w, img/pintura-defensa-1200.jpg 1200w" sizes="560px" alt="" loading="lazy" decoding="async"></div><div class="svc-shot svc-shot--2" data-for="mecanico"><img src="img/motor-cofre-800.jpg" srcset="img/motor-cofre-480.jpg 480w, img/motor-cofre-800.jpg 800w, img/motor-cofre-1200.jpg 1200w" sizes="280px" alt="" loading="lazy" decoding="async"><img src="img/llanta-impacto-800.jpg" srcset="img/llanta-impacto-480.jpg 480w, img/llanta-impacto-800.jpg 800w, img/llanta-impacto-1200.jpg 1200w" sizes="280px" alt="" loading="lazy" decoding="async"></div><div class="svc-shot" data-for="alineacion"><img src="img/alineacion-plataforma-800.jpg" srcset="img/alineacion-plataforma-480.jpg 480w, img/alineacion-plataforma-800.jpg 800w, img/alineacion-plataforma-1200.jpg 1200w" sizes="560px" alt="" loading="lazy" decoding="async"></div><div class="svc-shot" data-for="refacciones"><img src="img/refacciones-motor-800.jpg" srcset="img/refacciones-motor-480.jpg 480w, img/refacciones-motor-800.jpg 800w, img/refacciones-motor-1200.jpg 1200w" sizes="560px" alt="" loading="lazy" decoding="async"></div></div></div>
   </div>
 </section>
 
@@ -129,98 +158,22 @@
   </div>
 </section>
 
-<section class="section" id="trabajos" aria-labelledby="h-trabajos">
-  <div class="wrap">
-    <div class="section__head">
-      <h2 id="h-trabajos">Fotografías reales del taller</h2>
-      <p class="lead">Trabajos en proceso y terminados dentro de nuestras instalaciones. Toca una imagen para ampliarla.</p>
-    </div>
-    <div class="filters" role="group" aria-label="Filtrar trabajos por servicio">
-      <button class="chip" type="button" data-filter="all" aria-pressed="true">Todos</button><button class="chip" type="button" data-filter="Hojalatería y pintura" aria-pressed="false">Hojalatería y pintura</button><button class="chip" type="button" data-filter="Taller mecánico" aria-pressed="false">Taller mecánico</button><button class="chip" type="button" data-filter="Alineación y balanceo" aria-pressed="false">Alineación y balanceo</button>
-    </div>
-    <p class="sr-only" id="filter-live" role="status" aria-live="polite"></p>
-    <div class="projects" id="projects">
-<article class="project" data-cat="Hojalatería y pintura" data-name="Vehículo gris en cabina de pintura"
-  data-large="img/pintura-cabina-1600.jpg" data-situacion="Vehículo con la zona delantera reparada, listo para pintura." data-servicio="Hojalatería y pintura: protección de zonas y aplicación de acabado." data-resultado="En la fotografía se ve el cofre y la salpicadera con capa uniforme, mientras el resto del vehículo permanece cubierto.">
-  <button class="project__open" type="button" aria-label="Ampliar fotografía: Vehículo gris en cabina de pintura">
-    <img src="img/pintura-cabina-800.jpg" srcset="img/pintura-cabina-480.jpg 480w, img/pintura-cabina-800.jpg 800w, img/pintura-cabina-1200.jpg 1200w, img/pintura-cabina-1600.jpg 1600w" sizes="(min-width:1024px) 600px, (min-width:720px) 50vw, 100vw" width="800" height="600" alt="Vehículo gris con papel de enmascarado y plástico sobre el parabrisas y la rejilla dentro de la cabina de pintura" loading="lazy" decoding="async">
-  </button>
-  <div class="project__body">
-    <span class="project__tag">Hojalatería y pintura</span>
-    <h3>Vehículo gris en cabina de pintura</h3>
-    <dl class="facts">
-      <div><dt>Situación</dt><dd>Vehículo con la zona delantera reparada, listo para pintura.</dd></div>
-      <div><dt>Servicio</dt><dd>Hojalatería y pintura: protección de zonas y aplicación de acabado.</dd></div>
-      <div><dt>Resultado</dt><dd>En la fotografía se ve el cofre y la salpicadera con capa uniforme, mientras el resto del vehículo permanece cubierto.</dd></div>
-    </dl>
-  </div>
-</article>
-<article class="project" data-cat="Hojalatería y pintura" data-name="Cofre en preparación"
-  data-large="img/cofre-preparacion-1200.jpg" data-situacion="Cofre con el trabajo de superficie en proceso dentro del taller." data-servicio="Preparación de superficie para pintura." data-resultado="En la fotografía se ve la superficie lisa con marcas oscuras de guía.">
-  <button class="project__open" type="button" aria-label="Ampliar fotografía: Cofre en preparación">
-    <img src="img/cofre-preparacion-800.jpg" srcset="img/cofre-preparacion-480.jpg 480w, img/cofre-preparacion-800.jpg 800w, img/cofre-preparacion-1200.jpg 1200w" sizes="(min-width:1024px) 600px, (min-width:720px) 50vw, 100vw" width="800" height="450" alt="Cofre levantado con la superficie en preparación y marcas oscuras de guía" loading="lazy" decoding="async">
-  </button>
-  <div class="project__body">
-    <span class="project__tag">Hojalatería y pintura</span>
-    <h3>Cofre en preparación</h3>
-    <dl class="facts">
-      <div><dt>Situación</dt><dd>Cofre con el trabajo de superficie en proceso dentro del taller.</dd></div>
-      <div><dt>Servicio</dt><dd>Preparación de superficie para pintura.</dd></div>
-      <div><dt>Resultado</dt><dd>En la fotografía se ve la superficie lisa con marcas oscuras de guía.</dd></div>
-    </dl>
-  </div>
-</article>
-<article class="project" data-cat="Taller mecánico" data-name="Suspensión desmontada"
-  data-large="img/suspension-desmontada-800.jpg" data-situacion="Vehículo con la zona delantera abierta para trabajar en la suspensión." data-servicio="Taller mecánico: retiro de amortiguadores y resorte." data-resultado="En la fotografía se ven las piezas retiradas junto a las herramientas de trabajo.">
-  <button class="project__open" type="button" aria-label="Ampliar fotografía: Suspensión desmontada">
-    <img src="img/suspension-desmontada-800.jpg" srcset="img/suspension-desmontada-480.jpg 480w, img/suspension-desmontada-800.jpg 800w" sizes="(min-width:1024px) 600px, (min-width:720px) 50vw, 100vw" width="800" height="1423" alt="Dos amortiguadores retirados junto a herramientas, con la zona delantera del vehículo abierta" loading="lazy" decoding="async">
-  </button>
-  <div class="project__body">
-    <span class="project__tag">Taller mecánico</span>
-    <h3>Suspensión desmontada</h3>
-    <dl class="facts">
-      <div><dt>Situación</dt><dd>Vehículo con la zona delantera abierta para trabajar en la suspensión.</dd></div>
-      <div><dt>Servicio</dt><dd>Taller mecánico: retiro de amortiguadores y resorte.</dd></div>
-      <div><dt>Resultado</dt><dd>En la fotografía se ven las piezas retiradas junto a las herramientas de trabajo.</dd></div>
-    </dl>
-  </div>
-</article>
-<article class="project" data-cat="Alineación y balanceo" data-name="Alineación y balanceo"
-  data-large="img/alineacion-balanceo-1200.jpg" data-situacion="Vehículo en el área de alineación del taller." data-servicio="Alineación y balanceo con equipo de medición." data-resultado="En la fotografía se ve el vehículo sobre la plataforma con sensores colocados en las ruedas.">
-  <button class="project__open" type="button" aria-label="Ampliar fotografía: Alineación y balanceo">
-    <img src="img/alineacion-balanceo-800.jpg" srcset="img/alineacion-balanceo-480.jpg 480w, img/alineacion-balanceo-800.jpg 800w, img/alineacion-balanceo-1200.jpg 1200w" sizes="(min-width:1024px) 600px, (min-width:720px) 50vw, 100vw" width="800" height="450" alt="Vehículo blanco sobre la plataforma de alineación con sensores instalados en las ruedas" loading="lazy" decoding="async">
-  </button>
-  <div class="project__body">
-    <span class="project__tag">Alineación y balanceo</span>
-    <h3>Alineación y balanceo</h3>
-    <dl class="facts">
-      <div><dt>Situación</dt><dd>Vehículo en el área de alineación del taller.</dd></div>
-      <div><dt>Servicio</dt><dd>Alineación y balanceo con equipo de medición.</dd></div>
-      <div><dt>Resultado</dt><dd>En la fotografía se ve el vehículo sobre la plataforma con sensores colocados en las ruedas.</dd></div>
-    </dl>
-  </div>
-</article>
-    </div>
-  </div>
-</section>
-
 <dialog class="lightbox" id="lightbox" aria-labelledby="lb-title">
-  <div class="lightbox__inner">
-    <div class="lightbox__img"><img data-lb-img alt="" width="800" height="600"></div>
-    <div class="lightbox__text">
-      <span class="project__tag" data-lb-cat></span>
+  <div class="lightbox__head">
+    <div>
       <h3 id="lb-title" data-lb-title></h3>
-      <dl class="facts">
-        <div><dt>Situación</dt><dd data-lb-situacion></dd></div>
-        <div><dt>Servicio</dt><dd data-lb-servicio></dd></div>
-        <div><dt>Resultado</dt><dd data-lb-resultado></dd></div>
-      </dl>
-      <div class="lightbox__nav">
-        <button class="btn btn--sm" type="button" data-lb-prev>Anterior</button>
-        <button class="btn btn--sm" type="button" data-lb-next>Siguiente</button>
-        <button class="btn btn--sm btn--primary" type="button" data-lb-close>Cerrar</button>
-      </div>
+      <p class="lightbox__count" data-lb-count aria-live="polite"></p>
     </div>
+    <button class="lightbox__close" type="button" data-lb-close aria-label="Cerrar galería"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2 2 12" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+  </div>
+  <figure class="lightbox__figure">
+    <img data-lb-img alt="" width="1200" height="800">
+    <figcaption data-lb-pie></figcaption>
+  </figure>
+  <div class="lightbox__nav">
+    <button class="carousel__btn carousel__btn--light" type="button" data-lb-prev aria-label="Foto anterior"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M13 7H2M6.5 2.5 2 7l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+    <div class="lightbox__strip" data-lb-strip></div>
+    <button class="carousel__btn carousel__btn--light" type="button" data-lb-next aria-label="Foto siguiente"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
   </div>
 </dialog>
 
@@ -230,28 +183,37 @@
       <h2 id="h-resenas">Lo que dicen nuestros clientes</h2>
       <p class="reviews__src">Reseñas publicadas en Google Maps, transcritas tal como aparecen.</p>
     </div>
-    <div class="reviews__grid">
-<figure class="review">
+<div class="carousel" id="reviews-carousel" role="region" aria-roledescription="carrusel" aria-label="Opiniones de clientes">
+  <div class="carousel__viewport">
+    <div class="carousel__track" id="reviews-track" aria-live="off">
+<figure class="review" role="group" aria-roledescription="opinión" aria-label="1 de 4">
   <svg class="stars" viewBox="0 0 94 18" role="img" aria-label="5 de 5 estrellas" fill="currentColor"><polygon transform="translate(0 0)" points="9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"/><polygon transform="translate(19 0)" points="9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"/><polygon transform="translate(38 0)" points="9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"/><polygon transform="translate(57 0)" points="9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"/><polygon transform="translate(76 0)" points="9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"/></svg>
   <blockquote><p>Excelente trabajo a precio justo y la pintura de muy buena calidad lleva dos años como recién pintado.</p></blockquote>
   <figcaption>Armando Chapa</figcaption>
 </figure>
-<figure class="review">
+<figure class="review" role="group" aria-roledescription="opinión" aria-label="2 de 4">
   <svg class="stars" viewBox="0 0 94 18" role="img" aria-label="5 de 5 estrellas" fill="currentColor"><polygon transform="translate(0 0)" points="9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"/><polygon transform="translate(19 0)" points="9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"/><polygon transform="translate(38 0)" points="9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"/><polygon transform="translate(57 0)" points="9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"/><polygon transform="translate(76 0)" points="9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"/></svg>
   <blockquote><p>Excelente servicio, me arreglaron facia de kia forte en minutos y a un súper precio. Altamente Recomendado …</p></blockquote>
   <figcaption>Manolo Sánchez</figcaption>
 </figure>
-<figure class="review">
+<figure class="review" role="group" aria-roledescription="opinión" aria-label="3 de 4">
   <svg class="stars" viewBox="0 0 94 18" role="img" aria-label="5 de 5 estrellas" fill="currentColor"><polygon transform="translate(0 0)" points="9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"/><polygon transform="translate(19 0)" points="9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"/><polygon transform="translate(38 0)" points="9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"/><polygon transform="translate(57 0)" points="9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"/><polygon transform="translate(76 0)" points="9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"/></svg>
   <blockquote><p>Me gusta por qué dan un buen servicio y son muy amables y queda uno bien con el trabajo que hacen exelente</p></blockquote>
   <figcaption>Manuel Mota</figcaption>
 </figure>
-<figure class="review">
+<figure class="review" role="group" aria-roledescription="opinión" aria-label="4 de 4">
   <svg class="stars" viewBox="0 0 94 18" role="img" aria-label="5 de 5 estrellas" fill="currentColor"><polygon transform="translate(0 0)" points="9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"/><polygon transform="translate(19 0)" points="9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"/><polygon transform="translate(38 0)" points="9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"/><polygon transform="translate(57 0)" points="9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"/><polygon transform="translate(76 0)" points="9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"/></svg>
   <blockquote><p>Excelente atencion ,entregan muy bien su trabajo</p></blockquote>
   <figcaption>jose antonio ramirez</figcaption>
 </figure>
     </div>
+  </div>
+  <div class="carousel__controls js-only">
+    <span class="carousel__count" aria-hidden="true"><span data-carousel-current>1</span> / 4</span>
+    <button class="carousel__toggle" type="button" data-carousel-toggle>Pausar</button>
+    <span class="carousel__progress" aria-hidden="true"><span data-carousel-bar></span></span>
+  </div>
+</div>
   </div>
 </section>
 
@@ -380,7 +342,6 @@
       <div class="footer__col">
         <h2>Navegación</h2>
         <a href="#servicios">Servicios y cómo trabajamos</a>
-<a href="#trabajos">Trabajos</a>
 <a href="#contacto">Contacto</a>
       </div>
       <div class="footer__col footer__col--wide">
@@ -411,6 +372,7 @@
   </div>
 </footer>
 <script type="application/json" id="hours-data">{"tz": "America/Mexico_City", "days": [{"dia": "Lunes", "abre": "09:00", "cierra": "18:00"}, {"dia": "Martes", "abre": "09:00", "cierra": "18:00"}, {"dia": "Miércoles", "abre": "09:00", "cierra": "18:00"}, {"dia": "Jueves", "abre": "09:00", "cierra": "18:00"}, {"dia": "Viernes", "abre": "09:00", "cierra": "18:00"}, {"dia": "Sábado", "abre": "09:00", "cierra": "13:00"}, {"dia": "Domingo", "abre": "", "cierra": ""}]}</script>
+<script type="application/json" id="gallery-data">{"hojalateria": {"titulo": "Hojalatería y reparación de carrocería", "fotos": [{"src": "img/pulido-carroceria-1200.jpg", "srcset": "img/pulido-carroceria-480.jpg 480w, img/pulido-carroceria-800.jpg 800w, img/pulido-carroceria-1200.jpg 1200w", "alt": "Pulido de la carrocería de un auto oscuro con pulidora orbital", "pie": "", "w": 1200, "h": 3144}, {"src": "img/cofre-preparacion-1200.jpg", "srcset": "img/cofre-preparacion-480.jpg 480w, img/cofre-preparacion-800.jpg 800w, img/cofre-preparacion-1200.jpg 1200w", "alt": "Cofre levantado con la superficie en preparación y marcas oscuras de guía", "pie": "Cofre en preparación dentro del taller.", "w": 1200, "h": 675}]}, "pintura": {"titulo": "Pintura automotriz, pulido y acabado", "fotos": [{"src": "img/pintura-defensa-1200.jpg", "srcset": "img/pintura-defensa-480.jpg 480w, img/pintura-defensa-800.jpg 800w, img/pintura-defensa-1200.jpg 1200w", "alt": "Pintor con traje protector aplicando pintura a una defensa con pistola de aire", "pie": "", "w": 1200, "h": 1181}, {"src": "img/pintura-cabina-1600.jpg", "srcset": "img/pintura-cabina-480.jpg 480w, img/pintura-cabina-800.jpg 800w, img/pintura-cabina-1200.jpg 1200w, img/pintura-cabina-1600.jpg 1600w", "alt": "Vehículo gris con papel de enmascarado y plástico dentro de la cabina de pintura", "pie": "Vehículo protegido en la cabina de pintura.", "w": 1600, "h": 1200}]}, "mecanico": {"titulo": "Taller mecánico", "fotos": [{"src": "img/motor-cofre-1200.jpg", "srcset": "img/motor-cofre-480.jpg 480w, img/motor-cofre-800.jpg 800w, img/motor-cofre-1200.jpg 1200w", "alt": "Camioneta blanca con el cofre abierto y el motor a la vista dentro de un taller", "pie": "", "w": 1200, "h": 1800}, {"src": "img/llanta-impacto-1200.jpg", "srcset": "img/llanta-impacto-480.jpg 480w, img/llanta-impacto-800.jpg 800w, img/llanta-impacto-1200.jpg 1200w", "alt": "Mecánico aflojando las tuercas de una llanta con pistola de impacto", "pie": "", "w": 1200, "h": 1800}, {"src": "img/suspension-desmontada-800.jpg", "srcset": "img/suspension-desmontada-480.jpg 480w, img/suspension-desmontada-800.jpg 800w", "alt": "Dos amortiguadores retirados junto a herramientas, con la zona delantera del vehículo abierta", "pie": "Suspensión desmontada en el taller.", "w": 800, "h": 1423}]}, "alineacion": {"titulo": "Alineación y balanceo", "fotos": [{"src": "img/alineacion-plataforma-1200.jpg", "srcset": "img/alineacion-plataforma-480.jpg 480w, img/alineacion-plataforma-800.jpg 800w, img/alineacion-plataforma-1200.jpg 1200w", "alt": "Auto blanco sobre la plataforma de alineación con sensores en las ruedas, en el taller", "pie": "", "w": 1200, "h": 675}]}, "refacciones": {"titulo": "Refacciones a tu medida", "fotos": [{"src": "img/refacciones-motor-1200.jpg", "srcset": "img/refacciones-motor-480.jpg 480w, img/refacciones-motor-800.jpg 800w, img/refacciones-motor-1200.jpg 1200w", "alt": "Bloques de motor desmontados sobre una mesa de trabajo", "pie": "", "w": 1200, "h": 1600}]}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "AutoBodyShop", "name": "Auto Servicio D&A", "description": "Hojalatería y pintura, taller mecánico, alineación y balanceo, y refacciones a tu medida en San Juan del Río, Querétaro.", "telephone": "+524272025184", "address": {"@type": "PostalAddress", "streetAddress": "Av. 4 Ote. N° 97, La Loma", "addressLocality": "San Juan del Río", "addressRegion": "Querétaro", "postalCode": "76804", "addressCountry": "MX"}, "geo": {"@type": "GeoCoordinates", "latitude": 20.4004334, "longitude": -99.976916}, "hasMap": "https://maps.app.goo.gl/PJaJwuukKGx1fx8SA", "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "09:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "09:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "09:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "09:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "09:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "13:00"}], "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Hojalatería y reparación de carrocería"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Pintura automotriz, pulido y acabado"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Taller mecánico"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Alineación y balanceo"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Refacciones a tu medida"}}]}</script>
 
 <script src="js/app.js" defer></script>

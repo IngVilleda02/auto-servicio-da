@@ -1,5 +1,6 @@
 {
   "_ayuda": "Edita este archivo y ejecuta 'py build.py' para regenerar el sitio. Un campo vacío ('') se omite de la página; no se muestran avisos de pendiente al público.",
+  "_galerias": "Cada servicio tiene 'galeria': lista de fotos {nombre, alt, pie opcional, foco opcional}. 'portada' indica cuántas de las primeras fotos se muestran como portada (1 o 2). Para agregar una foto: tools\nueva-foto.ps1, luego añádela a la galería y ejecuta py build.py.",
   "negocio": {
     "nombre": "Auto Servicio D&A",
     "nombreMapa": "Hojalateria y pintura D&A",
@@ -78,23 +79,45 @@
       "titulo": "Hojalatería y reparación de carrocería",
       "descripcion": "Reparación de golpes y abolladuras, y restauración de piezas de carrocería.",
       "aplicacion": "Para daños por choque, golpes menores o piezas deformadas.",
-      "imagen": "cofre-preparacion",
-      "alt": "Cofre desmontado con la superficie en preparación dentro del taller"
+      "portada": 1,
+      "galeria": [
+        {
+          "nombre": "pulido-carroceria",
+          "alt": "Pulido de la carrocería de un auto oscuro con pulidora orbital",
+          "foco": "50% 62%"
+        },
+        {
+          "nombre": "cofre-preparacion",
+          "alt": "Cofre levantado con la superficie en preparación y marcas oscuras de guía",
+          "pie": "Cofre en preparación dentro del taller."
+        }
+      ]
     },
     {
       "id": "pintura",
       "titulo": "Pintura automotriz, pulido y acabado",
       "descripcion": "Pintura, retoques, pulido y acabado para devolver la estética del vehículo.",
       "aplicacion": "Para piezas reparadas, retoques o pintura de carrocería.",
-      "imagen": "pintura-cabina",
-      "alt": "Vehículo gris cubierto con papel y plástico de enmascarado dentro de la cabina de pintura"
+      "portada": 1,
+      "galeria": [
+        {
+          "nombre": "pintura-defensa",
+          "alt": "Pintor con traje protector aplicando pintura a una defensa con pistola de aire"
+        },
+        {
+          "nombre": "pintura-cabina",
+          "alt": "Vehículo gris con papel de enmascarado y plástico dentro de la cabina de pintura",
+          "pie": "Vehículo protegido en la cabina de pintura."
+        }
+      ]
     },
     {
       "id": "mecanico",
       "titulo": "Taller mecánico",
       "descripcion": "Reparación mecánica y trabajo en suspensión.",
       "aplicacion": "Para revisión o reparación mecánica de tu vehículo.",
-      "imagenes": [
+      "portada": 2,
+      "galeria": [
         {
           "nombre": "motor-cofre",
           "alt": "Camioneta blanca con el cofre abierto y el motor a la vista dentro de un taller"
@@ -102,6 +125,11 @@
         {
           "nombre": "llanta-impacto",
           "alt": "Mecánico aflojando las tuercas de una llanta con pistola de impacto"
+        },
+        {
+          "nombre": "suspension-desmontada",
+          "alt": "Dos amortiguadores retirados junto a herramientas, con la zona delantera del vehículo abierta",
+          "pie": "Suspensión desmontada en el taller."
         }
       ]
     },
@@ -110,72 +138,32 @@
       "titulo": "Alineación y balanceo",
       "descripcion": "Servicio completo de alineación y balanceo.",
       "aplicacion": "Para cuidar el desgaste de llantas y la dirección del vehículo.",
-      "imagen": "alineacion-balanceo",
-      "alt": "Vehículo blanco sobre la plataforma de alineación con sensores en las ruedas"
+      "portada": 1,
+      "galeria": [
+        {
+          "nombre": "alineacion-plataforma",
+          "alt": "Auto blanco sobre la plataforma de alineación con sensores en las ruedas, en el taller"
+        }
+      ]
     },
     {
       "id": "refacciones",
       "titulo": "Refacciones a tu medida",
       "descripcion": "Consigue las refacciones que tu reparación necesita.",
       "aplicacion": "Cuando tu reparación requiere piezas. Se incluyen en la cotización.",
-      "imagen": "suspension-desmontada",
-      "alt": "Piezas de suspensión retiradas de un vehículo, junto a herramientas"
+      "portada": 1,
+      "galeria": [
+        {
+          "nombre": "refacciones-motor",
+          "alt": "Bloques de motor desmontados sobre una mesa de trabajo"
+        }
+      ]
     }
   ],
   "qualitas": {
     "titulo": "Trabajamos de la mano con Qualitas",
     "texto": "Si tu vehículo está asegurado con Qualitas, te acompañamos desde el reporte del siniestro hasta la entrega de la reparación."
   },
-  "proyectos": [
-    {
-      "id": "cabina-pintura",
-      "nombre": "Vehículo gris en cabina de pintura",
-      "categoria": "Hojalatería y pintura",
-      "imagen": "pintura-cabina",
-      "ancho": 1600,
-      "alto": 1200,
-      "alt": "Vehículo gris con papel de enmascarado y plástico sobre el parabrisas y la rejilla dentro de la cabina de pintura",
-      "situacion": "Vehículo con la zona delantera reparada, listo para pintura.",
-      "servicio": "Hojalatería y pintura: protección de zonas y aplicación de acabado.",
-      "resultado": "En la fotografía se ve el cofre y la salpicadera con capa uniforme, mientras el resto del vehículo permanece cubierto."
-    },
-    {
-      "id": "cofre-preparado",
-      "nombre": "Cofre en preparación",
-      "categoria": "Hojalatería y pintura",
-      "imagen": "cofre-preparacion",
-      "ancho": 1599,
-      "alto": 899,
-      "alt": "Cofre levantado con la superficie en preparación y marcas oscuras de guía",
-      "situacion": "Cofre con el trabajo de superficie en proceso dentro del taller.",
-      "servicio": "Preparación de superficie para pintura.",
-      "resultado": "En la fotografía se ve la superficie lisa con marcas oscuras de guía."
-    },
-    {
-      "id": "suspension",
-      "nombre": "Suspensión desmontada",
-      "categoria": "Taller mecánico",
-      "imagen": "suspension-desmontada",
-      "ancho": 899,
-      "alto": 1599,
-      "alt": "Dos amortiguadores retirados junto a herramientas, con la zona delantera del vehículo abierta",
-      "situacion": "Vehículo con la zona delantera abierta para trabajar en la suspensión.",
-      "servicio": "Taller mecánico: retiro de amortiguadores y resorte.",
-      "resultado": "En la fotografía se ven las piezas retiradas junto a las herramientas de trabajo."
-    },
-    {
-      "id": "alineacion",
-      "nombre": "Alineación y balanceo",
-      "categoria": "Alineación y balanceo",
-      "imagen": "alineacion-balanceo",
-      "ancho": 1280,
-      "alto": 720,
-      "alt": "Vehículo blanco sobre la plataforma de alineación con sensores instalados en las ruedas",
-      "situacion": "Vehículo en el área de alineación del taller.",
-      "servicio": "Alineación y balanceo con equipo de medición.",
-      "resultado": "En la fotografía se ve el vehículo sobre la plataforma con sensores colocados en las ruedas."
-    }
-  ],
   "resenas": [
     {
       "autor": "Armando Chapa",
