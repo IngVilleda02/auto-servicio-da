@@ -563,6 +563,9 @@ def page(title, desc, body, inline, home):
 <meta name="description" content="{esc(desc)}">
 {robots}{canon}
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:locale" content="es_MX">
 <meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(desc)}">
 {FONTS}
