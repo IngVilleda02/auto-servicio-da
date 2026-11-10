@@ -37,6 +37,34 @@
     window.addEventListener("pagehide", function () { setOpen(false, false); });
   }
 
+  /* ---------- Hero: inclinación 3D del carro siguiendo el puntero ----------
+     Solo con ratón (hover real) y sin "reducir movimiento". Un único elemento, solo transform;
+     el bucle de animación se detiene en cuanto la imagen alcanza su posición. */
+  function initHeroTilt() {
+    var hero = document.querySelector(".hero");
+    var tilt = document.querySelector("[data-hero-tilt]");
+    if (!hero || !tilt) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    var cur = { x: 0, y: 0 }, tgt = { x: 0, y: 0 }, raf = 0;
+    function frame() {
+      cur.x += (tgt.x - cur.x) * 0.08;
+      cur.y += (tgt.y - cur.y) * 0.08;
+      tilt.style.transform = "scale(1.04) rotateX(" + (cur.y * -4).toFixed(3) + "deg) rotateY(" + (cur.x * 6).toFixed(3) +
+        "deg) translate3d(" + (cur.x * -16).toFixed(2) + "px," + (cur.y * -10).toFixed(2) + "px,0)";
+      if (Math.abs(tgt.x - cur.x) > 0.0008 || Math.abs(tgt.y - cur.y) > 0.0008) raf = requestAnimationFrame(frame);
+      else raf = 0;
+    }
+    function kick() { if (!raf) raf = requestAnimationFrame(frame); }
+    hero.addEventListener("pointermove", function (e) {
+      var r = hero.getBoundingClientRect();
+      tgt.x = (e.clientX - r.left) / r.width - 0.5;
+      tgt.y = (e.clientY - r.top) / r.height - 0.5;
+      kick();
+    });
+    hero.addEventListener("pointerleave", function () { tgt.x = 0; tgt.y = 0; kick(); });
+  }
+
   /* ---------- Horario: hoy y estado abierto/cerrado ---------- */
   function initHours() {
     var dataEl = document.getElementById("hours-data");
@@ -78,20 +106,101 @@
     document.querySelectorAll("[data-today-hours]").forEach(function (el) { el.textContent = range; });
   }
 
-  /* ---------- Servicios: la vista previa sigue a la fila activa ---------- */
-  function initServices() {
-    var rows = document.querySelectorAll(".svc");
-    var imgs = document.querySelectorAll(".svc-preview [data-for]");
-    if (!rows.length || !imgs.length) return;
-    function activate(row) {
-      var id = row.getAttribute("data-svc");
-      rows.forEach(function (r) { r.classList.toggle("is-active", r === row); });
-      imgs.forEach(function (im) { im.classList.toggle("is-active", im.getAttribute("data-for") === id); });
+  /* ---------- Recorrido de servicios: la etapa que cruza el centro de la pantalla se activa ----------
+     Sin escuchar el scroll en cada frame: IntersectionObserver marca la etapa y el cambio
+     visual es solo opacity/transform (barra de avance con scaleY). */
+  function initJourney() {
+    var root = document.querySelector("[data-journey]");
+    if (!root) return;
+    var stages = Array.prototype.slice.call(root.querySelectorAll(".stage"));
+    var shots = root.querySelectorAll(".shot");
+    var fill = root.querySelector("[data-journey-fill]");
+    var current = root.querySelector("[data-journey-current]");
+    var name = root.querySelector("[data-journey-name]");
+    if (!stages.length) return;
+    var active = -1;
+
+    function activate(i) {
+      if (i === active) return;
+      active = i;
+      var id = stages[i].getAttribute("data-stage");
+      stages.forEach(function (s, j) { s.classList.toggle("is-active", j === i); s.classList.toggle("is-past", j < i); });
+      shots.forEach(function (sh) { sh.classList.toggle("is-active", sh.getAttribute("data-for") === id); });
+      if (fill) fill.style.transform = "scaleY(" + ((i + 1) / stages.length) + ")";
+      if (current) current.textContent = (i + 1 < 10 ? "0" : "") + (i + 1);
+      if (name) name.textContent = stages[i].querySelector("h3").textContent;
     }
-    rows.forEach(function (row) {
-      row.addEventListener("mouseenter", function () { activate(row); });
-      row.addEventListener("focusin", function () { activate(row); });
+
+    root.classList.add("is-enhanced");
+    activate(0);
+    if (!("IntersectionObserver" in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) activate(stages.indexOf(e.target));
+      });
+    }, { rootMargin: "-48% 0px -48% 0px", threshold: 0 });
+    stages.forEach(function (s) { io.observe(s); });
+    // Hover o foco dentro de una etapa también la activa (teclado y ratón)
+    stages.forEach(function (s, i) {
+      s.addEventListener("focusin", function () { activate(i); });
     });
+  }
+
+  /* ---------- Proceso: pestañas Qualitas / particular con línea de tiempo ---------- */
+  function initFlows() {
+    var root = document.querySelector("[data-flows]");
+    if (!root) return;
+    var tabs = Array.prototype.slice.call(root.querySelectorAll("[role=tab]"));
+    var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute("aria-controls")); });
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    root.classList.add("is-enhanced");
+
+    function play(panel) {
+      var tl = panel.querySelector(".timeline");
+      if (!tl || reduce) return;
+      Array.prototype.forEach.call(tl.children, function (li, i) { li.style.setProperty("--i", i); });
+      tl.classList.remove("is-in");
+      tl.classList.add("will-reveal");
+      void tl.offsetWidth; // reinicia la secuencia al cambiar de pestaña
+      tl.classList.add("is-in");
+    }
+    function select(i, focus) {
+      tabs.forEach(function (t, j) {
+        var on = j === i;
+        t.setAttribute("aria-selected", on ? "true" : "false");
+        t.tabIndex = on ? 0 : -1;
+        panels[j].hidden = !on;
+      });
+      if (focus) tabs[i].focus();
+      play(panels[i]);
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener("click", function () { select(i, false); });
+      t.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+          e.preventDefault();
+          select((i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length, true);
+        }
+        if (e.key === "Home") { e.preventDefault(); select(0, true); }
+        if (e.key === "End") { e.preventDefault(); select(tabs.length - 1, true); }
+      });
+    });
+
+    // Primera vez: la línea se dibuja al llegar a la sección
+    tabs.forEach(function (t, j) { panels[j].hidden = j !== 0; });
+    if (reduce || !("IntersectionObserver" in window)) return;
+    var first = panels[0].querySelector(".timeline");
+    first.classList.add("will-reveal");
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          var open = panels.filter(function (p) { return !p.hidden; })[0];
+          play(open);
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    io.observe(root);
   }
 
   /* ---------- Encuadre de fotos (data-foco = object-position) ---------- */
@@ -128,8 +237,9 @@
       img.src = f.src;
       img.width = f.w; img.height = f.h;
       img.alt = f.alt;
-      pie.textContent = f.pie || "";
-      pie.hidden = !f.pie;
+      var texto = [f.pie || "", f.ilu ? "Imagen ilustrativa, no es un trabajo del taller." : ""].filter(Boolean).join(" ");
+      pie.textContent = texto;
+      pie.hidden = !texto;
       count.textContent = "Foto " + (index + 1) + " de " + fotos.length;
       strip.querySelectorAll("button").forEach(function (b, j) {
         b.setAttribute("aria-current", j === index ? "true" : "false");
@@ -282,21 +392,12 @@
     var form = document.getElementById("quote-form");
     if (!form) return;
     var waNumber = form.getAttribute("data-wa");
+    var submitBtn = document.getElementById("form-submit");
+    if (submitBtn) submitBtn.disabled = false; // la acción depende de JavaScript: se habilita al iniciar
     var $ = function (id) { return document.getElementById(id); };
     var status = $("form-status");
-    var prepared = $("prepared");
+    var done = $("form-done");
 
-    function medio() {
-      var c = form.querySelector('input[name="medio"]:checked');
-      return c ? c.value : "whatsapp";
-    }
-
-    function normalizePhone(v) {
-      var d = String(v).replace(/\D/g, "");
-      if (d.length === 12 && d.indexOf("52") === 0) d = d.slice(2);
-      if (d.length === 13 && d.indexOf("521") === 0) d = d.slice(3);
-      return d;
-    }
     function setError(el, msg) {
       var err = $(el.id + "-err");
       err.textContent = msg;
@@ -321,9 +422,6 @@
 
     var rules = {
       nombre: function (v) { return v.length < 2 ? "Escribe tu nombre." : ""; },
-      telefono: function (v) {
-        return normalizePhone(v).length === 10 ? "" : "Escribe un teléfono de 10 dígitos, por ejemplo 427 123 4567.";
-      },
       servicio: function (v) { return v ? "" : "Elige el servicio que te interesa."; },
       descripcion: function (v) { return v.length < 10 ? "Describe en pocas palabras lo que necesita tu vehículo (mínimo 10 caracteres)." : ""; }
     };
@@ -342,10 +440,8 @@
     });
 
     function buildMessage() {
-      var m = medio();
-      var lines = ["Hola, quiero solicitar una cotización."];
+      var lines = ["Hola, quiero agendar una evaluación para cotizar la reparación de mi vehículo."];
       lines.push("Nombre: " + $("nombre").value.trim());
-      lines.push("Contacto preferido: " + (m === "whatsapp" ? "WhatsApp" : "llamada") + " al " + normalizePhone($("telefono").value));
       lines.push("Servicio: " + $("servicio").selectedOptions[0].text);
       var v = $("vehiculo").value.trim();
       if (v) lines.push("Vehículo: " + v);
@@ -355,26 +451,31 @@
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var ids = ["nombre", "telefono", "servicio", "descripcion"];
+      var ids = ["nombre", "servicio", "descripcion"];
       var firstBad = null;
       ids.forEach(function (id) {
         if (!validateField(id) && !firstBad) firstBad = $(id);
       });
       if (firstBad) {
         status.textContent = "Revisa los campos marcados.";
-        prepared.hidden = true;
+        done.hidden = true;
         firstBad.focus();
         return;
       }
       status.textContent = "";
       var msg = buildMessage();
       var url = "https://wa.me/" + waNumber + "?text=" + encodeURIComponent(msg);
-      $("prepared-text").value = msg;
-      var link = $("prepared-link");
-      link.href = url;
-      prepared.hidden = false;
-      $("prepared-title").focus();
-      try { window.open(url, "_blank", "noopener"); } catch (err) { /* el enlace explícito sigue disponible */ }
+      // Abre WhatsApp en otra pestaña con un enlace real (no depende de window.open)
+      var a = document.createElement("a");
+      a.href = url; a.target = "_blank"; a.rel = "noopener";
+      document.body.appendChild(a); a.click(); a.remove();
+      // Aviso breve: no afirma que el taller recibió nada; los datos del formulario se conservan
+      done.textContent = "Abrimos WhatsApp con tu mensaje: revísalo y pulsa Enviar. ¿No se abrió? ";
+      var again = document.createElement("a");
+      again.href = url; again.target = "_blank"; again.rel = "noopener";
+      again.textContent = "Abrir WhatsApp";
+      done.appendChild(again);
+      done.hidden = false;
     });
 
     document.querySelectorAll("[data-service]").forEach(function (a) {
@@ -387,23 +488,17 @@
       });
     });
 
-    var copy = $("prepared-copy");
-    if (copy) copy.addEventListener("click", function () {
-      var ta = $("prepared-text");
-      function fallback() { ta.focus(); ta.select(); copy.textContent = "Texto seleccionado, cópialo"; }
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(ta.value).then(function () { copy.textContent = "Mensaje copiado"; }, fallback);
-      } else fallback();
-    });
   }
 
   onReady(function () {
     initMenu();
     initHours();
-    initServices();
+    initHeroTilt();
+    initJourney();
     initFoco();
     initGallery();
     initCarousel();
+    initFlows();
     initMap();
     initForm();
   });

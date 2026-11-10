@@ -105,9 +105,9 @@ def jsonld():
         "name": N["nombre"],
         "description": N["descripcionCorta"],
         "telephone": TEL,
-        "address": {"@type": "PostalAddress", "streetAddress": "Av. 4 Ote. N° 97, La Loma",
+        "address": {"@type": "PostalAddress", "streetAddress": "Av. 4 Oriente N° 14, Camino a Santa Cruz Nieto",
                     "addressLocality": "San Juan del Río", "addressRegion": "Querétaro",
-                    "postalCode": "76804", "addressCountry": "MX"},
+                    "addressCountry": "MX"},
         "geo": {"@type": "GeoCoordinates", "latitude": M["lat"], "longitude": M["lng"]},
         "hasMap": MAP_OPEN,
         "openingHoursSpecification": spec,
@@ -161,8 +161,7 @@ def footer(home):
       <div class="footer__col footer__col--wide">
         <h2>Contacto</h2>
         <p>{esc(N['direccion'])}</p>
-        <p>Teléfono: <a href="tel:{TEL}">{esc(N['telefonoMostrar'])}</a></p>
-        <p>WhatsApp: <a href="{WA_LINK}" target="_blank" rel="noopener">{esc(N['whatsappMostrar'])}</a></p>
+        <p>WhatsApp y llamadas: <a href="{WA_LINK}" target="_blank" rel="noopener">{esc(N['whatsappMostrar'])}</a></p>
         {email}
       </div>
       <div class="footer__col footer__col--wide">
@@ -175,7 +174,7 @@ def footer(home):
     <div class="footer__legal">
       <span>© {YEAR} {esc(N['nombre'])}. Todos los derechos reservados.</span>
       <a href="privacidad.html">Aviso de privacidad</a>
-      <span class="footer__credit">Desarrollado por MIRAI NEXUS</span>
+      <span class="footer__credit">Desarrollado por Mirai Nexus</span>
     </div>
   </div>
 </footer>'''
@@ -198,45 +197,99 @@ def thumbs_html(sv):
         w, h = jpeg_size(IMG_DIR / f"{f['nombre']}-{small}.jpg")
         extra = len(fotos) - 4 if (j == 3 and len(fotos) > 4) else 0
         more = f'<span class="thumb__more" aria-hidden="true">+{extra}</span>' if extra else ""
-        label = f"Ver foto {j + 1} de {len(fotos)} de {sv['titulo']}"
+        label = f"Ver foto {j + 1} de {len(fotos)} de {sv['titulo']}" + (" (imagen ilustrativa)" if f.get("ilustrativa") else "")
         foco = f' data-foco="{esc(f["foco"])}"' if f.get("foco") else ""
         out.append(f'<a class="thumb" href="{largest(f["nombre"])}" data-gal="{esc(sv["id"])}" data-index="{j}" aria-label="{esc(label)}">'
                    f'<img{foco} src="img/{f["nombre"]}-{small}.jpg" width="{w}" height="{h}" alt="" loading="lazy" decoding="async">{more}</a>')
     return "".join(out)
 
 
+def quote_panel(compact=False, clave="cotizacion"):
+    """Panel tipográfico (sin foto) para las etapas de Cotización y Entrega."""
+    q = CFG["recorrido"][clave]
+    items = "".join(f"<li><span>{i}</span>{esc(t)}</li>" for i, t in enumerate(q["lista"], start=1))
+    num = (f'<p class="quote-panel__num"><span>WhatsApp y llamadas</span>{esc(N["whatsappMostrar"])}</p>'
+           if clave == "cotizacion" else "")
+    return f'''<div class="quote-panel{' quote-panel--inline' if compact else ''}">
+  <p class="quote-panel__title">{esc(q.get('panelTitulo', q['titulo']))}</p>
+  <p class="quote-panel__label">Cómo funciona</p>
+  <ul class="quote-panel__list">{items}</ul>
+  {num}
+</div>'''
+
+
 def services_html():
-    rows, previews = [], []
-    for i, sv in enumerate(CFG["servicios"]):
+    """Recorrido por etapas: cotización + servicios en el orden del flujo del taller."""
+    q = CFG["recorrido"]["cotizacion"]
+    total = 2 + len(CFG["servicios"])  # cotización + servicios + entrega
+    stages, shots = [], []
+
+    # Etapa 1: cotización (sin foto: panel tipográfico)
+    stages.append(f"""<li class="stage is-active" data-stage="cotizacion">
+  <span class="stage__num" aria-hidden="true">01</span>
+  <div class="stage__body">
+    <h3>{esc(q['titulo'])}</h3>
+    <p>{esc(q['descripcion'])}</p>
+    <div class="stage__media">{quote_panel(compact=True)}</div>
+    <div class="svc__actions">
+      <a class="link-arrow" href="#contacto">Agendar evaluación {ARROW}</a>
+      <a class="link-arrow" href="{WA_LINK}" target="_blank" rel="noopener">Escribir por WhatsApp {ARROW}</a>
+    </div>
+  </div>
+</li>""")
+    shots.append(f'<div class="shot shot--quote is-active" data-for="cotizacion">{quote_panel()}</div>')
+
+    for i, sv in enumerate(CFG["servicios"], start=2):
         fotos = sv["galeria"]
         cover = fotos[:max(1, int(sv.get("portada", 1)))]
         multi = len(cover) > 1
-        act = " is-active" if i == 0 else ""
         mobile = "".join(pic(f["nombre"], "50vw" if multi else "100vw", f["alt"], "svc__img", style=f.get("foco", ""))
                          for f in cover)
-        rows.append(f"""<li class="svc{act}" data-svc="{esc(sv['id'])}">
-  <h3>{esc(sv['titulo'])}</h3>
-  <p>{esc(sv['descripcion'])}</p>
-  <p class="svc__use"><strong>Aplicación:</strong> {esc(sv['aplicacion'])}</p>
-  <div class="svc__imgs{' svc__imgs--2' if multi else ''}">{mobile}</div>
-  <div class="svc__gallery">
-    <div class="thumbs">{thumbs_html(sv)}</div>
-  </div>
-  <div class="svc__actions">
-    <a class="link-arrow" href="{largest(fotos[0]['nombre'])}" data-gal="{esc(sv['id'])}" data-index="0">Ver galería · {fotos_word(len(fotos))} {GRID_ICON}</a>
-    <a class="link-arrow" href="#contacto" data-service="{esc(sv['titulo'])}">Cotizar este servicio {ARROW}</a>
+        stages.append(f"""<li class="stage" data-stage="{esc(sv['id'])}">
+  <span class="stage__num" aria-hidden="true">{i:02d}</span>
+  <div class="stage__body">
+    <h3>{esc(sv['titulo'])}</h3>
+    <p>{esc(sv['descripcion'])}</p>
+    <div class="stage__media svc__imgs{' svc__imgs--2' if multi else ''}">{mobile}</div>
+    <div class="svc__gallery"><div class="thumbs">{thumbs_html(sv)}</div></div>
+    <div class="svc__actions">
+      <a class="link-arrow" href="{largest(fotos[0]['nombre'])}" data-gal="{esc(sv['id'])}" data-index="0">Ver galería · {fotos_word(len(fotos))} {GRID_ICON}</a>
+      <a class="link-arrow" href="#contacto" data-service="{esc(sv['titulo'])}">Cotizar este servicio {ARROW}</a>
+    </div>
   </div>
 </li>""")
-        shots = []
+        imgs = []
         for f in cover:
             foco = f' data-foco="{esc(f["foco"])}"' if f.get("foco") else ""
             mid = min(variants(f["nombre"]), key=lambda v: abs(v - 800))
-            load = 'decoding="async"' if i == 0 else 'loading="lazy" decoding="async"'
-            shots.append(f'<img{foco} src="img/{f["nombre"]}-{mid}.jpg" srcset="{srcset_of(f["nombre"])}" '
-                         f'sizes="{"280px" if multi else "560px"}" alt="" {load}>')
-        previews.append(f'<div class="svc-shot{act}{" svc-shot--2" if multi else ""}" data-for="{esc(sv["id"])}">{"".join(shots)}</div>')
-    return ('<div class="svc-wrap"><ul class="svc-list">' + "\n".join(rows) + '</ul>'
-            '<div class="svc-preview" aria-hidden="true">' + "".join(previews) + '</div></div>')
+            imgs.append(f'<img{foco} src="img/{f["nombre"]}-{mid}.jpg" srcset="{srcset_of(f["nombre"])}" '
+                        f'sizes="{"300px" if multi else "600px"}" alt="" loading="lazy" decoding="async">')
+        shots.append(f'<div class="shot{" shot--2" if multi else ""}" data-for="{esc(sv["id"])}">{"".join(imgs)}</div>')
+
+    e = CFG["recorrido"]["entrega"]
+    stages.append(f"""<li class="stage" data-stage="entrega">
+  <span class="stage__num" aria-hidden="true">{total:02d}</span>
+  <div class="stage__body">
+    <h3>{esc(e['titulo'])}</h3>
+    <p>{esc(e['descripcion'])}</p>
+    <div class="stage__media">{quote_panel(compact=True, clave="entrega")}</div>
+    <div class="svc__actions">
+      <a class="link-arrow" href="#contacto">Agendar evaluación {ARROW}</a>
+    </div>
+  </div>
+</li>""")
+    shots.append(f'<div class="shot shot--quote" data-for="entrega">{quote_panel(clave="entrega")}</div>')
+
+    return f"""<div class="journey" data-journey>
+  <div class="journey__rail" aria-hidden="true"><span class="journey__fill" data-journey-fill></span></div>
+  <ol class="journey__list">
+{chr(10).join(stages)}
+  </ol>
+  <div class="journey__panel" aria-hidden="true">
+    <div class="journey__frame">{"".join(shots)}</div>
+    <p class="journey__counter"><span data-journey-current>01</span> / {total:02d} <span class="journey__name" data-journey-name>{esc(q['titulo'])}</span></p>
+  </div>
+</div>"""
 
 
 def gallery_json():
@@ -247,7 +300,7 @@ def gallery_json():
             big = max(variants(f["nombre"]))
             w, h = jpeg_size(IMG_DIR / f"{f['nombre']}-{big}.jpg")
             fotos.append({"src": f"img/{f['nombre']}-{big}.jpg", "srcset": srcset_of(f["nombre"]),
-                          "alt": f["alt"], "pie": f.get("pie", ""), "w": w, "h": h})
+                          "alt": f["alt"], "pie": f.get("pie", ""), "ilu": bool(f.get("ilustrativa")), "w": w, "h": h})
         data[sv["id"]] = {"titulo": sv["titulo"], "fotos": fotos}
     # </ dentro de JSON no debe cerrar la etiqueta script
     return json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
@@ -260,8 +313,13 @@ def title_lines(name):
     return " ".join(f'<span class="title-line"><span class="title-ink">{esc(t)}</span></span>' for t in lines)
 
 
+def particular_media():
+    """Logotipo de la empresa para la pestaña de Reparación particular (se anima al mostrarse)."""
+    return f'<img class="badge-logo" src="img/logo-da-800.jpg" width="800" height="426" alt="{esc(N["nombre"])}" loading="lazy" decoding="async">'
+
+
 def steps(items):
-    return "\n".join(f"<li><span>{esc(t)}</span></li>" for t in items)
+    return "\n".join(f'<li><span class="timeline__num">{i}</span><p>{esc(t)}</p></li>' for i, t in enumerate(items, start=1))
 
 
 STAR = "9,1 11.4,6.6 17.5,7.2 12.9,11.2 14.3,17 9,13.9 3.7,17 5.1,11.2 0.5,7.2 6.6,6.6"
@@ -311,26 +369,25 @@ def home_body():
 {header(True)}
 <main id="contenido">
 <section class="hero" id="inicio" aria-labelledby="h1">
-  <picture class="hero__img">
-    <source media="(max-width: 719px)" srcset="{srcset_of(P['alta'])}" sizes="100vw">
-    <img src="img/{P['ancha']}-1200.jpg" srcset="{srcset_of(P['ancha'])}" sizes="100vw"
-         width="{P['anchaDims'][0]}" height="{P['anchaDims'][1]}" alt="{esc(P['alt'])}" fetchpriority="high">
-  </picture>
+  <div class="hero__depth">
+    <div class="hero__tilt" data-hero-tilt>
+      <picture class="hero__img">
+        <source media="(max-width: 719px)" srcset="{srcset_of(P['alta'])}" sizes="100vw">
+        <img src="img/{P['ancha']}-1200.jpg" srcset="{srcset_of(P['ancha'])}" sizes="100vw"
+             width="{P['anchaDims'][0]}" height="{P['anchaDims'][1]}" alt="{esc(P['alt'])}" fetchpriority="high">
+      </picture>
+    </div>
+  </div>
   <div class="wrap hero__inner">
     <h1 id="h1" class="hero__title">{title_lines(N['nombre'])}</h1>
-    <p class="hero__lead">Hojalatería y pintura de alta calidad. La diferencia está en cada detalle. Restauramos la estética de tu auto con precisión, acabados impecables y atención personalizada.</p>
-    <div class="hero__ctas">
-      <a class="btn btn--primary" href="#contacto">Solicitar cotización</a>
-      <a class="btn btn--light" href="#servicios">Trabajos</a>
-    </div>
+    <p class="hero__lead">{esc(CFG['hero']['texto'])}</p>
   </div>
 </section>
 
 <section class="facts-bar" aria-label="Datos del taller">
   <dl class="wrap">
     <div class="fact"><dt>Dónde</dt><dd>{esc(N['ciudad'])}</dd></div>
-    <div class="fact"><dt>WhatsApp</dt><dd><a href="{WA_LINK}" target="_blank" rel="noopener">{esc(N['whatsappMostrar'])}</a></dd></div>
-    <div class="fact"><dt>Teléfono</dt><dd><a href="tel:{TEL}">{esc(N['telefonoMostrar'])}</a></dd></div>
+    <div class="fact"><dt>WhatsApp y llamadas</dt><dd><a href="{WA_LINK}" target="_blank" rel="noopener">{esc(N['whatsappMostrar'])}</a></dd></div>
     <div class="fact"><dt>Hoy</dt><dd><span class="status" data-open-status data-open=""></span> <span data-today-hours></span></dd></div>
   </dl>
 </section>
@@ -338,8 +395,8 @@ def home_body():
 <section class="section" id="servicios" aria-labelledby="h-servicios">
   <div class="wrap">
     <div class="section__head">
-      <h2 id="h-servicios">Lo que hacemos en el taller</h2>
-      <p class="lead">Cada servicio incluye seguimiento personal de tu vehículo. Abre su galería para ver trabajos realizados.</p>
+      <h2 id="h-servicios">{esc(CFG['recorrido']['titulo'])}</h2>
+      <p class="lead">{esc(CFG['recorrido']['intro'])}</p>
     </div>
 {services_html()}
   </div>
@@ -347,25 +404,39 @@ def home_body():
 
 <section class="section section--dark on-dark" id="como-trabajamos" aria-labelledby="h-proceso">
   <div class="wrap">
-    <div class="qualitas">
-      <h2 id="h-proceso">{esc(CFG['qualitas']['titulo'])}</h2>
-      <p>{esc(CFG['qualitas']['texto'])}</p>
-    </div>
-    <div class="process">
-      <div class="process__col">
-        <h3>Reparación particular</h3>
-        <ol class="steps">
-{steps(CFG['procesoParticular'])}
-        </ol>
+    <h2 id="h-proceso" class="sr-only">Cómo trabajamos tu reparación</h2>
+    <div class="flows" data-flows>
+      <div class="flows__tabs js-only" role="tablist" aria-label="Tipo de reparación">
+        <button class="flows__tab" type="button" role="tab" id="tab-qualitas" aria-selected="true" aria-controls="flow-qualitas">Con seguro Qualitas</button>
+        <button class="flows__tab" type="button" role="tab" id="tab-particular" aria-selected="false" aria-controls="flow-particular" tabindex="-1">Reparación particular</button>
       </div>
-      <div class="process__col">
-        <h3>Reparación con seguro Qualitas</h3>
-        <ol class="steps">
+      <div class="flow" id="flow-qualitas" role="tabpanel" aria-labelledby="tab-qualitas">
+        <div class="qualitas">
+          <div class="qualitas__badge"><img src="img/{CFG['qualitas']['logo']}" width="360" height="468" alt="{esc(CFG['qualitas']['logoAlt'])}" loading="lazy" decoding="async"></div>
+          <div class="qualitas__copy">
+            <h3>{esc(CFG['qualitas']['titulo'])}</h3>
+            <p>{esc(CFG['qualitas']['texto'])}</p>
+            <ul class="qualitas__facts">{"".join(f"<li>{esc(t)}</li>" for t in CFG['qualitas']['datos'])}</ul>
+          </div>
+        </div>
+        <ol class="timeline">
 {steps(CFG['procesoQualitas'])}
         </ol>
       </div>
+      <div class="flow" id="flow-particular" role="tabpanel" aria-labelledby="tab-particular">
+        <div class="qualitas">
+          <div class="qualitas__badge qualitas__badge--logo">{particular_media()}</div>
+          <div class="qualitas__copy">
+            <h3>{esc(CFG['particular']['titulo'])}</h3>
+            <p>{esc(CFG['particular']['texto'])}</p>
+            <ul class="qualitas__facts">{"".join(f"<li>{esc(t)}</li>" for t in CFG['particular']['datos'])}</ul>
+          </div>
+        </div>
+        <ol class="timeline">
+{steps(CFG['procesoParticular'])}
+        </ol>
+      </div>
     </div>
-    <p class="process__note">La cotización se entrega después de revisar tu vehículo. Esta página no calcula precios ni tiempos.</p>
   </div>
 </section>
 
@@ -388,7 +459,7 @@ def home_body():
   </div>
 </dialog>
 
-<section class="section section--alt" id="resenas" aria-labelledby="h-resenas">
+<section class="section section--red on-dark" id="resenas" aria-labelledby="h-resenas">
   <div class="wrap reviews">
     <div class="reviews__head">
       <h2 id="h-resenas">Lo que dicen nuestros clientes</h2>
@@ -402,10 +473,11 @@ def home_body():
   <div class="wrap contact">
     <div class="contact__info">
       <h2 id="h-contacto">Solicita tu cotización</h2>
-      <p class="lead">Cuéntanos qué necesita tu vehículo. Preparamos tu mensaje y lo envías desde WhatsApp.</p>
+      <p class="lead">Cuéntanos qué necesita tu vehículo y agenda la evaluación presencial (aprox. 2 horas) para recibir tu cotización precisa. Continúas la conversación en WhatsApp.</p>
       <dl class="info-list">
-        <div><dt>Teléfono</dt><dd><a href="tel:{TEL}">{esc(N['telefonoMostrar'])}</a></dd></div>
-        <div><dt>WhatsApp</dt><dd><a href="{WA_LINK}" target="_blank" rel="noopener">{esc(N['whatsappMostrar'])}</a></dd></div>
+        <div><dt>WhatsApp y llamadas</dt><dd class="info-num"><span>{esc(N['whatsappMostrar'])}</span>
+          <a href="{WA_LINK}" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+          <a href="tel:{TEL}">Llamar</a></dd></div>
         {email_dt}
         <div><dt>Dirección</dt><dd>{esc(N['direccion'])}</dd></div>
       </dl>
@@ -419,27 +491,14 @@ def home_body():
     </div>
     <div class="contact__form">
       <noscript><div class="noscript-box"><h3>Contáctanos directamente</h3>
-        <p>El formulario necesita JavaScript. Escríbenos por <a href="{WA_LINK}">WhatsApp ({esc(N['whatsappMostrar'])})</a> o llama al <a href="tel:{TEL}">{esc(N['telefonoMostrar'])}</a>.</p></div></noscript>
+        <p>El formulario necesita JavaScript. Escríbenos por <a href="{WA_LINK}">WhatsApp</a> o llama al <a href="tel:{TEL}">{esc(N['telefonoMostrar'])}</a>.</p></div></noscript>
       <form class="form js-only" id="quote-form" method="post" action="#contacto" novalidate data-wa="{N['whatsappNumero']}">
-        <h3>Preparar solicitud</h3>
+        <h3>Agenda tu evaluación</h3>
         <p class="form__alt">Los campos con * son obligatorios.</p>
         <div class="field">
           <label for="nombre">Nombre *</label>
           <input id="nombre" name="nombre" type="text" autocomplete="name" maxlength="80" aria-describedby="nombre-err">
           <p class="err" id="nombre-err" hidden></p>
-        </div>
-        <fieldset class="field radios-wrap">
-          <legend>Medio de contacto preferido *</legend>
-          <div class="radios">
-            <label><input type="radio" name="medio" value="whatsapp" checked> WhatsApp</label>
-            <label><input type="radio" name="medio" value="llamada"> Llamada</label>
-          </div>
-        </fieldset>
-        <div class="field" id="row-telefono">
-          <label for="telefono">Teléfono *</label>
-          <input id="telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" aria-describedby="telefono-hint telefono-err">
-          <p class="hint" id="telefono-hint">10 dígitos. Puedes escribirlo con espacios o guiones.</p>
-          <p class="err" id="telefono-err" hidden></p>
         </div>
         <div class="field">
           <label for="servicio">Servicio de interés *</label>
@@ -460,18 +519,10 @@ def home_body():
           <p class="err" id="descripcion-err" hidden></p>
         </div>
         <p class="form__privacy">Usamos estos datos solo para armar tu mensaje en este navegador. Consulta el <a href="privacidad.html">aviso de privacidad</a>.</p>
-        <button class="btn btn--primary" type="submit">Preparar solicitud por WhatsApp</button>
+        <button class="btn btn--primary" type="submit" id="form-submit" disabled>Continuar en WhatsApp</button>
+        <p class="form__alt">Se abre WhatsApp con tu mensaje listo; revísalo y pulsa Enviar. Las fotos las adjuntas ahí.</p>
         <p id="form-status" role="alert" class="err"></p>
-        <div class="prepared" id="prepared" hidden>
-          <p id="prepared-title" tabindex="-1">Tu solicitud está preparada. Continúa en WhatsApp y pulsa Enviar.</p>
-          <label for="prepared-text" class="form__alt">Mensaje preparado (puedes editarlo en WhatsApp):</label>
-          <textarea id="prepared-text" readonly></textarea>
-          <div class="prepared__actions">
-            <a class="btn btn--primary" id="prepared-link" href="{WA_LINK}" target="_blank" rel="noopener">Continuar en WhatsApp</a>
-            <button class="btn" type="button" id="prepared-copy">Copiar mensaje</button>
-          </div>
-          <p class="form__alt">Abrir WhatsApp no envía el mensaje: la solicitud llega hasta que pulses Enviar. Si necesitas mandar fotos, adjúntalas ahí.</p>
-        </div>
+        <p id="form-done" class="form__done" role="status" hidden></p>
       </form>
     </div>
   </div>
@@ -508,7 +559,7 @@ def home_body():
 
 
 def privacy_body():
-    cont = f'WhatsApp <a href="{WA_LINK}" target="_blank" rel="noopener">{esc(N["whatsappMostrar"])}</a> o teléfono <a href="tel:{TEL}">{esc(N["telefonoMostrar"])}</a>'
+    cont = f'WhatsApp y llamadas al <a href="{WA_LINK}" target="_blank" rel="noopener">{esc(N["whatsappMostrar"])}</a>'
     return f'''
 {header(False)}
 <main id="contenido" class="wrap legal">
@@ -517,7 +568,7 @@ def privacy_body():
   <section><h2>Responsable</h2>
     <p>{esc(N['responsable'])}, con domicilio en {esc(N['direccion'])}. Contacto: {cont}.</p></section>
   <section><h2>Qué datos se capturan en este sitio</h2>
-    <p>El formulario de cotización pide nombre, medio de contacto preferido (WhatsApp o llamada), teléfono, servicio de interés, vehículo (opcional) y la descripción de lo que necesitas. Esta página no envía esos datos a un servidor propio ni los guarda: se usan en tu navegador para armar un mensaje de WhatsApp.</p></section>
+    <p>El formulario de cotización pide nombre, servicio de interés, vehículo (opcional) y la descripción de lo que necesitas. Tu número de teléfono lo recibe el taller al continuar la conversación en WhatsApp. Esta página no envía esos datos a un servidor propio ni los guarda: se usan en tu navegador para armar un mensaje de WhatsApp.</p></section>
   <section><h2>Para qué se usan</h2>
     <ul><li>Preparar el mensaje con el que solicitas una cotización.</li><li>Si decides enviarlo por WhatsApp, el taller lo recibe y lo usa para responderte y cotizar el servicio.</li></ul></section>
   <section><h2>Con quién se comparten</h2>

@@ -33,26 +33,25 @@
 </header>
 <main id="contenido">
 <section class="hero" id="inicio" aria-labelledby="h1">
-  <picture class="hero__img">
-    <source media="(max-width: 719px)" srcset="img/portada-alta-480.jpg 480w, img/portada-alta-800.jpg 800w, img/portada-alta-1080.jpg 1080w" sizes="100vw">
-    <img src="img/portada-ancha-1200.jpg" srcset="img/portada-ancha-800.jpg 800w, img/portada-ancha-1200.jpg 1200w, img/portada-ancha-1600.jpg 1600w, img/portada-ancha-2000.jpg 2000w" sizes="100vw"
-         width="3940" height="2500" alt="Auto clásico con la pintura desgastada, estacionado de noche en una calle" fetchpriority="high">
-  </picture>
+  <div class="hero__depth">
+    <div class="hero__tilt" data-hero-tilt>
+      <picture class="hero__img">
+        <source media="(max-width: 719px)" srcset="img/portada-alta-480.jpg 480w, img/portada-alta-800.jpg 800w, img/portada-alta-1080.jpg 1080w" sizes="100vw">
+        <img src="img/portada-ancha-1200.jpg" srcset="img/portada-ancha-800.jpg 800w, img/portada-ancha-1200.jpg 1200w, img/portada-ancha-1600.jpg 1600w, img/portada-ancha-2000.jpg 2000w" sizes="100vw"
+             width="3940" height="2500" alt="Auto clásico con la pintura desgastada, estacionado de noche en una calle" fetchpriority="high">
+      </picture>
+    </div>
+  </div>
   <div class="wrap hero__inner">
     <h1 id="h1" class="hero__title"><span class="title-line"><span class="title-ink">Auto</span></span> <span class="title-line"><span class="title-ink">Servicio D&amp;A</span></span></h1>
-    <p class="hero__lead">Hojalatería y pintura de alta calidad. La diferencia está en cada detalle. Restauramos la estética de tu auto con precisión, acabados impecables y atención personalizada.</p>
-    <div class="hero__ctas">
-      <a class="btn btn--primary" href="#contacto">Solicitar cotización</a>
-      <a class="btn btn--light" href="#servicios">Trabajos</a>
-    </div>
+    <p class="hero__lead">Hojalatería y pintura, pulido y encerado, afinaciones, frenos y suspensiones. Te mantenemos informado en cada etapa del servicio.</p>
   </div>
 </section>
 
 <section class="facts-bar" aria-label="Datos del taller">
   <dl class="wrap">
     <div class="fact"><dt>Dónde</dt><dd>San Juan del Río, Querétaro</dd></div>
-    <div class="fact"><dt>WhatsApp</dt><dd><a href="https://wa.me/524272025184" target="_blank" rel="noopener">+52 427 202 5184</a></dd></div>
-    <div class="fact"><dt>Teléfono</dt><dd><a href="tel:+524272025184">427 202 5184</a></dd></div>
+    <div class="fact"><dt>WhatsApp y llamadas</dt><dd><a href="https://wa.me/524271017856" target="_blank" rel="noopener">427 101 7856</a></dd></div>
     <div class="fact"><dt>Hoy</dt><dd><span class="status" data-open-status data-open=""></span> <span data-today-hours></span></dd></div>
   </dl>
 </section>
@@ -60,104 +59,157 @@
 <section class="section" id="servicios" aria-labelledby="h-servicios">
   <div class="wrap">
     <div class="section__head">
-      <h2 id="h-servicios">Lo que hacemos en el taller</h2>
-      <p class="lead">Cada servicio incluye seguimiento personal de tu vehículo. Abre su galería para ver trabajos realizados.</p>
+      <h2 id="h-servicios">Así trabajamos tu vehículo</h2>
+      <p class="lead">Desde la recepción de la unidad y la cotización de refacciones hasta la entrega, te acompañamos en cada paso y te mantenemos notificado de cada avance.</p>
     </div>
-<div class="svc-wrap"><ul class="svc-list"><li class="svc is-active" data-svc="hojalateria">
-  <h3>Hojalatería y reparación de carrocería</h3>
-  <p>Reparación de golpes y abolladuras, y restauración de piezas de carrocería.</p>
-  <p class="svc__use"><strong>Aplicación:</strong> Para daños por choque, golpes menores o piezas deformadas.</p>
-  <div class="svc__imgs"><img class="svc__img" data-foco="50% 62%" src="img/pulido-carroceria-800.jpg" srcset="img/pulido-carroceria-480.jpg 480w, img/pulido-carroceria-800.jpg 800w, img/pulido-carroceria-1200.jpg 1200w" sizes="100vw" width="800" height="2096" alt="Pulido de la carrocería de un auto oscuro con pulidora orbital" loading="lazy" decoding="async"></div>
-  <div class="svc__gallery">
-    <div class="thumbs"><a class="thumb" href="img/pulido-carroceria-1200.jpg" data-gal="hojalateria" data-index="0" aria-label="Ver foto 1 de 2 de Hojalatería y reparación de carrocería"><img data-foco="50% 62%" src="img/pulido-carroceria-480.jpg" width="480" height="1258" alt="" loading="lazy" decoding="async"></a><a class="thumb" href="img/cofre-preparacion-1200.jpg" data-gal="hojalateria" data-index="1" aria-label="Ver foto 2 de 2 de Hojalatería y reparación de carrocería"><img src="img/cofre-preparacion-480.jpg" width="480" height="270" alt="" loading="lazy" decoding="async"></a></div>
-  </div>
-  <div class="svc__actions">
-    <a class="link-arrow" href="img/pulido-carroceria-1200.jpg" data-gal="hojalateria" data-index="0">Ver galería · 2 fotos <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1h5v5H1zM8 1h5v5H8zM1 8h5v5H1zM8 8h5v5H8z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
-    <a class="link-arrow" href="#contacto" data-service="Hojalatería y reparación de carrocería">Cotizar este servicio <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
-  </div>
-</li>
-<li class="svc" data-svc="pintura">
-  <h3>Pintura automotriz, pulido y acabado</h3>
-  <p>Pintura, retoques, pulido y acabado para devolver la estética del vehículo.</p>
-  <p class="svc__use"><strong>Aplicación:</strong> Para piezas reparadas, retoques o pintura de carrocería.</p>
-  <div class="svc__imgs"><img class="svc__img" src="img/pintura-defensa-800.jpg" srcset="img/pintura-defensa-480.jpg 480w, img/pintura-defensa-800.jpg 800w, img/pintura-defensa-1200.jpg 1200w" sizes="100vw" width="800" height="787" alt="Pintor con traje protector aplicando pintura a una defensa con pistola de aire" loading="lazy" decoding="async"></div>
-  <div class="svc__gallery">
-    <div class="thumbs"><a class="thumb" href="img/pintura-defensa-1200.jpg" data-gal="pintura" data-index="0" aria-label="Ver foto 1 de 2 de Pintura automotriz, pulido y acabado"><img src="img/pintura-defensa-480.jpg" width="480" height="472" alt="" loading="lazy" decoding="async"></a><a class="thumb" href="img/pintura-cabina-1600.jpg" data-gal="pintura" data-index="1" aria-label="Ver foto 2 de 2 de Pintura automotriz, pulido y acabado"><img src="img/pintura-cabina-480.jpg" width="480" height="360" alt="" loading="lazy" decoding="async"></a></div>
-  </div>
-  <div class="svc__actions">
-    <a class="link-arrow" href="img/pintura-defensa-1200.jpg" data-gal="pintura" data-index="0">Ver galería · 2 fotos <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1h5v5H1zM8 1h5v5H8zM1 8h5v5H1zM8 8h5v5H8z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
-    <a class="link-arrow" href="#contacto" data-service="Pintura automotriz, pulido y acabado">Cotizar este servicio <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+<div class="journey" data-journey>
+  <div class="journey__rail" aria-hidden="true"><span class="journey__fill" data-journey-fill></span></div>
+  <ol class="journey__list">
+<li class="stage is-active" data-stage="cotizacion">
+  <span class="stage__num" aria-hidden="true">01</span>
+  <div class="stage__body">
+    <h3>Cotización</h3>
+    <p>Para darte una cotización precisa revisamos tu vehículo en el taller. La evaluación presencial dura aproximadamente 2 horas; después se genera la cotización para iniciar la reparación.</p>
+    <div class="stage__media"><div class="quote-panel quote-panel--inline">
+  <p class="quote-panel__title">Cotización con evaluación presencial</p>
+  <p class="quote-panel__label">Cómo funciona</p>
+  <ul class="quote-panel__list"><li><span>1</span>Agenda tu evaluación por WhatsApp</li><li><span>2</span>Trae tu vehículo: la revisión dura aprox. 2 horas</li><li><span>3</span>Recibes tu cotización y, con tu aprobación, iniciamos la reparación</li></ul>
+  <p class="quote-panel__num"><span>WhatsApp y llamadas</span>427 101 7856</p>
+</div></div>
+    <div class="svc__actions">
+      <a class="link-arrow" href="#contacto">Agendar evaluación <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+      <a class="link-arrow" href="https://wa.me/524271017856" target="_blank" rel="noopener">Escribir por WhatsApp <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+    </div>
   </div>
 </li>
-<li class="svc" data-svc="mecanico">
-  <h3>Taller mecánico</h3>
-  <p>Reparación mecánica y trabajo en suspensión.</p>
-  <p class="svc__use"><strong>Aplicación:</strong> Para revisión o reparación mecánica de tu vehículo.</p>
-  <div class="svc__imgs svc__imgs--2"><img class="svc__img" src="img/motor-cofre-800.jpg" srcset="img/motor-cofre-480.jpg 480w, img/motor-cofre-800.jpg 800w, img/motor-cofre-1200.jpg 1200w" sizes="50vw" width="800" height="1200" alt="Camioneta blanca con el cofre abierto y el motor a la vista dentro de un taller" loading="lazy" decoding="async"><img class="svc__img" src="img/llanta-impacto-800.jpg" srcset="img/llanta-impacto-480.jpg 480w, img/llanta-impacto-800.jpg 800w, img/llanta-impacto-1200.jpg 1200w" sizes="50vw" width="800" height="1200" alt="Mecánico aflojando las tuercas de una llanta con pistola de impacto" loading="lazy" decoding="async"></div>
-  <div class="svc__gallery">
-    <div class="thumbs"><a class="thumb" href="img/motor-cofre-1200.jpg" data-gal="mecanico" data-index="0" aria-label="Ver foto 1 de 3 de Taller mecánico"><img src="img/motor-cofre-480.jpg" width="480" height="720" alt="" loading="lazy" decoding="async"></a><a class="thumb" href="img/llanta-impacto-1200.jpg" data-gal="mecanico" data-index="1" aria-label="Ver foto 2 de 3 de Taller mecánico"><img src="img/llanta-impacto-480.jpg" width="480" height="720" alt="" loading="lazy" decoding="async"></a><a class="thumb" href="img/suspension-desmontada-800.jpg" data-gal="mecanico" data-index="2" aria-label="Ver foto 3 de 3 de Taller mecánico"><img src="img/suspension-desmontada-480.jpg" width="480" height="854" alt="" loading="lazy" decoding="async"></a></div>
-  </div>
-  <div class="svc__actions">
-    <a class="link-arrow" href="img/motor-cofre-1200.jpg" data-gal="mecanico" data-index="0">Ver galería · 3 fotos <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1h5v5H1zM8 1h5v5H8zM1 8h5v5H1zM8 8h5v5H8z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
-    <a class="link-arrow" href="#contacto" data-service="Taller mecánico">Cotizar este servicio <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
-  </div>
-</li>
-<li class="svc" data-svc="alineacion">
-  <h3>Alineación y balanceo</h3>
-  <p>Servicio completo de alineación y balanceo.</p>
-  <p class="svc__use"><strong>Aplicación:</strong> Para cuidar el desgaste de llantas y la dirección del vehículo.</p>
-  <div class="svc__imgs"><img class="svc__img" src="img/alineacion-plataforma-800.jpg" srcset="img/alineacion-plataforma-480.jpg 480w, img/alineacion-plataforma-800.jpg 800w, img/alineacion-plataforma-1200.jpg 1200w" sizes="100vw" width="800" height="450" alt="Auto blanco sobre la plataforma de alineación con sensores en las ruedas, en el taller" loading="lazy" decoding="async"></div>
-  <div class="svc__gallery">
-    <div class="thumbs"><a class="thumb" href="img/alineacion-plataforma-1200.jpg" data-gal="alineacion" data-index="0" aria-label="Ver foto 1 de 1 de Alineación y balanceo"><img src="img/alineacion-plataforma-480.jpg" width="480" height="270" alt="" loading="lazy" decoding="async"></a></div>
-  </div>
-  <div class="svc__actions">
-    <a class="link-arrow" href="img/alineacion-plataforma-1200.jpg" data-gal="alineacion" data-index="0">Ver galería · 1 foto <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1h5v5H1zM8 1h5v5H8zM1 8h5v5H1zM8 8h5v5H8z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
-    <a class="link-arrow" href="#contacto" data-service="Alineación y balanceo">Cotizar este servicio <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+<li class="stage" data-stage="refacciones">
+  <span class="stage__num" aria-hidden="true">02</span>
+  <div class="stage__body">
+    <h3>Refacciones a tu medida</h3>
+    <p>Cotizamos y conseguimos las refacciones que tu reparación necesita.</p>
+    <div class="stage__media svc__imgs"><img class="svc__img" src="img/refacciones-motor-800.jpg" srcset="img/refacciones-motor-480.jpg 480w, img/refacciones-motor-800.jpg 800w, img/refacciones-motor-1200.jpg 1200w" sizes="100vw" width="800" height="1067" alt="Bloques de motor desmontados sobre una mesa de trabajo" loading="lazy" decoding="async"></div>
+    <div class="svc__gallery"><div class="thumbs"><a class="thumb" href="img/refacciones-motor-1200.jpg" data-gal="refacciones" data-index="0" aria-label="Ver foto 1 de 1 de Refacciones a tu medida (imagen ilustrativa)"><img src="img/refacciones-motor-480.jpg" width="480" height="640" alt="" loading="lazy" decoding="async"></a></div></div>
+    <div class="svc__actions">
+      <a class="link-arrow" href="img/refacciones-motor-1200.jpg" data-gal="refacciones" data-index="0">Ver galería · 1 foto <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1h5v5H1zM8 1h5v5H8zM1 8h5v5H1zM8 8h5v5H8z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+      <a class="link-arrow" href="#contacto" data-service="Refacciones a tu medida">Cotizar este servicio <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+    </div>
   </div>
 </li>
-<li class="svc" data-svc="refacciones">
-  <h3>Refacciones a tu medida</h3>
-  <p>Consigue las refacciones que tu reparación necesita.</p>
-  <p class="svc__use"><strong>Aplicación:</strong> Cuando tu reparación requiere piezas. Se incluyen en la cotización.</p>
-  <div class="svc__imgs"><img class="svc__img" src="img/refacciones-motor-800.jpg" srcset="img/refacciones-motor-480.jpg 480w, img/refacciones-motor-800.jpg 800w, img/refacciones-motor-1200.jpg 1200w" sizes="100vw" width="800" height="1067" alt="Bloques de motor desmontados sobre una mesa de trabajo" loading="lazy" decoding="async"></div>
-  <div class="svc__gallery">
-    <div class="thumbs"><a class="thumb" href="img/refacciones-motor-1200.jpg" data-gal="refacciones" data-index="0" aria-label="Ver foto 1 de 1 de Refacciones a tu medida"><img src="img/refacciones-motor-480.jpg" width="480" height="640" alt="" loading="lazy" decoding="async"></a></div>
+<li class="stage" data-stage="mecanico">
+  <span class="stage__num" aria-hidden="true">03</span>
+  <div class="stage__body">
+    <h3>Taller mecánico</h3>
+    <p>Afinaciones, frenos y suspensiones. Si tu vehículo lo requiere, también alineación y balanceo.</p>
+    <div class="stage__media svc__imgs svc__imgs--2"><img class="svc__img" src="img/motor-cofre-800.jpg" srcset="img/motor-cofre-480.jpg 480w, img/motor-cofre-800.jpg 800w, img/motor-cofre-1200.jpg 1200w" sizes="50vw" width="800" height="1200" alt="Camioneta blanca con el cofre abierto y el motor a la vista dentro de un taller" loading="lazy" decoding="async"><img class="svc__img" src="img/llanta-impacto-800.jpg" srcset="img/llanta-impacto-480.jpg 480w, img/llanta-impacto-800.jpg 800w, img/llanta-impacto-1200.jpg 1200w" sizes="50vw" width="800" height="1200" alt="Mecánico aflojando las tuercas de una llanta con pistola de impacto" loading="lazy" decoding="async"></div>
+    <div class="svc__gallery"><div class="thumbs"><a class="thumb" href="img/motor-cofre-1200.jpg" data-gal="mecanico" data-index="0" aria-label="Ver foto 1 de 4 de Taller mecánico (imagen ilustrativa)"><img src="img/motor-cofre-480.jpg" width="480" height="720" alt="" loading="lazy" decoding="async"></a><a class="thumb" href="img/llanta-impacto-1200.jpg" data-gal="mecanico" data-index="1" aria-label="Ver foto 2 de 4 de Taller mecánico (imagen ilustrativa)"><img src="img/llanta-impacto-480.jpg" width="480" height="720" alt="" loading="lazy" decoding="async"></a><a class="thumb" href="img/suspension-desmontada-800.jpg" data-gal="mecanico" data-index="2" aria-label="Ver foto 3 de 4 de Taller mecánico"><img src="img/suspension-desmontada-480.jpg" width="480" height="854" alt="" loading="lazy" decoding="async"></a><a class="thumb" href="img/alineacion-plataforma-1200.jpg" data-gal="mecanico" data-index="3" aria-label="Ver foto 4 de 4 de Taller mecánico"><img src="img/alineacion-plataforma-480.jpg" width="480" height="270" alt="" loading="lazy" decoding="async"></a></div></div>
+    <div class="svc__actions">
+      <a class="link-arrow" href="img/motor-cofre-1200.jpg" data-gal="mecanico" data-index="0">Ver galería · 4 fotos <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1h5v5H1zM8 1h5v5H8zM1 8h5v5H1zM8 8h5v5H8z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+      <a class="link-arrow" href="#contacto" data-service="Taller mecánico">Cotizar este servicio <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+    </div>
   </div>
-  <div class="svc__actions">
-    <a class="link-arrow" href="img/refacciones-motor-1200.jpg" data-gal="refacciones" data-index="0">Ver galería · 1 foto <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1h5v5H1zM8 1h5v5H8zM1 8h5v5H1zM8 8h5v5H8z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
-    <a class="link-arrow" href="#contacto" data-service="Refacciones a tu medida">Cotizar este servicio <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+</li>
+<li class="stage" data-stage="hojalateria">
+  <span class="stage__num" aria-hidden="true">04</span>
+  <div class="stage__body">
+    <h3>Hojalatería y reparación de carrocería</h3>
+    <p>Reparación de golpes y abolladuras, y restauración de piezas de carrocería, también por siniestro.</p>
+    <div class="stage__media svc__imgs"><img class="svc__img" data-foco="50% 62%" src="img/pulido-carroceria-800.jpg" srcset="img/pulido-carroceria-480.jpg 480w, img/pulido-carroceria-800.jpg 800w, img/pulido-carroceria-1200.jpg 1200w" sizes="100vw" width="800" height="2096" alt="Pulido de la carrocería de un auto oscuro con pulidora orbital" loading="lazy" decoding="async"></div>
+    <div class="svc__gallery"><div class="thumbs"><a class="thumb" href="img/pulido-carroceria-1200.jpg" data-gal="hojalateria" data-index="0" aria-label="Ver foto 1 de 2 de Hojalatería y reparación de carrocería (imagen ilustrativa)"><img data-foco="50% 62%" src="img/pulido-carroceria-480.jpg" width="480" height="1258" alt="" loading="lazy" decoding="async"></a><a class="thumb" href="img/cofre-preparacion-1200.jpg" data-gal="hojalateria" data-index="1" aria-label="Ver foto 2 de 2 de Hojalatería y reparación de carrocería"><img src="img/cofre-preparacion-480.jpg" width="480" height="270" alt="" loading="lazy" decoding="async"></a></div></div>
+    <div class="svc__actions">
+      <a class="link-arrow" href="img/pulido-carroceria-1200.jpg" data-gal="hojalateria" data-index="0">Ver galería · 2 fotos <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1h5v5H1zM8 1h5v5H8zM1 8h5v5H1zM8 8h5v5H8z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+      <a class="link-arrow" href="#contacto" data-service="Hojalatería y reparación de carrocería">Cotizar este servicio <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+    </div>
   </div>
-</li></ul><div class="svc-preview" aria-hidden="true"><div class="svc-shot is-active" data-for="hojalateria"><img data-foco="50% 62%" src="img/pulido-carroceria-800.jpg" srcset="img/pulido-carroceria-480.jpg 480w, img/pulido-carroceria-800.jpg 800w, img/pulido-carroceria-1200.jpg 1200w" sizes="560px" alt="" decoding="async"></div><div class="svc-shot" data-for="pintura"><img src="img/pintura-defensa-800.jpg" srcset="img/pintura-defensa-480.jpg 480w, img/pintura-defensa-800.jpg 800w, img/pintura-defensa-1200.jpg 1200w" sizes="560px" alt="" loading="lazy" decoding="async"></div><div class="svc-shot svc-shot--2" data-for="mecanico"><img src="img/motor-cofre-800.jpg" srcset="img/motor-cofre-480.jpg 480w, img/motor-cofre-800.jpg 800w, img/motor-cofre-1200.jpg 1200w" sizes="280px" alt="" loading="lazy" decoding="async"><img src="img/llanta-impacto-800.jpg" srcset="img/llanta-impacto-480.jpg 480w, img/llanta-impacto-800.jpg 800w, img/llanta-impacto-1200.jpg 1200w" sizes="280px" alt="" loading="lazy" decoding="async"></div><div class="svc-shot" data-for="alineacion"><img src="img/alineacion-plataforma-800.jpg" srcset="img/alineacion-plataforma-480.jpg 480w, img/alineacion-plataforma-800.jpg 800w, img/alineacion-plataforma-1200.jpg 1200w" sizes="560px" alt="" loading="lazy" decoding="async"></div><div class="svc-shot" data-for="refacciones"><img src="img/refacciones-motor-800.jpg" srcset="img/refacciones-motor-480.jpg 480w, img/refacciones-motor-800.jpg 800w, img/refacciones-motor-1200.jpg 1200w" sizes="560px" alt="" loading="lazy" decoding="async"></div></div></div>
+</li>
+<li class="stage" data-stage="pintura">
+  <span class="stage__num" aria-hidden="true">05</span>
+  <div class="stage__body">
+    <h3>Pintura, pulido y encerado</h3>
+    <p>Pintura, retoques, pulido y encerado para devolver la estética del vehículo.</p>
+    <div class="stage__media svc__imgs"><img class="svc__img" src="img/pintura-defensa-800.jpg" srcset="img/pintura-defensa-480.jpg 480w, img/pintura-defensa-800.jpg 800w, img/pintura-defensa-1200.jpg 1200w" sizes="100vw" width="800" height="787" alt="Pintor con traje protector aplicando pintura a una defensa con pistola de aire" loading="lazy" decoding="async"></div>
+    <div class="svc__gallery"><div class="thumbs"><a class="thumb" href="img/pintura-defensa-1200.jpg" data-gal="pintura" data-index="0" aria-label="Ver foto 1 de 2 de Pintura, pulido y encerado (imagen ilustrativa)"><img src="img/pintura-defensa-480.jpg" width="480" height="472" alt="" loading="lazy" decoding="async"></a><a class="thumb" href="img/pintura-cabina-1600.jpg" data-gal="pintura" data-index="1" aria-label="Ver foto 2 de 2 de Pintura, pulido y encerado"><img src="img/pintura-cabina-480.jpg" width="480" height="360" alt="" loading="lazy" decoding="async"></a></div></div>
+    <div class="svc__actions">
+      <a class="link-arrow" href="img/pintura-defensa-1200.jpg" data-gal="pintura" data-index="0">Ver galería · 2 fotos <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1h5v5H1zM8 1h5v5H8zM1 8h5v5H1zM8 8h5v5H8z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+      <a class="link-arrow" href="#contacto" data-service="Pintura, pulido y encerado">Cotizar este servicio <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+    </div>
+  </div>
+</li>
+<li class="stage" data-stage="entrega">
+  <span class="stage__num" aria-hidden="true">06</span>
+  <div class="stage__body">
+    <h3>Entrega</h3>
+    <p>Te avisamos de cada avance y, al terminar la reparación, coordinamos contigo la entrega de tu vehículo.</p>
+    <div class="stage__media"><div class="quote-panel quote-panel--inline">
+  <p class="quote-panel__title">Entrega coordinada</p>
+  <p class="quote-panel__label">Cómo funciona</p>
+  <ul class="quote-panel__list"><li><span>1</span>Te avisamos de cada avance de la reparación</li><li><span>2</span>Te confirmamos cuando tu vehículo está listo</li><li><span>3</span>Coordinamos contigo la entrega</li></ul>
+  
+</div></div>
+    <div class="svc__actions">
+      <a class="link-arrow" href="#contacto">Agendar evaluación <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+    </div>
+  </div>
+</li>
+  </ol>
+  <div class="journey__panel" aria-hidden="true">
+    <div class="journey__frame"><div class="shot shot--quote is-active" data-for="cotizacion"><div class="quote-panel">
+  <p class="quote-panel__title">Cotización con evaluación presencial</p>
+  <p class="quote-panel__label">Cómo funciona</p>
+  <ul class="quote-panel__list"><li><span>1</span>Agenda tu evaluación por WhatsApp</li><li><span>2</span>Trae tu vehículo: la revisión dura aprox. 2 horas</li><li><span>3</span>Recibes tu cotización y, con tu aprobación, iniciamos la reparación</li></ul>
+  <p class="quote-panel__num"><span>WhatsApp y llamadas</span>427 101 7856</p>
+</div></div><div class="shot" data-for="refacciones"><img src="img/refacciones-motor-800.jpg" srcset="img/refacciones-motor-480.jpg 480w, img/refacciones-motor-800.jpg 800w, img/refacciones-motor-1200.jpg 1200w" sizes="600px" alt="" loading="lazy" decoding="async"></div><div class="shot shot--2" data-for="mecanico"><img src="img/motor-cofre-800.jpg" srcset="img/motor-cofre-480.jpg 480w, img/motor-cofre-800.jpg 800w, img/motor-cofre-1200.jpg 1200w" sizes="300px" alt="" loading="lazy" decoding="async"><img src="img/llanta-impacto-800.jpg" srcset="img/llanta-impacto-480.jpg 480w, img/llanta-impacto-800.jpg 800w, img/llanta-impacto-1200.jpg 1200w" sizes="300px" alt="" loading="lazy" decoding="async"></div><div class="shot" data-for="hojalateria"><img data-foco="50% 62%" src="img/pulido-carroceria-800.jpg" srcset="img/pulido-carroceria-480.jpg 480w, img/pulido-carroceria-800.jpg 800w, img/pulido-carroceria-1200.jpg 1200w" sizes="600px" alt="" loading="lazy" decoding="async"></div><div class="shot" data-for="pintura"><img src="img/pintura-defensa-800.jpg" srcset="img/pintura-defensa-480.jpg 480w, img/pintura-defensa-800.jpg 800w, img/pintura-defensa-1200.jpg 1200w" sizes="600px" alt="" loading="lazy" decoding="async"></div><div class="shot shot--quote" data-for="entrega"><div class="quote-panel">
+  <p class="quote-panel__title">Entrega coordinada</p>
+  <p class="quote-panel__label">Cómo funciona</p>
+  <ul class="quote-panel__list"><li><span>1</span>Te avisamos de cada avance de la reparación</li><li><span>2</span>Te confirmamos cuando tu vehículo está listo</li><li><span>3</span>Coordinamos contigo la entrega</li></ul>
+  
+</div></div></div>
+    <p class="journey__counter"><span data-journey-current>01</span> / 06 <span class="journey__name" data-journey-name>Cotización</span></p>
+  </div>
+</div>
   </div>
 </section>
 
 <section class="section section--dark on-dark" id="como-trabajamos" aria-labelledby="h-proceso">
   <div class="wrap">
-    <div class="qualitas">
-      <h2 id="h-proceso">Trabajamos de la mano con Qualitas</h2>
-      <p>Si tu vehículo está asegurado con Qualitas, te acompañamos desde el reporte del siniestro hasta la entrega de la reparación.</p>
-    </div>
-    <div class="process">
-      <div class="process__col">
-        <h3>Reparación particular</h3>
-        <ol class="steps">
-<li><span>Comparte tu requerimiento de reparación.</span></li>
-<li><span>Revisamos materiales, refacciones y servicios extras.</span></li>
-<li><span>Recibes una cotización con alcance y condiciones.</span></li>
-<li><span>Reparamos y coordinamos la entrega después de tu aprobación, con seguimiento personalizado.</span></li>
+    <h2 id="h-proceso" class="sr-only">Cómo trabajamos tu reparación</h2>
+    <div class="flows" data-flows>
+      <div class="flows__tabs js-only" role="tablist" aria-label="Tipo de reparación">
+        <button class="flows__tab" type="button" role="tab" id="tab-qualitas" aria-selected="true" aria-controls="flow-qualitas">Con seguro Qualitas</button>
+        <button class="flows__tab" type="button" role="tab" id="tab-particular" aria-selected="false" aria-controls="flow-particular" tabindex="-1">Reparación particular</button>
+      </div>
+      <div class="flow" id="flow-qualitas" role="tabpanel" aria-labelledby="tab-qualitas">
+        <div class="qualitas">
+          <div class="qualitas__badge"><img src="img/logo-qualitas.png" width="360" height="468" alt="Logotipo de Qualitas" loading="lazy" decoding="async"></div>
+          <div class="qualitas__copy">
+            <h3>Trabajamos de la mano con Qualitas</h3>
+            <p>Si tu vehículo está asegurado con Qualitas, te acompañamos desde el reporte del siniestro hasta la entrega, con enlaces de reparación de acuerdo con los términos del seguro.</p>
+            <ul class="qualitas__facts"><li>Asociados a Qualitas</li><li>Enlaces de reparación según los términos del seguro</li><li>4 pasos fáciles de entender</li></ul>
+          </div>
+        </div>
+        <ol class="timeline">
+<li><span class="timeline__num">1</span><p>Damos seguimiento a tu reporte de siniestro con enlaces virtuales de cada paso.</p></li>
+<li><span class="timeline__num">2</span><p>Traes el vehículo a evaluación presencial (aprox. 2 horas) y se genera la cotización.</p></li>
+<li><span class="timeline__num">3</span><p>Recibes la cotización con alcance y condiciones, de acuerdo con el enlace de Qualitas.</p></li>
+<li><span class="timeline__num">4</span><p>Con la aprobación iniciamos la reparación y te avisamos de cada avance hasta la entrega.</p></li>
         </ol>
       </div>
-      <div class="process__col">
-        <h3>Reparación con seguro Qualitas</h3>
-        <ol class="steps">
-<li><span>Damos seguimiento a tu reporte de siniestro con enlaces virtuales de cada paso.</span></li>
-<li><span>Entregas el vehículo para evaluación y se genera la cotización.</span></li>
-<li><span>Recibes una cotización con alcance y condiciones, de acuerdo con el enlace de Qualitas.</span></li>
-<li><span>Reparamos y coordinamos la entrega después de la aprobación, con seguimiento personalizado.</span></li>
+      <div class="flow" id="flow-particular" role="tabpanel" aria-labelledby="tab-particular">
+        <div class="qualitas">
+          <div class="qualitas__badge qualitas__badge--logo"><img class="badge-logo" src="img/logo-da-800.jpg" width="800" height="426" alt="Auto Servicio D&amp;A" loading="lazy" decoding="async"></div>
+          <div class="qualitas__copy">
+            <h3>Reparación particular</h3>
+            <p>Si reparas sin seguro, tratas directo con el taller: agendas tu evaluación presencial, recibes tu cotización precisa y decides. Te avisamos de cada avance hasta la entrega.</p>
+            <ul class="qualitas__facts"><li>Evaluación presencial (aprox. 2 horas)</li><li>Cotización con alcance y condiciones</li><li>Avisos de cada avance</li></ul>
+          </div>
+        </div>
+        <ol class="timeline">
+<li><span class="timeline__num">1</span><p>Agenda tu evaluación y trae tu vehículo al taller.</p></li>
+<li><span class="timeline__num">2</span><p>Hacemos la evaluación presencial (aprox. 2 horas): daño, materiales y refacciones.</p></li>
+<li><span class="timeline__num">3</span><p>Recibes tu cotización precisa con alcance y condiciones.</p></li>
+<li><span class="timeline__num">4</span><p>Con tu aprobación iniciamos la reparación y te avisamos de cada avance hasta la entrega.</p></li>
         </ol>
       </div>
     </div>
-    <p class="process__note">La cotización se entrega después de revisar tu vehículo. Esta página no calcula precios ni tiempos.</p>
   </div>
 </section>
 
@@ -180,7 +232,7 @@
   </div>
 </dialog>
 
-<section class="section section--alt" id="resenas" aria-labelledby="h-resenas">
+<section class="section section--red on-dark" id="resenas" aria-labelledby="h-resenas">
   <div class="wrap reviews">
     <div class="reviews__head">
       <h2 id="h-resenas">Lo que dicen nuestros clientes</h2>
@@ -224,12 +276,13 @@
   <div class="wrap contact">
     <div class="contact__info">
       <h2 id="h-contacto">Solicita tu cotización</h2>
-      <p class="lead">Cuéntanos qué necesita tu vehículo. Preparamos tu mensaje y lo envías desde WhatsApp.</p>
+      <p class="lead">Cuéntanos qué necesita tu vehículo y agenda la evaluación presencial (aprox. 2 horas) para recibir tu cotización precisa. Continúas la conversación en WhatsApp.</p>
       <dl class="info-list">
-        <div><dt>Teléfono</dt><dd><a href="tel:+524272025184">427 202 5184</a></dd></div>
-        <div><dt>WhatsApp</dt><dd><a href="https://wa.me/524272025184" target="_blank" rel="noopener">+52 427 202 5184</a></dd></div>
+        <div><dt>WhatsApp y llamadas</dt><dd class="info-num"><span>427 101 7856</span>
+          <a href="https://wa.me/524271017856" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+          <a href="tel:+524271017856">Llamar</a></dd></div>
         
-        <div><dt>Dirección</dt><dd>Av. 4 Ote. N° 97, Camino a Sta. Cruz, Sta. Cruz Nieto, La Loma, 76804 San Juan del Río, Qro.</dd></div>
+        <div><dt>Dirección</dt><dd>Av. 4 Oriente N° 14, Camino a Santa Cruz Nieto, San Juan del Río, Qro.</dd></div>
       </dl>
       <div>
         <p class="status" data-open-status data-open="" role="status"></p>
@@ -247,37 +300,23 @@
     </div>
     <div class="contact__form">
       <noscript><div class="noscript-box"><h3>Contáctanos directamente</h3>
-        <p>El formulario necesita JavaScript. Escríbenos por <a href="https://wa.me/524272025184">WhatsApp (+52 427 202 5184)</a> o llama al <a href="tel:+524272025184">427 202 5184</a>.</p></div></noscript>
-      <form class="form js-only" id="quote-form" method="post" action="#contacto" novalidate data-wa="524272025184">
-        <h3>Preparar solicitud</h3>
+        <p>El formulario necesita JavaScript. Escríbenos por <a href="https://wa.me/524271017856">WhatsApp</a> o llama al <a href="tel:+524271017856">427 101 7856</a>.</p></div></noscript>
+      <form class="form js-only" id="quote-form" method="post" action="#contacto" novalidate data-wa="524271017856">
+        <h3>Agenda tu evaluación</h3>
         <p class="form__alt">Los campos con * son obligatorios.</p>
         <div class="field">
           <label for="nombre">Nombre *</label>
           <input id="nombre" name="nombre" type="text" autocomplete="name" maxlength="80" aria-describedby="nombre-err">
           <p class="err" id="nombre-err" hidden></p>
         </div>
-        <fieldset class="field radios-wrap">
-          <legend>Medio de contacto preferido *</legend>
-          <div class="radios">
-            <label><input type="radio" name="medio" value="whatsapp" checked> WhatsApp</label>
-            <label><input type="radio" name="medio" value="llamada"> Llamada</label>
-          </div>
-        </fieldset>
-        <div class="field" id="row-telefono">
-          <label for="telefono">Teléfono *</label>
-          <input id="telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" aria-describedby="telefono-hint telefono-err">
-          <p class="hint" id="telefono-hint">10 dígitos. Puedes escribirlo con espacios o guiones.</p>
-          <p class="err" id="telefono-err" hidden></p>
-        </div>
         <div class="field">
           <label for="servicio">Servicio de interés *</label>
           <select id="servicio" name="servicio" aria-describedby="servicio-err">
 <option value="">Elige un servicio</option>
-<option value="Hojalatería y reparación de carrocería">Hojalatería y reparación de carrocería</option>
-<option value="Pintura automotriz, pulido y acabado">Pintura automotriz, pulido y acabado</option>
-<option value="Taller mecánico">Taller mecánico</option>
-<option value="Alineación y balanceo">Alineación y balanceo</option>
 <option value="Refacciones a tu medida">Refacciones a tu medida</option>
+<option value="Taller mecánico">Taller mecánico</option>
+<option value="Hojalatería y reparación de carrocería">Hojalatería y reparación de carrocería</option>
+<option value="Pintura, pulido y encerado">Pintura, pulido y encerado</option>
 <option value="Reparación con seguro Qualitas">Reparación con seguro Qualitas</option>
 <option value="Aún no lo sé">Aún no lo sé</option>
           </select>
@@ -295,18 +334,10 @@
           <p class="err" id="descripcion-err" hidden></p>
         </div>
         <p class="form__privacy">Usamos estos datos solo para armar tu mensaje en este navegador. Consulta el <a href="privacidad.html">aviso de privacidad</a>.</p>
-        <button class="btn btn--primary" type="submit">Preparar solicitud por WhatsApp</button>
+        <button class="btn btn--primary" type="submit" id="form-submit" disabled>Continuar en WhatsApp</button>
+        <p class="form__alt">Se abre WhatsApp con tu mensaje listo; revísalo y pulsa Enviar. Las fotos las adjuntas ahí.</p>
         <p id="form-status" role="alert" class="err"></p>
-        <div class="prepared" id="prepared" hidden>
-          <p id="prepared-title" tabindex="-1">Tu solicitud está preparada. Continúa en WhatsApp y pulsa Enviar.</p>
-          <label for="prepared-text" class="form__alt">Mensaje preparado (puedes editarlo en WhatsApp):</label>
-          <textarea id="prepared-text" readonly></textarea>
-          <div class="prepared__actions">
-            <a class="btn btn--primary" id="prepared-link" href="https://wa.me/524272025184" target="_blank" rel="noopener">Continuar en WhatsApp</a>
-            <button class="btn" type="button" id="prepared-copy">Copiar mensaje</button>
-          </div>
-          <p class="form__alt">Abrir WhatsApp no envía el mensaje: la solicitud llega hasta que pulses Enviar. Si necesitas mandar fotos, adjúntalas ahí.</p>
-        </div>
+        <p id="form-done" class="form__done" role="status" hidden></p>
       </form>
     </div>
   </div>
@@ -317,10 +348,10 @@
     <div class="location">
       <div class="location__info">
         <h2 id="h-ubicacion">Cómo llegar</h2>
-        <address><strong>Auto Servicio D&amp;A</strong><br>Av. 4 Ote. N° 97, Camino a Sta. Cruz, Sta. Cruz Nieto, La Loma, 76804 San Juan del Río, Qro.</address>
-        <p>Sobre Av. 4 Ote., en el camino a Santa Cruz Nieto, colonia La Loma. Usa “Cómo llegar” para abrir la ruta en Google Maps.</p>
+        <address><strong>Auto Servicio D&amp;A</strong><br>Av. 4 Oriente N° 14, Camino a Santa Cruz Nieto, San Juan del Río, Qro.</address>
+        <p>Sobre Av. 4 Oriente, en el camino a Santa Cruz Nieto. Usa “Cómo llegar” para abrir la ruta en Google Maps.</p>
         <div class="location__actions">
-          <a class="btn btn--primary" href="https://maps.app.goo.gl/PJaJwuukKGx1fx8SA" target="_blank" rel="noopener">Abrir en Google Maps</a>
+          <a class="btn btn--primary" href="https://maps.app.goo.gl/gWK8aiqv6PhXZtEo9" target="_blank" rel="noopener">Abrir en Google Maps</a>
           <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=20.4004334,-99.976916" target="_blank" rel="noopener">Cómo llegar</a>
         </div>
       </div>
@@ -328,7 +359,7 @@
         <div class="map__ph">
           <p>El mapa de Google se carga solo si lo pides, para no compartir datos de tu visita antes.</p>
           <button class="btn js-only" type="button" id="load-map">Cargar mapa</button>
-          <a class="btn" href="https://maps.app.goo.gl/PJaJwuukKGx1fx8SA" target="_blank" rel="noopener">Ver en Google Maps</a>
+          <a class="btn" href="https://maps.app.goo.gl/gWK8aiqv6PhXZtEo9" target="_blank" rel="noopener">Ver en Google Maps</a>
         </div>
       </div>
     </div>
@@ -340,7 +371,7 @@
     <div class="footer__grid">
       <div class="footer__brand">
         <a class="brand brand--plate" href="index.html#inicio" aria-label="Auto Servicio D&amp;A, inicio"><img src="img/logo-da.png" width="320" height="170" alt="Auto Servicio D&amp;A"></a>
-        <p>Hojalatería y pintura, taller mecánico, alineación y balanceo, y refacciones a tu medida en San Juan del Río, Querétaro.</p>
+        <p>Hojalatería y pintura, pulido y encerado, afinaciones, frenos y suspensiones en San Juan del Río, Querétaro. Reparaciones particulares y con seguro Qualitas, con seguimiento de cada avance.</p>
       </div>
       <div class="footer__col">
         <h2>Navegación</h2>
@@ -349,9 +380,8 @@
       </div>
       <div class="footer__col footer__col--wide">
         <h2>Contacto</h2>
-        <p>Av. 4 Ote. N° 97, Camino a Sta. Cruz, Sta. Cruz Nieto, La Loma, 76804 San Juan del Río, Qro.</p>
-        <p>Teléfono: <a href="tel:+524272025184">427 202 5184</a></p>
-        <p>WhatsApp: <a href="https://wa.me/524272025184" target="_blank" rel="noopener">+52 427 202 5184</a></p>
+        <p>Av. 4 Oriente N° 14, Camino a Santa Cruz Nieto, San Juan del Río, Qro.</p>
+        <p>WhatsApp y llamadas: <a href="https://wa.me/524271017856" target="_blank" rel="noopener">427 101 7856</a></p>
         
       </div>
       <div class="footer__col footer__col--wide">
@@ -370,13 +400,13 @@
     <div class="footer__legal">
       <span>© 2026 Auto Servicio D&amp;A. Todos los derechos reservados.</span>
       <a href="privacidad.html">Aviso de privacidad</a>
-      <span class="footer__credit">Desarrollado por MIRAI NEXUS</span>
+      <span class="footer__credit">Desarrollado por Mirai Nexus</span>
     </div>
   </div>
 </footer>
 <script type="application/json" id="hours-data">{"tz": "America/Mexico_City", "days": [{"dia": "Lunes", "abre": "09:00", "cierra": "18:00"}, {"dia": "Martes", "abre": "09:00", "cierra": "18:00"}, {"dia": "Miércoles", "abre": "09:00", "cierra": "18:00"}, {"dia": "Jueves", "abre": "09:00", "cierra": "18:00"}, {"dia": "Viernes", "abre": "09:00", "cierra": "18:00"}, {"dia": "Sábado", "abre": "09:00", "cierra": "13:00"}, {"dia": "Domingo", "abre": "", "cierra": ""}]}</script>
-<script type="application/json" id="gallery-data">{"hojalateria": {"titulo": "Hojalatería y reparación de carrocería", "fotos": [{"src": "img/pulido-carroceria-1200.jpg", "srcset": "img/pulido-carroceria-480.jpg 480w, img/pulido-carroceria-800.jpg 800w, img/pulido-carroceria-1200.jpg 1200w", "alt": "Pulido de la carrocería de un auto oscuro con pulidora orbital", "pie": "", "w": 1200, "h": 3144}, {"src": "img/cofre-preparacion-1200.jpg", "srcset": "img/cofre-preparacion-480.jpg 480w, img/cofre-preparacion-800.jpg 800w, img/cofre-preparacion-1200.jpg 1200w", "alt": "Cofre levantado con la superficie en preparación y marcas oscuras de guía", "pie": "Cofre en preparación dentro del taller.", "w": 1200, "h": 675}]}, "pintura": {"titulo": "Pintura automotriz, pulido y acabado", "fotos": [{"src": "img/pintura-defensa-1200.jpg", "srcset": "img/pintura-defensa-480.jpg 480w, img/pintura-defensa-800.jpg 800w, img/pintura-defensa-1200.jpg 1200w", "alt": "Pintor con traje protector aplicando pintura a una defensa con pistola de aire", "pie": "", "w": 1200, "h": 1181}, {"src": "img/pintura-cabina-1600.jpg", "srcset": "img/pintura-cabina-480.jpg 480w, img/pintura-cabina-800.jpg 800w, img/pintura-cabina-1200.jpg 1200w, img/pintura-cabina-1600.jpg 1600w", "alt": "Vehículo gris con papel de enmascarado y plástico dentro de la cabina de pintura", "pie": "Vehículo protegido en la cabina de pintura.", "w": 1600, "h": 1200}]}, "mecanico": {"titulo": "Taller mecánico", "fotos": [{"src": "img/motor-cofre-1200.jpg", "srcset": "img/motor-cofre-480.jpg 480w, img/motor-cofre-800.jpg 800w, img/motor-cofre-1200.jpg 1200w", "alt": "Camioneta blanca con el cofre abierto y el motor a la vista dentro de un taller", "pie": "", "w": 1200, "h": 1800}, {"src": "img/llanta-impacto-1200.jpg", "srcset": "img/llanta-impacto-480.jpg 480w, img/llanta-impacto-800.jpg 800w, img/llanta-impacto-1200.jpg 1200w", "alt": "Mecánico aflojando las tuercas de una llanta con pistola de impacto", "pie": "", "w": 1200, "h": 1800}, {"src": "img/suspension-desmontada-800.jpg", "srcset": "img/suspension-desmontada-480.jpg 480w, img/suspension-desmontada-800.jpg 800w", "alt": "Dos amortiguadores retirados junto a herramientas, con la zona delantera del vehículo abierta", "pie": "Suspensión desmontada en el taller.", "w": 800, "h": 1423}]}, "alineacion": {"titulo": "Alineación y balanceo", "fotos": [{"src": "img/alineacion-plataforma-1200.jpg", "srcset": "img/alineacion-plataforma-480.jpg 480w, img/alineacion-plataforma-800.jpg 800w, img/alineacion-plataforma-1200.jpg 1200w", "alt": "Auto blanco sobre la plataforma de alineación con sensores en las ruedas, en el taller", "pie": "", "w": 1200, "h": 675}]}, "refacciones": {"titulo": "Refacciones a tu medida", "fotos": [{"src": "img/refacciones-motor-1200.jpg", "srcset": "img/refacciones-motor-480.jpg 480w, img/refacciones-motor-800.jpg 800w, img/refacciones-motor-1200.jpg 1200w", "alt": "Bloques de motor desmontados sobre una mesa de trabajo", "pie": "", "w": 1200, "h": 1600}]}}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "AutoBodyShop", "name": "Auto Servicio D&A", "description": "Hojalatería y pintura, taller mecánico, alineación y balanceo, y refacciones a tu medida en San Juan del Río, Querétaro.", "telephone": "+524272025184", "address": {"@type": "PostalAddress", "streetAddress": "Av. 4 Ote. N° 97, La Loma", "addressLocality": "San Juan del Río", "addressRegion": "Querétaro", "postalCode": "76804", "addressCountry": "MX"}, "geo": {"@type": "GeoCoordinates", "latitude": 20.4004334, "longitude": -99.976916}, "hasMap": "https://maps.app.goo.gl/PJaJwuukKGx1fx8SA", "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "09:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "09:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "09:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "09:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "09:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "13:00"}], "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Hojalatería y reparación de carrocería"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Pintura automotriz, pulido y acabado"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Taller mecánico"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Alineación y balanceo"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Refacciones a tu medida"}}]}</script>
+<script type="application/json" id="gallery-data">{"refacciones": {"titulo": "Refacciones a tu medida", "fotos": [{"src": "img/refacciones-motor-1200.jpg", "srcset": "img/refacciones-motor-480.jpg 480w, img/refacciones-motor-800.jpg 800w, img/refacciones-motor-1200.jpg 1200w", "alt": "Bloques de motor desmontados sobre una mesa de trabajo", "pie": "", "ilu": true, "w": 1200, "h": 1600}]}, "mecanico": {"titulo": "Taller mecánico", "fotos": [{"src": "img/motor-cofre-1200.jpg", "srcset": "img/motor-cofre-480.jpg 480w, img/motor-cofre-800.jpg 800w, img/motor-cofre-1200.jpg 1200w", "alt": "Camioneta blanca con el cofre abierto y el motor a la vista dentro de un taller", "pie": "", "ilu": true, "w": 1200, "h": 1800}, {"src": "img/llanta-impacto-1200.jpg", "srcset": "img/llanta-impacto-480.jpg 480w, img/llanta-impacto-800.jpg 800w, img/llanta-impacto-1200.jpg 1200w", "alt": "Mecánico aflojando las tuercas de una llanta con pistola de impacto", "pie": "", "ilu": true, "w": 1200, "h": 1800}, {"src": "img/suspension-desmontada-800.jpg", "srcset": "img/suspension-desmontada-480.jpg 480w, img/suspension-desmontada-800.jpg 800w", "alt": "Dos amortiguadores retirados junto a herramientas, con la zona delantera del vehículo abierta", "pie": "Suspensión desmontada en el taller.", "ilu": false, "w": 800, "h": 1423}, {"src": "img/alineacion-plataforma-1200.jpg", "srcset": "img/alineacion-plataforma-480.jpg 480w, img/alineacion-plataforma-800.jpg 800w, img/alineacion-plataforma-1200.jpg 1200w", "alt": "Auto blanco sobre la plataforma de alineación con sensores en las ruedas, en el taller", "pie": "", "ilu": false, "w": 1200, "h": 675}]}, "hojalateria": {"titulo": "Hojalatería y reparación de carrocería", "fotos": [{"src": "img/pulido-carroceria-1200.jpg", "srcset": "img/pulido-carroceria-480.jpg 480w, img/pulido-carroceria-800.jpg 800w, img/pulido-carroceria-1200.jpg 1200w", "alt": "Pulido de la carrocería de un auto oscuro con pulidora orbital", "pie": "", "ilu": true, "w": 1200, "h": 3144}, {"src": "img/cofre-preparacion-1200.jpg", "srcset": "img/cofre-preparacion-480.jpg 480w, img/cofre-preparacion-800.jpg 800w, img/cofre-preparacion-1200.jpg 1200w", "alt": "Cofre levantado con la superficie en preparación y marcas oscuras de guía", "pie": "Cofre en preparación dentro del taller.", "ilu": false, "w": 1200, "h": 675}]}, "pintura": {"titulo": "Pintura, pulido y encerado", "fotos": [{"src": "img/pintura-defensa-1200.jpg", "srcset": "img/pintura-defensa-480.jpg 480w, img/pintura-defensa-800.jpg 800w, img/pintura-defensa-1200.jpg 1200w", "alt": "Pintor con traje protector aplicando pintura a una defensa con pistola de aire", "pie": "", "ilu": true, "w": 1200, "h": 1181}, {"src": "img/pintura-cabina-1600.jpg", "srcset": "img/pintura-cabina-480.jpg 480w, img/pintura-cabina-800.jpg 800w, img/pintura-cabina-1200.jpg 1200w, img/pintura-cabina-1600.jpg 1600w", "alt": "Vehículo gris con papel de enmascarado y plástico dentro de la cabina de pintura", "pie": "Vehículo protegido en la cabina de pintura.", "ilu": false, "w": 1600, "h": 1200}]}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "AutoBodyShop", "name": "Auto Servicio D&A", "description": "Hojalatería y pintura, pulido y encerado, afinaciones, frenos y suspensiones en San Juan del Río, Querétaro. Reparaciones particulares y con seguro Qualitas, con seguimiento de cada avance.", "telephone": "+524271017856", "address": {"@type": "PostalAddress", "streetAddress": "Av. 4 Oriente N° 14, Camino a Santa Cruz Nieto", "addressLocality": "San Juan del Río", "addressRegion": "Querétaro", "addressCountry": "MX"}, "geo": {"@type": "GeoCoordinates", "latitude": 20.4004334, "longitude": -99.976916}, "hasMap": "https://maps.app.goo.gl/gWK8aiqv6PhXZtEo9", "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "09:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "09:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "09:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "09:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "09:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "13:00"}], "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Refacciones a tu medida"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Taller mecánico"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Hojalatería y reparación de carrocería"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Pintura, pulido y encerado"}}]}</script>
 
 <script src="js/app.js" defer></script>
 </body>

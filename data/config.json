@@ -4,24 +4,24 @@
   "negocio": {
     "nombre": "Auto Servicio D&A",
     "nombreMapa": "Hojalateria y pintura D&A",
-    "descripcionCorta": "Hojalatería y pintura, taller mecánico, alineación y balanceo, y refacciones a tu medida en San Juan del Río, Querétaro.",
-    "direccion": "Av. 4 Ote. N° 97, Camino a Sta. Cruz, Sta. Cruz Nieto, La Loma, 76804 San Juan del Río, Qro.",
+    "descripcionCorta": "Hojalatería y pintura, pulido y encerado, afinaciones, frenos y suspensiones en San Juan del Río, Querétaro. Reparaciones particulares y con seguro Qualitas, con seguimiento de cada avance.",
+    "direccion": "Av. 4 Oriente N° 14, Camino a Santa Cruz Nieto, San Juan del Río, Qro.",
     "ciudad": "San Juan del Río, Querétaro",
-    "telefonoMostrar": "427 202 5184",
-    "telefonoTel": "+524272025184",
-    "whatsappMostrar": "+52 427 202 5184",
-    "whatsappNumero": "524272025184",
+    "telefonoMostrar": "427 101 7856",
+    "telefonoTel": "+524271017856",
+    "whatsappMostrar": "427 101 7856",
+    "whatsappNumero": "524271017856",
     "correo": "",
     "dominio": "",
     "zonaHoraria": "America/Mexico_City",
-    "fechaPrivacidad": "7 de noviembre de 2026",
+    "fechaPrivacidad": "9 de noviembre de 2026",
     "responsable": "Auto Servicio D&A"
   },
   "mapa": {
-    "enlaceGoogleMaps": "https://maps.app.goo.gl/PJaJwuukKGx1fx8SA",
+    "enlaceGoogleMaps": "https://maps.app.goo.gl/gWK8aiqv6PhXZtEo9",
     "lat": 20.4004334,
     "lng": -99.976916,
-    "instruccionesLlegada": "Sobre Av. 4 Ote., en el camino a Santa Cruz Nieto, colonia La Loma. Usa “Cómo llegar” para abrir la ruta en Google Maps."
+    "instruccionesLlegada": "Sobre Av. 4 Oriente, en el camino a Santa Cruz Nieto. Usa “Cómo llegar” para abrir la ruta en Google Maps."
   },
   "portada": {
     "ancha": "portada-ancha",
@@ -75,16 +75,59 @@
   ],
   "servicios": [
     {
+      "id": "refacciones",
+      "titulo": "Refacciones a tu medida",
+      "descripcion": "Cotizamos y conseguimos las refacciones que tu reparación necesita.",
+      "aplicacion": "Se incluyen en la cotización, junto con el alcance del trabajo.",
+      "portada": 1,
+      "galeria": [
+        {
+          "nombre": "refacciones-motor",
+          "alt": "Bloques de motor desmontados sobre una mesa de trabajo",
+          "ilustrativa": true
+        }
+      ]
+    },
+    {
+      "id": "mecanico",
+      "titulo": "Taller mecánico",
+      "descripcion": "Afinaciones, frenos y suspensiones. Si tu vehículo lo requiere, también alineación y balanceo.",
+      "aplicacion": "Para revisión o reparación mecánica de tu vehículo.",
+      "portada": 2,
+      "galeria": [
+        {
+          "nombre": "motor-cofre",
+          "alt": "Camioneta blanca con el cofre abierto y el motor a la vista dentro de un taller",
+          "ilustrativa": true
+        },
+        {
+          "nombre": "llanta-impacto",
+          "alt": "Mecánico aflojando las tuercas de una llanta con pistola de impacto",
+          "ilustrativa": true
+        },
+        {
+          "nombre": "suspension-desmontada",
+          "alt": "Dos amortiguadores retirados junto a herramientas, con la zona delantera del vehículo abierta",
+          "pie": "Suspensión desmontada en el taller."
+        },
+        {
+          "nombre": "alineacion-plataforma",
+          "alt": "Auto blanco sobre la plataforma de alineación con sensores en las ruedas, en el taller"
+        }
+      ]
+    },
+    {
       "id": "hojalateria",
       "titulo": "Hojalatería y reparación de carrocería",
-      "descripcion": "Reparación de golpes y abolladuras, y restauración de piezas de carrocería.",
+      "descripcion": "Reparación de golpes y abolladuras, y restauración de piezas de carrocería, también por siniestro.",
       "aplicacion": "Para daños por choque, golpes menores o piezas deformadas.",
       "portada": 1,
       "galeria": [
         {
           "nombre": "pulido-carroceria",
           "alt": "Pulido de la carrocería de un auto oscuro con pulidora orbital",
-          "foco": "50% 62%"
+          "foco": "50% 62%",
+          "ilustrativa": true
         },
         {
           "nombre": "cofre-preparacion",
@@ -95,14 +138,15 @@
     },
     {
       "id": "pintura",
-      "titulo": "Pintura automotriz, pulido y acabado",
-      "descripcion": "Pintura, retoques, pulido y acabado para devolver la estética del vehículo.",
-      "aplicacion": "Para piezas reparadas, retoques o pintura de carrocería.",
+      "titulo": "Pintura, pulido y encerado",
+      "descripcion": "Pintura, retoques, pulido y encerado para devolver la estética del vehículo.",
+      "aplicacion": "Para piezas reparadas, retoques, pintura de carrocería o acabado final.",
       "portada": 1,
       "galeria": [
         {
           "nombre": "pintura-defensa",
-          "alt": "Pintor con traje protector aplicando pintura a una defensa con pistola de aire"
+          "alt": "Pintor con traje protector aplicando pintura a una defensa con pistola de aire",
+          "ilustrativa": true
         },
         {
           "nombre": "pintura-cabina",
@@ -110,59 +154,18 @@
           "pie": "Vehículo protegido en la cabina de pintura."
         }
       ]
-    },
-    {
-      "id": "mecanico",
-      "titulo": "Taller mecánico",
-      "descripcion": "Reparación mecánica y trabajo en suspensión.",
-      "aplicacion": "Para revisión o reparación mecánica de tu vehículo.",
-      "portada": 2,
-      "galeria": [
-        {
-          "nombre": "motor-cofre",
-          "alt": "Camioneta blanca con el cofre abierto y el motor a la vista dentro de un taller"
-        },
-        {
-          "nombre": "llanta-impacto",
-          "alt": "Mecánico aflojando las tuercas de una llanta con pistola de impacto"
-        },
-        {
-          "nombre": "suspension-desmontada",
-          "alt": "Dos amortiguadores retirados junto a herramientas, con la zona delantera del vehículo abierta",
-          "pie": "Suspensión desmontada en el taller."
-        }
-      ]
-    },
-    {
-      "id": "alineacion",
-      "titulo": "Alineación y balanceo",
-      "descripcion": "Servicio completo de alineación y balanceo.",
-      "aplicacion": "Para cuidar el desgaste de llantas y la dirección del vehículo.",
-      "portada": 1,
-      "galeria": [
-        {
-          "nombre": "alineacion-plataforma",
-          "alt": "Auto blanco sobre la plataforma de alineación con sensores en las ruedas, en el taller"
-        }
-      ]
-    },
-    {
-      "id": "refacciones",
-      "titulo": "Refacciones a tu medida",
-      "descripcion": "Consigue las refacciones que tu reparación necesita.",
-      "aplicacion": "Cuando tu reparación requiere piezas. Se incluyen en la cotización.",
-      "portada": 1,
-      "galeria": [
-        {
-          "nombre": "refacciones-motor",
-          "alt": "Bloques de motor desmontados sobre una mesa de trabajo"
-        }
-      ]
     }
   ],
   "qualitas": {
     "titulo": "Trabajamos de la mano con Qualitas",
-    "texto": "Si tu vehículo está asegurado con Qualitas, te acompañamos desde el reporte del siniestro hasta la entrega de la reparación."
+    "texto": "Si tu vehículo está asegurado con Qualitas, te acompañamos desde el reporte del siniestro hasta la entrega, con enlaces de reparación de acuerdo con los términos del seguro.",
+    "logo": "logo-qualitas.png",
+    "logoAlt": "Logotipo de Qualitas",
+    "datos": [
+      "Asociados a Qualitas",
+      "Enlaces de reparación según los términos del seguro",
+      "4 pasos fáciles de entender"
+    ]
   },
   "resenas": [
     {
@@ -183,15 +186,51 @@
     }
   ],
   "procesoParticular": [
-    "Comparte tu requerimiento de reparación.",
-    "Revisamos materiales, refacciones y servicios extras.",
-    "Recibes una cotización con alcance y condiciones.",
-    "Reparamos y coordinamos la entrega después de tu aprobación, con seguimiento personalizado."
+    "Agenda tu evaluación y trae tu vehículo al taller.",
+    "Hacemos la evaluación presencial (aprox. 2 horas): daño, materiales y refacciones.",
+    "Recibes tu cotización precisa con alcance y condiciones.",
+    "Con tu aprobación iniciamos la reparación y te avisamos de cada avance hasta la entrega."
   ],
   "procesoQualitas": [
     "Damos seguimiento a tu reporte de siniestro con enlaces virtuales de cada paso.",
-    "Entregas el vehículo para evaluación y se genera la cotización.",
-    "Recibes una cotización con alcance y condiciones, de acuerdo con el enlace de Qualitas.",
-    "Reparamos y coordinamos la entrega después de la aprobación, con seguimiento personalizado."
-  ]
+    "Traes el vehículo a evaluación presencial (aprox. 2 horas) y se genera la cotización.",
+    "Recibes la cotización con alcance y condiciones, de acuerdo con el enlace de Qualitas.",
+    "Con la aprobación iniciamos la reparación y te avisamos de cada avance hasta la entrega."
+  ],
+  "hero": {
+    "texto": "Hojalatería y pintura, pulido y encerado, afinaciones, frenos y suspensiones. Te mantenemos informado en cada etapa del servicio."
+  },
+  "recorrido": {
+    "titulo": "Así trabajamos tu vehículo",
+    "intro": "Desde la recepción de la unidad y la cotización de refacciones hasta la entrega, te acompañamos en cada paso y te mantenemos notificado de cada avance.",
+    "cotizacion": {
+      "titulo": "Cotización",
+      "descripcion": "Para darte una cotización precisa revisamos tu vehículo en el taller. La evaluación presencial dura aproximadamente 2 horas; después se genera la cotización para iniciar la reparación.",
+      "panelTitulo": "Cotización con evaluación presencial",
+      "lista": [
+        "Agenda tu evaluación por WhatsApp",
+        "Trae tu vehículo: la revisión dura aprox. 2 horas",
+        "Recibes tu cotización y, con tu aprobación, iniciamos la reparación"
+      ]
+    },
+    "entrega": {
+      "titulo": "Entrega",
+      "descripcion": "Te avisamos de cada avance y, al terminar la reparación, coordinamos contigo la entrega de tu vehículo.",
+      "panelTitulo": "Entrega coordinada",
+      "lista": [
+        "Te avisamos de cada avance de la reparación",
+        "Te confirmamos cuando tu vehículo está listo",
+        "Coordinamos contigo la entrega"
+      ]
+    }
+  },
+  "particular": {
+    "titulo": "Reparación particular",
+    "texto": "Si reparas sin seguro, tratas directo con el taller: agendas tu evaluación presencial, recibes tu cotización precisa y decides. Te avisamos de cada avance hasta la entrega.",
+    "datos": [
+      "Evaluación presencial (aprox. 2 horas)",
+      "Cotización con alcance y condiciones",
+      "Avisos de cada avance"
+    ]
+  }
 }

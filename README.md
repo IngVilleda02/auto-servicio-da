@@ -23,6 +23,7 @@ Sitio estático, sin Node. Se genera con Python desde un solo archivo de datos.
      `powershell -ExecutionPolicy Bypass -File tools\nueva-foto.ps1 -Origen "C:\ruta\foto.jpg" -Nombre "pintura-puerta-azul"`
   2. En `data/config.json`, dentro del servicio, agrega a `galeria`: `{ "nombre": "pintura-puerta-azul", "alt": "Descripción de lo que se ve", "pie": "Texto opcional bajo la foto" }`.
   3. Ejecuta `py build.py`. Las miniaturas, el contador "Ver galería · n fotos" y el visor se actualizan solos.
+- **Recorrido de servicios:** el orden de `servicios` en `data/config.json` es el orden del recorrido (después de la etapa fija de Cotización, que se edita en `recorrido.cotizacion`). En escritorio, cada etapa cambia el panel de imagen al pasar por el centro de la pantalla.
 - **Portada de un servicio:** son las primeras fotos de su `galeria`; `"portada": 2` muestra dos (como en Taller mecánico). `"foco": "50% 60%"` ajusta el encuadre de una foto recortada.
 - **Horario:** `horarios` (formato 24 h; domingo vacío = cerrado). El estado “Abierto ahora” usa `zonaHoraria`.
 - **Dominio definitivo:** al llenar `negocio.dominio` se activan canonical, `url` en datos estructurados y se quita `noindex`. Después genera `sitemap.xml` y quita el `Disallow: /` de `robots.txt` (el build lo hace solo).
@@ -60,4 +61,6 @@ Ninguna. No hay servidor, claves ni APIs. El mapa usa el embed público de Googl
 8. Confirmar que las reseñas de Google pueden mostrarse con nombre.
 9. Revisión legal del aviso de privacidad.
 10. Imagen social para Open Graph.
-11. Confirmar el origen y permiso de uso de `Img1`, `Img2` e `Img3` (portada y Taller mecánico). No parecen tomadas en el taller; si son de un banco de imágenes, revisar su licencia.
+11. Confirmar origen y licencia de `Img1` a `Img5` e `img7`. Se muestran como **imágenes ilustrativas** (`"ilustrativa": true` en `config.json`); si alguna es un trabajo real del taller, quita esa marca.
+12. Datos de contacto confirmados: un solo celular, 427 101 7856, para WhatsApp y llamadas; domicilio Av. 4 Oriente N° 14, Camino a Santa Cruz Nieto, San Juan del Río, Qro. Falta confirmar el código postal si se quiere mostrar.
+13. Autorización para usar el logotipo de Qualitas.
