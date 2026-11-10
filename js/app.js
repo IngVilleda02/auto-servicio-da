@@ -397,6 +397,23 @@
     var $ = function (id) { return document.getElementById(id); };
     var status = $("form-status");
     var done = $("form-done");
+    var mail = form.getAttribute("data-mail");
+    var help = $("form-help");
+
+    // Canal de envío: WhatsApp (por defecto) o correo; el botón y la ayuda dicen exactamente qué pasará
+    function canal() {
+      var c = form.querySelector('input[name="canal"]:checked');
+      return c && c.value === "correo" && mail ? "correo" : "whatsapp";
+    }
+    function syncCanal() {
+      var porCorreo = canal() === "correo";
+      submitBtn.textContent = porCorreo ? "Continuar en correo" : "Continuar en WhatsApp";
+      if (help) help.textContent = porCorreo
+        ? "Se abre tu programa de correo con el mensaje listo para " + mail + "; revísalo y pulsa Enviar. Las fotos las adjuntas ahí."
+        : "Se abre WhatsApp con tu mensaje listo; revísalo y pulsa Enviar. Las fotos las adjuntas ahí.";
+      done.hidden = true;
+    }
+    form.querySelectorAll('input[name="canal"]').forEach(function (r) { r.addEventListener("change", syncCanal); });
 
     function setError(el, msg) {
       var err = $(el.id + "-err");
@@ -464,17 +481,25 @@
       }
       status.textContent = "";
       var msg = buildMessage();
-      var url = "https://wa.me/" + waNumber + "?text=" + encodeURIComponent(msg);
-      // Abre WhatsApp en otra pestaña con un enlace real (no depende de window.open)
+      var porCorreo = canal() === "correo";
+      var url = porCorreo
+        ? "mailto:" + mail + "?subject=" + encodeURIComponent("Solicitud de evaluación - " + $("servicio").selectedOptions[0].text) +
+          "&body=" + encodeURIComponent(msg)
+        : "https://wa.me/" + waNumber + "?text=" + encodeURIComponent(msg);
+      var medio = porCorreo ? "tu correo" : "WhatsApp";
+      // Abre el canal con un enlace real (no depende de window.open); WhatsApp en otra pestaña
       var a = document.createElement("a");
-      a.href = url; a.target = "_blank"; a.rel = "noopener";
+      a.href = url;
+      if (!porCorreo) { a.target = "_blank"; a.rel = "noopener"; }
       document.body.appendChild(a); a.click(); a.remove();
       // Aviso breve: no afirma que el taller recibió nada; los datos del formulario se conservan
-      done.textContent = "Abrimos WhatsApp con tu mensaje: revísalo y pulsa Enviar. ¿No se abrió? ";
+      done.textContent = "Abrimos " + medio + " con tu mensaje: revísalo y pulsa Enviar. ¿No se abrió? ";
       var again = document.createElement("a");
-      again.href = url; again.target = "_blank"; again.rel = "noopener";
-      again.textContent = "Abrir WhatsApp";
+      again.href = url;
+      if (!porCorreo) { again.target = "_blank"; again.rel = "noopener"; }
+      again.textContent = porCorreo ? "Abrir correo" : "Abrir WhatsApp";
       done.appendChild(again);
+      if (porCorreo) done.appendChild(document.createTextNode(" o escribe directo a " + mail + "."));
       done.hidden = false;
     });
 

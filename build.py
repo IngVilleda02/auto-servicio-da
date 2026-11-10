@@ -116,6 +116,7 @@ def jsonld():
     }
     if N["dominio"]:
         data["url"] = N["dominio"]
+        data["image"] = N["dominio"] + "/img/logo-da-800.jpg"
     if N["correo"]:
         data["email"] = N["correo"]
     return json.dumps(data, ensure_ascii=False)
@@ -146,7 +147,7 @@ def header(home):
 def footer(home):
     base = "" if home else "index.html"
     nav = "\n".join(f'<a href="{base}{h}">{esc(t)}</a>' for t, h in NAV)
-    email = f'<p><a href="mailto:{esc(N["correo"])}">{esc(N["correo"])}</a></p>' if N["correo"] else ""
+    email = f'<p>Correo: <a href="mailto:{esc(N["correo"])}">{esc(N["correo"])}</a></p>' if N["correo"] else ""
     return f'''<footer class="site-footer">
   <div class="wrap">
     <div class="footer__grid">
@@ -161,7 +162,8 @@ def footer(home):
       <div class="footer__col footer__col--wide">
         <h2>Contacto</h2>
         <p>{esc(N['direccion'])}</p>
-        <p>WhatsApp y llamadas: <a href="{WA_LINK}" target="_blank" rel="noopener">{esc(N['whatsappMostrar'])}</a></p>
+        <p>WhatsApp: <a href="{WA_LINK}" target="_blank" rel="noopener">{esc(N['whatsappMostrar'])}</a></p>
+        <p>Llamadas: <a href="tel:{TEL}">{esc(N['telefonoMostrar'])}</a></p>
         {email}
       </div>
       <div class="footer__col footer__col--wide">
@@ -208,7 +210,7 @@ def quote_panel(compact=False, clave="cotizacion"):
     """Panel tipográfico (sin foto) para las etapas de Cotización y Entrega."""
     q = CFG["recorrido"][clave]
     items = "".join(f"<li><span>{i}</span>{esc(t)}</li>" for i, t in enumerate(q["lista"], start=1))
-    num = (f'<p class="quote-panel__num"><span>WhatsApp y llamadas</span>{esc(N["whatsappMostrar"])}</p>'
+    num = (f'<p class="quote-panel__num"><span>WhatsApp</span>{esc(N["whatsappMostrar"])}</p>'
            if clave == "cotizacion" else "")
     return f'''<div class="quote-panel{' quote-panel--inline' if compact else ''}">
   <p class="quote-panel__title">{esc(q.get('panelTitulo', q['titulo']))}</p>
@@ -387,7 +389,8 @@ def home_body():
 <section class="facts-bar" aria-label="Datos del taller">
   <dl class="wrap">
     <div class="fact"><dt>Dónde</dt><dd>{esc(N['ciudad'])}</dd></div>
-    <div class="fact"><dt>WhatsApp y llamadas</dt><dd><a href="{WA_LINK}" target="_blank" rel="noopener">{esc(N['whatsappMostrar'])}</a></dd></div>
+    <div class="fact"><dt>WhatsApp</dt><dd><a href="{WA_LINK}" target="_blank" rel="noopener">{esc(N['whatsappMostrar'])}</a></dd></div>
+    <div class="fact"><dt>Llamadas</dt><dd><a href="tel:{TEL}">{esc(N['telefonoMostrar'])}</a></dd></div>
     <div class="fact"><dt>Hoy</dt><dd><span class="status" data-open-status data-open=""></span> <span data-today-hours></span></dd></div>
   </dl>
 </section>
@@ -473,10 +476,11 @@ def home_body():
   <div class="wrap contact">
     <div class="contact__info">
       <h2 id="h-contacto">Solicita tu cotización</h2>
-      <p class="lead">Cuéntanos qué necesita tu vehículo y agenda la evaluación presencial (aprox. 2 horas) para recibir tu cotización precisa. Continúas la conversación en WhatsApp.</p>
+      <p class="lead">Cuéntanos qué necesita tu vehículo y agenda la evaluación presencial (aprox. 2 horas) para recibir tu cotización precisa. Envías tu solicitud por WhatsApp o por correo.</p>
       <dl class="info-list">
-        <div><dt>WhatsApp y llamadas</dt><dd class="info-num"><span>{esc(N['whatsappMostrar'])}</span>
-          <a href="{WA_LINK}" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+        <div><dt>WhatsApp</dt><dd class="info-num"><span>{esc(N['whatsappMostrar'])}</span>
+          <a href="{WA_LINK}" target="_blank" rel="noopener">Escribir por WhatsApp</a></dd></div>
+        <div><dt>Llamadas</dt><dd class="info-num"><span>{esc(N['telefonoMostrar'])}</span>
           <a href="tel:{TEL}">Llamar</a></dd></div>
         {email_dt}
         <div><dt>Dirección</dt><dd>{esc(N['direccion'])}</dd></div>
@@ -491,8 +495,8 @@ def home_body():
     </div>
     <div class="contact__form">
       <noscript><div class="noscript-box"><h3>Contáctanos directamente</h3>
-        <p>El formulario necesita JavaScript. Escríbenos por <a href="{WA_LINK}">WhatsApp</a> o llama al <a href="tel:{TEL}">{esc(N['telefonoMostrar'])}</a>.</p></div></noscript>
-      <form class="form js-only" id="quote-form" method="post" action="#contacto" novalidate data-wa="{N['whatsappNumero']}">
+        <p>El formulario necesita JavaScript. Escríbenos por <a href="{WA_LINK}">WhatsApp ({esc(N['whatsappMostrar'])})</a>, llama al <a href="tel:{TEL}">{esc(N['telefonoMostrar'])}</a> o escribe a <a href="mailto:{esc(N['correo'])}">{esc(N['correo'])}</a>.</p></div></noscript>
+      <form class="form js-only" id="quote-form" method="post" action="#contacto" novalidate data-wa="{N['whatsappNumero']}" data-mail="{esc(N['correo'])}">
         <h3>Agenda tu evaluación</h3>
         <p class="form__alt">Los campos con * son obligatorios.</p>
         <div class="field">
@@ -500,6 +504,14 @@ def home_body():
           <input id="nombre" name="nombre" type="text" autocomplete="name" maxlength="80" aria-describedby="nombre-err">
           <p class="err" id="nombre-err" hidden></p>
         </div>
+        <fieldset class="field radios-wrap">
+          <legend>¿Por dónde quieres enviar tu solicitud? *</legend>
+          <div class="radios">
+            <label><input type="radio" name="canal" value="whatsapp" checked> WhatsApp</label>
+            <label><input type="radio" name="canal" value="correo"> Correo electrónico</label>
+          </div>
+          <p class="hint" id="canal-hint">Por correo se abre tu programa de correo con el mensaje listo para {esc(N['correo'])}.</p>
+        </fieldset>
         <div class="field">
           <label for="servicio">Servicio de interés *</label>
           <select id="servicio" name="servicio" aria-describedby="servicio-err">
@@ -515,12 +527,12 @@ def home_body():
         <div class="field">
           <label for="descripcion">Descripción del requerimiento *</label>
           <textarea id="descripcion" name="descripcion" maxlength="600" aria-describedby="descripcion-hint descripcion-err"></textarea>
-          <p class="hint" id="descripcion-hint">Máximo 600 caracteres. Las fotos se adjuntan manualmente dentro de la conversación de WhatsApp.</p>
+          <p class="hint" id="descripcion-hint">Máximo 600 caracteres. Las fotos las adjuntas tú en WhatsApp o en el correo.</p>
           <p class="err" id="descripcion-err" hidden></p>
         </div>
         <p class="form__privacy">Usamos estos datos solo para armar tu mensaje en este navegador. Consulta el <a href="privacidad.html">aviso de privacidad</a>.</p>
         <button class="btn btn--primary" type="submit" id="form-submit" disabled>Continuar en WhatsApp</button>
-        <p class="form__alt">Se abre WhatsApp con tu mensaje listo; revísalo y pulsa Enviar. Las fotos las adjuntas ahí.</p>
+        <p class="form__alt" id="form-help">Se abre WhatsApp con tu mensaje listo; revísalo y pulsa Enviar. Las fotos las adjuntas ahí.</p>
         <p id="form-status" role="alert" class="err"></p>
         <p id="form-done" class="form__done" role="status" hidden></p>
       </form>
@@ -559,7 +571,8 @@ def home_body():
 
 
 def privacy_body():
-    cont = f'WhatsApp y llamadas al <a href="{WA_LINK}" target="_blank" rel="noopener">{esc(N["whatsappMostrar"])}</a>'
+    cont = (f'WhatsApp <a href="{WA_LINK}" target="_blank" rel="noopener">{esc(N["whatsappMostrar"])}</a>, '
+            f'teléfono <a href="tel:{TEL}">{esc(N["telefonoMostrar"])}</a> o correo <a href="mailto:{esc(N["correo"])}">{esc(N["correo"])}</a>')
     return f'''
 {header(False)}
 <main id="contenido" class="wrap legal">
@@ -568,11 +581,11 @@ def privacy_body():
   <section><h2>Responsable</h2>
     <p>{esc(N['responsable'])}, con domicilio en {esc(N['direccion'])}. Contacto: {cont}.</p></section>
   <section><h2>Qué datos se capturan en este sitio</h2>
-    <p>El formulario de cotización pide nombre, servicio de interés, vehículo (opcional) y la descripción de lo que necesitas. Tu número de teléfono lo recibe el taller al continuar la conversación en WhatsApp. Esta página no envía esos datos a un servidor propio ni los guarda: se usan en tu navegador para armar un mensaje de WhatsApp.</p></section>
+    <p>El formulario de cotización pide nombre, servicio de interés, vehículo (opcional) y la descripción de lo que necesitas. Eliges si la solicitud sale por WhatsApp o por correo; el taller recibe tu número o tu correo cuando envías el mensaje desde ese medio. Esta página no envía esos datos a un servidor propio ni los guarda: se usan en tu navegador para armar un mensaje de WhatsApp o de correo.</p></section>
   <section><h2>Para qué se usan</h2>
-    <ul><li>Preparar el mensaje con el que solicitas una cotización.</li><li>Si decides enviarlo por WhatsApp, el taller lo recibe y lo usa para responderte y cotizar el servicio.</li></ul></section>
+    <ul><li>Preparar el mensaje con el que solicitas una cotización.</li><li>Si decides enviarlo por WhatsApp o por correo, el taller lo recibe y lo usa para responderte y cotizar el servicio.</li></ul></section>
   <section><h2>Con quién se comparten</h2>
-    <p>El mensaje viaja por WhatsApp solo cuando pulsas Enviar, y queda sujeto a los términos y al aviso de privacidad de esa plataforma. Si cargas el mapa, Google recibe tu visita a ese contenido. Las tipografías se cargan desde Google Fonts.</p></section>
+    <p>El mensaje viaja por WhatsApp o por tu servicio de correo solo cuando pulsas Enviar, y queda sujeto a los términos y al aviso de privacidad de esa plataforma. Si cargas el mapa, Google recibe tu visita a ese contenido. Las tipografías se cargan desde Google Fonts.</p></section>
   <section><h2>Cookies y analítica</h2>
     <p>Este sitio no usa cookies propias ni herramientas de analítica.</p></section>
   <section><h2>Tus derechos</h2>
@@ -592,8 +605,12 @@ CSP = ("default-src 'self'; img-src 'self' data:; style-src 'self' https://fonts
 
 
 def page(title, desc, body, inline, home):
-    robots = "" if N["dominio"] else '<meta name="robots" content="noindex, nofollow">'
-    canon = f'<link rel="canonical" href="{esc(N["dominio"])}{"" if home else "/privacidad.html"}">' if N["dominio"] else ""
+    live = bool(N["dominio"]) and bool(N.get("publicado"))
+    # La página de privacidad no se indexa nunca; la principal solo cuando "publicado" es true
+    robots = "" if (live and home) else '<meta name="robots" content="noindex, nofollow">'
+    canon = f'<link rel="canonical" href="{esc(N["dominio"])}/">' if (N["dominio"] and home) else ""
+    og_url = (f'<meta property="og:url" content="{esc(N["dominio"])}/"><meta property="og:image" content="{esc(N["dominio"])}/img/logo-da-800.jpg">'
+              '<meta name="twitter:card" content="summary">') if (N["dominio"] and home) else ""
     css = (ROOT / "css" / "styles.css").read_text(encoding="utf-8")
     js = (ROOT / "js" / "app.js").read_text(encoding="utf-8")
     if inline:
@@ -618,7 +635,7 @@ def page(title, desc, body, inline, home):
 <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:locale" content="es_MX">
-<meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(desc)}">
+<meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(desc)}">{og_url}
 {FONTS}
 {head_css}{css_pad}'''
     if inline:
@@ -652,7 +669,15 @@ def main():
     art.mkdir(exist_ok=True)
     (art / "index.html").write_text(page(N["nombre"], desc_home, home_body(), True, True), encoding="utf-8")
     (art / "privacidad.html").write_text(page(titles[1], f"Aviso de privacidad de {N['nombre']}.", privacy_body(), True, False), encoding="utf-8")
-    robots = "User-agent: *\nDisallow: /\n" if not N["dominio"] else f"User-agent: *\nAllow: /\nSitemap: {N['dominio']}/sitemap.xml\n"
+    live = bool(N["dominio"]) and bool(N.get("publicado"))
+    robots = (f"User-agent: *\nAllow: /\nDisallow: /privacidad.html\nSitemap: {N['dominio']}/sitemap.xml\n" if live
+              else "User-agent: *\nDisallow: /\n")
+    sm = ROOT / "sitemap.xml"
+    if live:
+        sm.write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+                      f'  <url><loc>{N["dominio"]}/</loc></url>\n</urlset>\n', encoding="utf-8")
+    elif sm.exists():
+        sm.unlink()
     (ROOT / "robots.txt").write_text(robots, encoding="utf-8")
     print("OK: index.html, privacidad.html, robots.txt, artifact/")
 

@@ -62,5 +62,19 @@ Ninguna. No hay servidor, claves ni APIs. El mapa usa el embed público de Googl
 9. Revisión legal del aviso de privacidad.
 10. Imagen social para Open Graph.
 11. Confirmar origen y licencia de `Img1` a `Img5` e `img7`. Se muestran como **imágenes ilustrativas** (`"ilustrativa": true` en `config.json`); si alguna es un trabajo real del taller, quita esa marca.
-12. Datos de contacto confirmados: un solo celular, 427 101 7856, para WhatsApp y llamadas; domicilio Av. 4 Oriente N° 14, Camino a Santa Cruz Nieto, San Juan del Río, Qro. Falta confirmar el código postal si se quiere mostrar.
+12. Datos de contacto (tarjeta del taller): WhatsApp 427 202 5184, llamadas 427 101 7856, correo autoserviciodya@hotmail.com; domicilio Av. 4 Oriente N° 14, Camino a Santa Cruz Nieto, San Juan del Río, Qro. Falta el código postal si se quiere mostrar.
 13. Autorización para usar el logotipo de Qualitas.
+
+## Salir en Google (sin dominio propio)
+
+Está preparado pero **apagado**. En `data/config.json`, `negocio.publicado` está en `false`: el sitio lleva `noindex` y `robots.txt` bloquea todo.
+
+Para abrirlo a Google:
+1. Pon `negocio.publicado` en `true` y ejecuta `py build.py`. Se quita `noindex` de la página principal, `robots.txt` la permite, se crea `sitemap.xml` y quedan activos canonical, `og:url` y `og:image`. El aviso de privacidad sigue sin indexarse.
+2. `git add -A`, `git commit`, `git push`.
+3. En Google Search Console agrega la propiedad `https://auto-servicio-da.vercel.app`, envía `sitemap.xml` y pide indexar la página principal.
+4. En el Perfil de Empresa de Google (el de Maps) enlaza este sitio.
+
+Con dominio propio: cambia `negocio.dominio`, repite los pasos 1 a 3 y agrega una redirección desde la dirección `.vercel.app`.
+
+Antes de abrirlo: el plan Hobby de Vercel es solo para uso personal no comercial; un sitio de negocio debería estar en el plan Pro. Los datos estructurados ya llevan nombre, domicilio, teléfono, horario y mapa del taller.

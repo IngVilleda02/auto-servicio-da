@@ -9,13 +9,15 @@
     "ciudad": "San Juan del Río, Querétaro",
     "telefonoMostrar": "427 101 7856",
     "telefonoTel": "+524271017856",
-    "whatsappMostrar": "427 101 7856",
-    "whatsappNumero": "524271017856",
-    "correo": "",
-    "dominio": "",
+    "whatsappMostrar": "427 202 5184",
+    "whatsappNumero": "524272025184",
+    "correo": "autoserviciodya@hotmail.com",
+    "dominio": "https://auto-servicio-da.vercel.app",
     "zonaHoraria": "America/Mexico_City",
     "fechaPrivacidad": "9 de noviembre de 2026",
-    "responsable": "Auto Servicio D&A"
+    "responsable": "Auto Servicio D&A",
+    "publicado": false,
+    "_publicado": "Déjalo en false mientras se revisan los pendientes. Con true el sitio se vuelve indexable."
   },
   "mapa": {
     "enlaceGoogleMaps": "https://maps.app.goo.gl/gWK8aiqv6PhXZtEo9",
