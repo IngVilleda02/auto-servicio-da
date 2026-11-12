@@ -1,5 +1,5 @@
 <#
-  Prepara una foto para el sitio: crea versiones de 480, 800 y 1200 px de ancho en img/.
+  Prepara una foto para el sitio: crea versiones de 240 (miniatura), 480, 800 y 1200 px de ancho en img/.
 
   Uso (desde la carpeta sitio):
     powershell -ExecutionPolicy Bypass -File tools\nueva-foto.ps1 -Origen "C:\ruta\foto.jpg" -Nombre "pintura-defensa"
@@ -10,7 +10,8 @@
 param(
   [Parameter(Mandatory = $true)][string]$Origen,
   [Parameter(Mandatory = $true)][ValidatePattern('^[a-z0-9-]+$')][string]$Nombre,
-  [int]$Calidad = 78
+  [int]$Calidad = 78,
+  [int[]]$Anchos = @(240, 480, 800, 1200)
 )
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Drawing
@@ -30,7 +31,7 @@ try {
   $ep = New-Object System.Drawing.Imaging.EncoderParameters(1)
   $ep.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter([System.Drawing.Imaging.Encoder]::Quality, [int64]$Calidad)
 
-  $anchos = @(480, 800, 1200) | Where-Object { $_ -le $img.Width }
+  $anchos = $Anchos | Where-Object { $_ -le $img.Width }
   if (-not $anchos) { $anchos = @($img.Width) }
   foreach ($w in $anchos) {
     $h = [int][math]::Round($img.Height * $w / $img.Width)

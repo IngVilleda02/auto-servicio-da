@@ -183,32 +183,174 @@ def footer(home):
 
 
 ARROW = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M7.5 2.5 12 7l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>'
-GRID_ICON = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1h5v5H1zM8 1h5v5H8zM1 8h5v5H1zM8 8h5v5H8z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>'
 
 
 def fotos_word(n):
     return "1 foto" if n == 1 else f"{n} fotos"
 
 
-def thumbs_html(sv):
-    fotos = sv["galeria"]
-    out = []
-    for j, f in enumerate(fotos[:4]):
+CHEV_L = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M9 2 4 7l5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>'
+CHEV_R = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="m5 2 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>'
+
+
+def near(name, target):
+    return min(variants(name), key=lambda v: abs(v - target))
+
+
+def folio_html(sv):
+    """Portafolio de un trabajo real del taller para el panel fijo del recorrido (escritorio)."""
+    fotos, pf, gid = sv["galeria"], sv["portafolio"], esc(sv["id"])
+    n = len(fotos)
+    f0 = fotos[0]
+    for f in fotos:
         check_image(f["nombre"])
-        small = variants(f["nombre"])[0]
-        w, h = jpeg_size(IMG_DIR / f"{f['nombre']}-{small}.jpg")
-        extra = len(fotos) - 4 if (j == 3 and len(fotos) > 4) else 0
-        more = f'<span class="thumb__more" aria-hidden="true">+{extra}</span>' if extra else ""
-        label = f"Ver foto {j + 1} de {len(fotos)} de {sv['titulo']}" + (" (imagen ilustrativa)" if f.get("ilustrativa") else "")
-        foco = f' data-foco="{esc(f["foco"])}"' if f.get("foco") else ""
-        out.append(f'<a class="thumb" href="{largest(f["nombre"])}" data-gal="{esc(sv["id"])}" data-index="{j}" aria-label="{esc(label)}">'
-                   f'<img{foco} src="img/{f["nombre"]}-{small}.jpg" width="{w}" height="{h}" alt="" loading="lazy" decoding="async">{more}</a>')
-    return "".join(out)
+    mid = near(f0["nombre"], 800)
+    w, h = jpeg_size(IMG_DIR / f"{f0['nombre']}-{mid}.jpg")
+    thumbs = []
+    for j, f in enumerate(fotos):
+        s = variants(f["nombre"])[0]
+        tw, th = jpeg_size(IMG_DIR / f"{f['nombre']}-{s}.jpg")
+        thumbs.append(f'<button type="button" class="folio__thumb" data-folio-to="{j}" aria-label="Ver foto {j + 1} de {n}"'
+                      f' aria-current="{"true" if j == 0 else "false"}"><img src="img/{f["nombre"]}-{s}.jpg" width="{tw}" height="{th}"'
+                      f' alt="" loading="lazy" decoding="async"></button>')
+    return f'''<div class="folio" data-folio="{gid}">
+  <a class="folio__main" href="{largest(f0['nombre'])}" data-gal="{gid}" data-index="0" aria-label="Ampliar foto 1 de {n}: {esc(f0['alt'])}">
+    <img data-folio-img src="img/{f0['nombre']}-{mid}.jpg" srcset="{srcset_of(f0['nombre'])}" sizes="(min-width: 1280px) 560px, 45vw" width="{w}" height="{h}" alt="{esc(f0['alt'])}" loading="lazy" decoding="async">
+    <span class="folio__zoom" aria-hidden="true">Ampliar</span>
+  </a>
+  <div class="folio__bar">
+    <p class="folio__title"><span class="folio__eyebrow">Trabajo real del taller</span>{esc(pf['vehiculo'])}<span class="folio__job">{esc(pf['trabajo'])}</span></p>
+    <div class="folio__nav">
+      <button type="button" class="folio__btn" data-folio-prev aria-label="Foto anterior">{CHEV_L}</button>
+      <p class="folio__count"><span data-folio-i>01</span> / {n:02d}</p>
+      <button type="button" class="folio__btn" data-folio-next aria-label="Foto siguiente">{CHEV_R}</button>
+    </div>
+  </div>
+  <p class="folio__pie" data-folio-pie aria-live="polite">{esc(f0.get('pie', ''))}</p>
+  <div class="folio__strip">{"".join(thumbs)}</div>
+</div>'''
+
+
+def reel_html(sv):
+    """Fotos del trabajo en fila deslizable (móvil, tablet y sin JavaScript)."""
+    fotos, pf, gid = sv["galeria"], sv["portafolio"], esc(sv["id"])
+    n = len(fotos)
+    items = []
+    for j, f in enumerate(fotos):
+        m = near(f["nombre"], 480)
+        w, h = jpeg_size(IMG_DIR / f"{f['nombre']}-{m}.jpg")
+        items.append(f'<a class="reel__item" href="{largest(f["nombre"])}" data-gal="{gid}" data-index="{j}" aria-label="Ver foto {j + 1} de {n}: {esc(f["alt"])}">'
+                     f'<img src="img/{f["nombre"]}-{m}.jpg" srcset="{srcset_of(f["nombre"])}" sizes="(min-width: 768px) 45vw, 80vw"'
+                     f' width="{w}" height="{h}" alt="" loading="lazy" decoding="async"></a>')
+    return f'''<p class="reel__title"><span>Trabajo real del taller</span>{esc(pf['vehiculo'])} · {esc(pf['trabajo'])} · {fotos_word(n)}</p>
+    <div class="reel">{"".join(items)}</div>'''
+
+
+SCENE_MAP = '''<svg class="scene__svg" viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice">
+  <rect width="400" height="240" fill="#f2efe9"/>
+  <path d="M-10 0 H70 Q60 40 20 70 Q0 84 -10 86 Z" fill="#c4dff4"/>
+  <rect x="112" y="76" width="96" height="56" rx="10" fill="#d4ebc6"/>
+  <rect x="252" y="168" width="64" height="40" rx="8" fill="#d4ebc6"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <g stroke="#e2dccf" stroke-width="17"><path d="M-10 60 H410 M-10 150 H410 M-10 214 H410 M90 -10 V250 M230 -10 V250 M340 -10 V250 M150 250 L250 160"/></g>
+    <g stroke="#fff" stroke-width="13"><path d="M-10 60 H410 M-10 150 H410 M-10 214 H410 M90 -10 V250 M230 -10 V250 M340 -10 V250 M150 250 L250 160"/></g>
+    <path d="M90 250 V162 Q90 150 102 150 H218 Q230 150 230 138 V72 Q230 60 242 60 H300" stroke="#fff" stroke-width="11"/>
+    <path data-route d="M90 250 V162 Q90 150 102 150 H218 Q230 150 230 138 V72 Q230 60 242 60 H300" stroke="#0a84ff" stroke-width="6.5"/>
+  </g>
+  <g class="map-pin" transform="translate(300 60)">
+    <circle class="map-pin__pulse" r="14" fill="#e3262d"/>
+    <circle r="13" fill="#e3262d" stroke="#fff" stroke-width="3"/>
+    <path d="M-5 3 L2 -4 M1.5 -6.5 a3.2 3.2 0 1 0 4.5 4.5 M-5 3 a1.6 1.6 0 1 0 2.2 2.2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+    <text y="31" text-anchor="middle" class="map-pin__label">Auto Servicio D&amp;A</text>
+  </g>
+  <g class="map-car" data-car transform="translate(300 60) rotate(90)">
+    <circle r="13" fill="#fff" class="map-car__halo"/>
+    <rect x="-5.5" y="-9" width="11" height="18" rx="4" fill="#0a84ff"/>
+    <rect x="-4" y="-5.5" width="8" height="4" rx="1.4" fill="#cfe6ff"/>
+    <rect x="-4" y="3" width="8" height="2.6" rx="1.2" fill="#cfe6ff"/>
+  </g>
+</svg>'''
+
+CAR_BODY = ('<path d="M60 168 V142 Q62 128 80 124 L128 118 Q150 92 182 84 L250 82 Q276 84 298 112 L332 120 Q348 124 350 140 V168 Z" '
+            'fill="#fff" stroke="#1d1d1f" stroke-width="2.5" stroke-linejoin="round"/>'
+            '<path d="M140 117 Q157 98 182 92 L211 91 V117 Z M219 91 L248 90 Q265 92 282 115 L219 117 Z" fill="#dfe3e8"/>'
+            '<path d="M215 120 V160 M150 128 H166 M238 128 H254" stroke="#1d1d1f" stroke-width="2" stroke-linecap="round"/>'
+            '<circle cx="112" cy="170" r="22" fill="#1d1d1f"/><circle cx="112" cy="170" r="9" fill="#d2d2d7"/>'
+            '<circle cx="296" cy="170" r="22" fill="#1d1d1f"/><circle cx="296" cy="170" r="9" fill="#d2d2d7"/>')
+
+SCENE_SCAN = f'''<svg class="scene__svg" viewBox="0 0 400 240" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <g id="scan-car">{CAR_BODY}</g>
+    <clipPath id="scan-lens"><circle data-lens-clip cx="70" cy="128" r="31"/></clipPath>
+  </defs>
+  <rect width="400" height="240" fill="#f5f5f7"/>
+  <ellipse cx="205" cy="196" rx="160" ry="8" fill="#000" opacity=".07"/>
+  <use href="#scan-car"/>
+  <g class="scan-checks">
+    <g data-check="112" transform="translate(112 132)"><circle r="10"/><path d="M-4 0 l3 3 5-6"/></g>
+    <g data-check="190" transform="translate(186 70)"><circle r="10"/><path d="M-4 0 l3 3 5-6"/></g>
+    <g data-check="250" transform="translate(262 146)"><circle r="10"/><path d="M-4 0 l3 3 5-6"/></g>
+    <g data-check="300" transform="translate(326 104)"><circle r="10"/><path d="M-4 0 l3 3 5-6"/></g>
+  </g>
+  <g data-lens transform="translate(70 128)">
+    <g clip-path="url(#scan-lens)" transform="translate(-70 -128)">
+      <rect width="400" height="240" fill="#fff"/>
+      <g data-lens-zoom transform="translate(70 128) scale(1.7) translate(-70 -128)"><use href="#scan-car"/></g>
+    </g>
+    <circle r="31" fill="none" stroke="#1d1d1f" stroke-width="5"/>
+    <circle r="31" fill="none" stroke="#fff" stroke-width="1.5" opacity=".7"/>
+    <path d="M23 23 L44 44" stroke="#1d1d1f" stroke-width="9" stroke-linecap="round"/>
+  </g>
+</svg>'''
+
+
+_SCENES_N = 0
+
+
+def scenes_html(q):
+    """Escenas animadas de la cotización: llegada (mapa), revisión con lupa y cotización por WhatsApp."""
+    esc_ = q["escenas"]
+    steps = "".join(
+        f'<li><button type="button" class="scenes__step" data-scene-to="{i}" aria-current="{"true" if i == 0 else "false"}">'
+        f'<span class="scenes__n">{i + 1}</span><span class="scenes__txt"><strong>{esc(s["titulo"])}</strong>{esc(s["texto"])}</span>'
+        f'<span class="scenes__bar" aria-hidden="true"><i></i></span></button></li>'
+        for i, s in enumerate(esc_))
+    calle = N["direccion"].split(",")[0]
+    global _SCENES_N
+    _SCENES_N += 1
+    scan = SCENE_SCAN.replace("scan-car", f"scan-car-{_SCENES_N}").replace("scan-lens", f"scan-lens-{_SCENES_N}")
+    return f'''<div class="scenes" data-scenes>
+  <div class="scenes__stage" aria-hidden="true">
+    <div class="scene scene--map is-active" data-scene="map" data-ms="3800">{SCENE_MAP}
+      <div class="map-card"><span class="map-card__icon"></span><span><strong>{esc(N["nombre"])}</strong>{esc(calle)}</span><em class="map-card__chip">Llegaste</em></div>
+    </div>
+    <div class="scene scene--scan" data-scene="scan" data-ms="4200">{scan}
+      <div class="scan-chip"><span class="scan-chip__ring"></span>Revisión · aprox. 2 h</div>
+    </div>
+    <div class="scene scene--wa" data-scene="wa" data-ms="3600">
+      <div class="lock">
+        <p class="lock__time">17:30</p>
+        <div class="notif">
+          <span class="notif__icon"><svg viewBox="0 0 24 24"><path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1 0 12 3.5Z" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
+          <span class="notif__body"><span class="notif__app">WHATSAPP <em>ahora</em></span><strong>{esc(N["nombre"])}</strong>Tu cotización está lista. Con tu aprobación, iniciamos la reparación.</span>
+        </div>
+        <div class="notif notif--doc"><span class="notif__doc"></span><span><strong>Cotización</strong>Revisión presencial</span></div>
+      </div>
+    </div>
+  </div>
+  <ol class="scenes__steps">{steps}</ol>
+</div>'''
 
 
 def quote_panel(compact=False, clave="cotizacion"):
     """Panel tipográfico (sin foto) para las etapas de Cotización y Entrega."""
     q = CFG["recorrido"][clave]
+    if q.get("escenas"):
+        return f'''<div class="quote-panel quote-panel--scenes{' quote-panel--inline' if compact else ''}">
+  <p class="quote-panel__title">{esc(q.get('panelTitulo', q['titulo']))}</p>
+  {scenes_html(q)}
+  <p class="quote-panel__num"><span>WhatsApp</span>{esc(N["whatsappMostrar"])}</p>
+</div>'''
     items = "".join(f"<li><span>{i}</span>{esc(t)}</li>" for i, t in enumerate(q["lista"], start=1))
     num = (f'<p class="quote-panel__num"><span>WhatsApp</span>{esc(N["whatsappMostrar"])}</p>'
            if clave == "cotizacion" else "")
@@ -218,6 +360,52 @@ def quote_panel(compact=False, clave="cotizacion"):
   <ul class="quote-panel__list">{items}</ul>
   {num}
 </div>'''
+
+
+TICKS = ('<svg class="msg__ticks" viewBox="0 0 18 11" aria-hidden="true"><path d="M1 6l3 3 6-7M7 8.5 8 9.5l7-8" fill="none"'
+         ' stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+
+
+def chat_html():
+    """Conversación de WhatsApp (estilo iOS) que cuenta los pasos de la entrega; se anima en app.js."""
+    e = CFG["recorrido"]["entrega"]
+    ch = e["chat"]
+    horas = ch.get("horas", [])
+    lista = e["lista"]
+
+    def hora(k):
+        return f'<span class="msg__meta" aria-hidden="true">{esc(horas[k]) if k < len(horas) else ""}</span>'
+
+    msgs, k = [], 0
+    for j, texto in enumerate(lista):
+        if j == len(lista) - 1 and ch.get("respuesta"):
+            msgs.append(f'<li class="msg msg--out" data-from="cliente"><p><span class="sr-only">Tú: </span>{esc(ch["respuesta"])}'
+                        f'{hora(k)}{TICKS}</p></li>')
+            k += 1
+        foto = ""
+        if j == 0 and ch.get("foto"):
+            name = ch["foto"]
+            check_image(name)
+            m = near(name, 480)
+            w, h = jpeg_size(IMG_DIR / f"{name}-{m}.jpg")
+            foto = (f'<img class="msg__photo" src="img/{name}-{m}.jpg" width="{w}" height="{h}" alt="{esc(ch.get("fotoAlt", ""))}"'
+                    f' loading="lazy" decoding="async">')
+        msgs.append(f'<li class="msg msg--in{" msg--photo" if foto else ""}" data-from="taller">{foto}'
+                    f'<p><span class="sr-only">Paso {j + 1}: </span>{esc(texto)}{hora(k)}</p></li>')
+        k += 1
+    return f'''<figure class="chat" data-chat aria-label="{esc(e.get('panelTitulo', e['titulo']))}: así te avisamos por WhatsApp">
+  <div class="chat__head" aria-hidden="true">
+    <span class="chat__back"><svg viewBox="0 0 10 18"><path d="M9 1 1 9l8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <span class="chat__avatar"><img src="img/logo-da.png" alt="" width="64" height="34" loading="lazy" decoding="async"></span>
+    <span class="chat__who"><strong>{esc(ch['contacto'])}</strong><span data-chat-status data-idle="en línea">en línea</span></span>
+  </div>
+  <ol class="chat__log">
+    <li class="chat__day" aria-hidden="true"><span>Hoy</span></li>
+    {"".join(msgs)}
+    <li class="msg msg--in msg--typing" data-chat-typing hidden aria-hidden="true"><p><i></i><i></i><i></i></p></li>
+  </ol>
+  <div class="chat__compose" aria-hidden="true"><span class="chat__input">Mensaje</span><span class="chat__send"></span></div>
+</figure>'''
 
 
 def services_html():
@@ -242,31 +430,18 @@ def services_html():
     shots.append(f'<div class="shot shot--quote is-active" data-for="cotizacion">{quote_panel()}</div>')
 
     for i, sv in enumerate(CFG["servicios"], start=2):
-        fotos = sv["galeria"]
-        cover = fotos[:max(1, int(sv.get("portada", 1)))]
-        multi = len(cover) > 1
-        mobile = "".join(pic(f["nombre"], "50vw" if multi else "100vw", f["alt"], "svc__img", style=f.get("foco", ""))
-                         for f in cover)
         stages.append(f"""<li class="stage" data-stage="{esc(sv['id'])}">
   <span class="stage__num" aria-hidden="true">{i:02d}</span>
   <div class="stage__body">
     <h3>{esc(sv['titulo'])}</h3>
     <p>{esc(sv['descripcion'])}</p>
-    <div class="stage__media svc__imgs{' svc__imgs--2' if multi else ''}">{mobile}</div>
-    <div class="svc__gallery"><div class="thumbs">{thumbs_html(sv)}</div></div>
+    <div class="stage__media stage__media--reel">{reel_html(sv)}</div>
     <div class="svc__actions">
-      <a class="link-arrow" href="{largest(fotos[0]['nombre'])}" data-gal="{esc(sv['id'])}" data-index="0">Ver galería · {fotos_word(len(fotos))} {GRID_ICON}</a>
       <a class="link-arrow" href="#contacto" data-service="{esc(sv['titulo'])}">Cotizar este servicio {ARROW}</a>
     </div>
   </div>
 </li>""")
-        imgs = []
-        for f in cover:
-            foco = f' data-foco="{esc(f["foco"])}"' if f.get("foco") else ""
-            mid = min(variants(f["nombre"]), key=lambda v: abs(v - 800))
-            imgs.append(f'<img{foco} src="img/{f["nombre"]}-{mid}.jpg" srcset="{srcset_of(f["nombre"])}" '
-                        f'sizes="{"300px" if multi else "600px"}" alt="" loading="lazy" decoding="async">')
-        shots.append(f'<div class="shot{" shot--2" if multi else ""}" data-for="{esc(sv["id"])}">{"".join(imgs)}</div>')
+        shots.append(f'<div class="shot shot--folio" data-for="{esc(sv["id"])}">{folio_html(sv)}</div>')
 
     e = CFG["recorrido"]["entrega"]
     stages.append(f"""<li class="stage" data-stage="entrega">
@@ -274,22 +449,24 @@ def services_html():
   <div class="stage__body">
     <h3>{esc(e['titulo'])}</h3>
     <p>{esc(e['descripcion'])}</p>
-    <div class="stage__media">{quote_panel(compact=True, clave="entrega")}</div>
+    <div class="stage__media stage__media--chat">{chat_html()}</div>
     <div class="svc__actions">
       <a class="link-arrow" href="#contacto">Agendar evaluación {ARROW}</a>
     </div>
   </div>
 </li>""")
-    shots.append(f'<div class="shot shot--quote" data-for="entrega">{quote_panel(clave="entrega")}</div>')
+    shots.append(f'''<div class="shot shot--chat" data-for="entrega">
+  <p class="shot__label">{esc(e.get('panelTitulo', e['titulo']))}</p>
+  {chat_html()}
+</div>''')
 
     return f"""<div class="journey" data-journey>
   <div class="journey__rail" aria-hidden="true"><span class="journey__fill" data-journey-fill></span></div>
   <ol class="journey__list">
 {chr(10).join(stages)}
   </ol>
-  <div class="journey__panel" aria-hidden="true">
+  <div class="journey__panel">
     <div class="journey__frame">{"".join(shots)}</div>
-    <p class="journey__counter"><span data-journey-current>01</span> / {total:02d} <span class="journey__name" data-journey-name>{esc(q['titulo'])}</span></p>
   </div>
 </div>"""
 
@@ -303,7 +480,9 @@ def gallery_json():
             w, h = jpeg_size(IMG_DIR / f"{f['nombre']}-{big}.jpg")
             fotos.append({"src": f"img/{f['nombre']}-{big}.jpg", "srcset": srcset_of(f["nombre"]),
                           "alt": f["alt"], "pie": f.get("pie", ""), "ilu": bool(f.get("ilustrativa")), "w": w, "h": h})
-        data[sv["id"]] = {"titulo": sv["titulo"], "fotos": fotos}
+        pf = sv.get("portafolio")
+        titulo = f"{pf['vehiculo']} · {pf['trabajo']}" if pf else sv["titulo"]
+        data[sv["id"]] = {"titulo": titulo, "fotos": fotos}
     # </ dentro de JSON no debe cerrar la etiqueta script
     return json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
 
@@ -312,7 +491,15 @@ def title_lines(name):
     """Divide el nombre en dos líneas (primera palabra / resto) para la animación de entrada."""
     first, _, rest = name.partition(" ")
     lines = [first, rest] if rest else [first]
-    return " ".join(f'<span class="title-line"><span class="title-ink">{esc(t)}</span></span>' for t in lines)
+    acento = CFG["hero"].get("acento", "")
+
+    def ink(t):
+        # La palabra de acento (D&A) va en rojo; app.js la pinta con un aerosol generativo al cargar
+        if acento and acento in t:
+            a, _, b = t.partition(acento)
+            return f'{esc(a)}<span class="title-accent" data-spray>{esc(acento)}</span>{esc(b)}'
+        return esc(t)
+    return " ".join(f'<span class="title-line"><span class="title-ink">{ink(t)}</span></span>' for t in lines)
 
 
 def particular_media():

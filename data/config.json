@@ -1,6 +1,6 @@
 {
   "_ayuda": "Edita este archivo y ejecuta 'py build.py' para regenerar el sitio. Un campo vacío ('') se omite de la página; no se muestran avisos de pendiente al público.",
-  "_galerias": "Cada servicio tiene 'galeria': lista de fotos {nombre, alt, pie opcional, foco opcional}. 'portada' indica cuántas de las primeras fotos se muestran como portada (1 o 2). Para agregar una foto: tools\nueva-foto.ps1, luego añádela a la galería y ejecuta py build.py.",
+  "_galerias": "Cada servicio tiene 'portafolio' {vehiculo, trabajo} y 'galeria': fotos reales de ese trabajo {nombre, alt, pie}. La primera foto es la que se ve al llegar a la etapa. Para agregar una foto: tools\nueva-foto.ps1, luego añádela a la galería y ejecuta py build.py.",
   "negocio": {
     "nombre": "Auto Servicio D&A",
     "nombreMapa": "Hojalateria y pintura D&A",
@@ -80,82 +80,275 @@
       "id": "refacciones",
       "titulo": "Refacciones a tu medida",
       "descripcion": "Cotizamos y conseguimos las refacciones que tu reparación necesita.",
-      "aplicacion": "Se incluyen en la cotización, junto con el alcance del trabajo.",
-      "portada": 1,
       "galeria": [
         {
-          "nombre": "refacciones-motor",
-          "alt": "Bloques de motor desmontados sobre una mesa de trabajo",
-          "ilustrativa": true
+          "nombre": "pickup-20",
+          "alt": "Pickup Chevrolet clásica azul en el área de trabajo del taller",
+          "pie": "La pickup en el área de trabajo"
+        },
+        {
+          "nombre": "pickup-26",
+          "alt": "Pickup azul sobre soportes, con el cofre abierto y sin ruedas delanteras",
+          "pie": "Desarmado: cofre abierto y ruedas delanteras retiradas"
+        },
+        {
+          "nombre": "pickup-27",
+          "alt": "Interior de la cabina sin asientos ni tapicería, con el volante y el tablero",
+          "pie": "Interior de la cabina desarmado"
+        },
+        {
+          "nombre": "pickup-21",
+          "alt": "Cabina de la pickup vacía, vista desde la puerta",
+          "pie": "Cabina sin asientos ni tapicería"
+        },
+        {
+          "nombre": "pickup-22",
+          "alt": "Piso de la cabina en reparación, con herramientas sobre él",
+          "pie": "Piso de la cabina en reparación"
+        },
+        {
+          "nombre": "pickup-23",
+          "alt": "Cabina azul levantada y chasis con ruedas separado de ella",
+          "pie": "Cabina y chasis separados"
+        },
+        {
+          "nombre": "pickup-28",
+          "alt": "Chasis de la pickup sobre soportes, con muelles y tambores de freno",
+          "pie": "Chasis sobre soportes"
+        },
+        {
+          "nombre": "pickup-24",
+          "alt": "Piso de cabina con recubrimiento negro, protegido con plástico",
+          "pie": "Piso de cabina con recubrimiento negro"
+        },
+        {
+          "nombre": "pickup-25",
+          "alt": "Caja de la pickup azul sobre soportes, con el piso de madera expuesto",
+          "pie": "Caja de la pickup en reparación"
+        },
+        {
+          "nombre": "pickup-29",
+          "alt": "Interior terminado con asientos negros y tapetes con logotipo de Chevrolet",
+          "pie": "Interior armado con asientos y tapetes"
+        },
+        {
+          "nombre": "pickup-19",
+          "alt": "Pickup azul terminada frente al letrero de Entrega del taller",
+          "pie": "Terminada, en el área de entrega"
+        },
+        {
+          "nombre": "pickup-18",
+          "alt": "Vista trasera de la pickup azul terminada, con las puertas abiertas",
+          "pie": "Vista trasera en el área de entrega"
         }
-      ]
+      ],
+      "portafolio": {
+        "vehiculo": "Pickup Chevrolet clásica",
+        "trabajo": "Restauración de cabina, chasis y caja"
+      }
     },
     {
       "id": "mecanico",
       "titulo": "Taller mecánico",
       "descripcion": "Afinaciones, frenos y suspensiones. Si tu vehículo lo requiere, también alineación y balanceo.",
-      "aplicacion": "Para revisión o reparación mecánica de tu vehículo.",
-      "portada": 2,
       "galeria": [
         {
-          "nombre": "motor-cofre",
-          "alt": "Camioneta blanca con el cofre abierto y el motor a la vista dentro de un taller",
-          "ilustrativa": true
+          "nombre": "cruze-01",
+          "alt": "Chevrolet Cruze plateado sobre la plataforma de alineación del taller",
+          "pie": "Alineación en plataforma"
         },
         {
-          "nombre": "llanta-impacto",
-          "alt": "Mecánico aflojando las tuercas de una llanta con pistola de impacto",
-          "ilustrativa": true
+          "nombre": "cruze-04",
+          "alt": "Chevrolet Cruze con la defensa y la salpicadera delanteras dañadas",
+          "pie": "Llegada con daño frontal"
         },
         {
-          "nombre": "suspension-desmontada",
-          "alt": "Dos amortiguadores retirados junto a herramientas, con la zona delantera del vehículo abierta",
-          "pie": "Suspensión desmontada en el taller."
+          "nombre": "cruze-03",
+          "alt": "Amortiguadores y piezas de suspensión desmontados junto al vehículo",
+          "pie": "Amortiguadores y suspensión desmontados"
         },
         {
-          "nombre": "alineacion-plataforma",
-          "alt": "Auto blanco sobre la plataforma de alineación con sensores en las ruedas, en el taller"
+          "nombre": "cruze-02",
+          "alt": "Frente del Cruze cubierto con papel y plástico para pintar",
+          "pie": "Frente enmascarado para pintura"
+        },
+        {
+          "nombre": "cruze-05",
+          "alt": "Chevrolet Cruze plateado terminado en el área de recepción",
+          "pie": "Terminado, en recepción"
         }
-      ]
+      ],
+      "portafolio": {
+        "vehiculo": "Chevrolet Cruze",
+        "trabajo": "Suspensión, alineación y daño frontal"
+      }
     },
     {
       "id": "hojalateria",
       "titulo": "Hojalatería y reparación de carrocería",
       "descripcion": "Reparación de golpes y abolladuras, y restauración de piezas de carrocería, también por siniestro.",
-      "aplicacion": "Para daños por choque, golpes menores o piezas deformadas.",
-      "portada": 1,
       "galeria": [
         {
-          "nombre": "pulido-carroceria",
-          "alt": "Pulido de la carrocería de un auto oscuro con pulidora orbital",
-          "foco": "50% 62%",
-          "ilustrativa": true
+          "nombre": "mustang-16",
+          "alt": "Ford Mustang GT rojo con franjas blancas, terminado, en el patio del taller",
+          "pie": "Terminado: frente reparado y pintado"
         },
         {
-          "nombre": "cofre-preparacion",
-          "alt": "Cofre levantado con la superficie en preparación y marcas oscuras de guía",
-          "pie": "Cofre en preparación dentro del taller."
+          "nombre": "mustang-01",
+          "alt": "Mustang rojo con la defensa delantera desprendida",
+          "pie": "Llegada con impacto frontal"
+        },
+        {
+          "nombre": "mustang-05",
+          "alt": "Mustang con el frente destruido y la rueda delantera desalineada",
+          "pie": "Daño en frente, salpicadera y suspensión"
+        },
+        {
+          "nombre": "mustang-02",
+          "alt": "Frente del Mustang sin defensa, con el motor y la estructura expuestos",
+          "pie": "Frente desarmado para evaluar la estructura"
+        },
+        {
+          "nombre": "mustang-04",
+          "alt": "Estructura frontal del Mustang con el cofre levantado",
+          "pie": "Estructura frontal expuesta"
+        },
+        {
+          "nombre": "mustang-06",
+          "alt": "Frente desarmado del Mustang sobre gato hidráulico",
+          "pie": "Desarmado de frente y faro"
+        },
+        {
+          "nombre": "mustang-07",
+          "alt": "Suspensión delantera del Mustang desmontada",
+          "pie": "Suspensión delantera desmontada"
+        },
+        {
+          "nombre": "mustang-10",
+          "alt": "Mustang cubierto con plástico y el frente desarmado",
+          "pie": "Carrocería protegida durante la reparación"
+        },
+        {
+          "nombre": "mustang-11",
+          "alt": "Técnico trabajando la estructura frontal del Mustang con soplete",
+          "pie": "Reparación de la estructura con soplete"
+        },
+        {
+          "nombre": "mustang-12",
+          "alt": "Mustang montado en el banco de enderezado del taller",
+          "pie": "Enderezado en banco"
+        },
+        {
+          "nombre": "mustang-13",
+          "alt": "Frente del Mustang con radiador y travesaño, en proceso de reparación",
+          "pie": "Estructura frontal en proceso"
+        },
+        {
+          "nombre": "mustang-14",
+          "alt": "Larguero del Mustang sujeto con cadena al banco de enderezado",
+          "pie": "Enderezado de larguero con cadena"
+        },
+        {
+          "nombre": "mustang-08",
+          "alt": "Defensa delantera roja recién pintada sobre un soporte",
+          "pie": "Defensa pintada"
+        },
+        {
+          "nombre": "mustang-09",
+          "alt": "Cofre rojo con franjas blancas recién pintado sobre un soporte",
+          "pie": "Cofre pintado con franjas"
+        },
+        {
+          "nombre": "mustang-03",
+          "alt": "Vista trasera del Mustang GT en el área de trabajo",
+          "pie": "Vista trasera en el área de trabajo"
+        },
+        {
+          "nombre": "mustang-15",
+          "alt": "Mustang GT terminado, vista trasera dentro del taller",
+          "pie": "Entrega: vista trasera"
+        },
+        {
+          "nombre": "mustang-17",
+          "alt": "Mustang GT terminado, vista tres cuartos trasera",
+          "pie": "Entrega: vista tres cuartos trasera"
         }
-      ]
+      ],
+      "portafolio": {
+        "vehiculo": "Ford Mustang GT",
+        "trabajo": "Reparación por impacto frontal"
+      }
     },
     {
       "id": "pintura",
       "titulo": "Pintura, pulido y encerado",
       "descripcion": "Pintura, retoques, pulido y encerado para devolver la estética del vehículo.",
-      "aplicacion": "Para piezas reparadas, retoques, pintura de carrocería o acabado final.",
-      "portada": 1,
       "galeria": [
         {
-          "nombre": "pintura-defensa",
-          "alt": "Pintor con traje protector aplicando pintura a una defensa con pistola de aire",
-          "ilustrativa": true
+          "nombre": "cx5-38",
+          "alt": "Mazda CX-5 blanca cubierta con papel para pintar en la cabina",
+          "pie": "Enmascarado en cabina de pintura"
         },
         {
-          "nombre": "pintura-cabina",
-          "alt": "Vehículo gris con papel de enmascarado y plástico dentro de la cabina de pintura",
-          "pie": "Vehículo protegido en la cabina de pintura."
+          "nombre": "cx5-30",
+          "alt": "Mazda CX-5 blanca con la parte trasera golpeada",
+          "pie": "Llegada con impacto trasero"
+        },
+        {
+          "nombre": "cx5-33",
+          "alt": "Portón y defensa trasera de la CX-5 deformados",
+          "pie": "Daño en portón y defensa trasera"
+        },
+        {
+          "nombre": "cx5-32",
+          "alt": "Costado trasero de la CX-5 golpeado",
+          "pie": "Daño en el costado trasero"
+        },
+        {
+          "nombre": "cx5-34",
+          "alt": "CX-5 con el portón abierto y la parte trasera desarmada",
+          "pie": "Desarmado de la parte trasera"
+        },
+        {
+          "nombre": "cx5-35",
+          "alt": "CX-5 en el banco de enderezado del taller",
+          "pie": "Enderezado en banco"
+        },
+        {
+          "nombre": "cx5-37",
+          "alt": "Pieza blanca recién pintada sobre un soporte metálico",
+          "pie": "Pieza recién pintada"
+        },
+        {
+          "nombre": "cx5-36",
+          "alt": "Defensa trasera blanca recién pintada",
+          "pie": "Defensa trasera pintada"
+        },
+        {
+          "nombre": "cx5-40",
+          "alt": "Piezas blancas recién pintadas sobre un soporte",
+          "pie": "Piezas pintadas en soporte"
+        },
+        {
+          "nombre": "cx5-41",
+          "alt": "Portón de la CX-5 colgado y enmascarado en la cabina de pintura",
+          "pie": "Portón enmascarado en cabina"
+        },
+        {
+          "nombre": "cx5-39",
+          "alt": "Costado de la CX-5 cubierto con papel antes de pintar",
+          "pie": "Costado enmascarado antes de pintar"
+        },
+        {
+          "nombre": "cx5-31",
+          "alt": "Mazda CX-5 blanca en la entrada del taller",
+          "pie": "En la entrada del taller"
         }
-      ]
+      ],
+      "portafolio": {
+        "vehiculo": "Mazda CX-5",
+        "trabajo": "Impacto trasero, enderezado y pintura"
+      }
     }
   ],
   "qualitas": {
@@ -200,7 +393,8 @@
     "Con la aprobación iniciamos la reparación y te avisamos de cada avance hasta la entrega."
   ],
   "hero": {
-    "texto": "Hojalatería y pintura, pulido y encerado, afinaciones, frenos y suspensiones. Te mantenemos informado en cada etapa del servicio."
+    "texto": "Hojalatería y pintura, pulido y encerado, afinaciones, frenos y suspensiones. Te mantenemos informado en cada etapa del servicio.",
+    "acento": "D&A"
   },
   "recorrido": {
     "titulo": "Así trabajamos tu vehículo",
@@ -213,7 +407,22 @@
         "Agenda tu evaluación por WhatsApp",
         "Trae tu vehículo: la revisión dura aprox. 2 horas",
         "Recibes tu cotización y, con tu aprobación, iniciamos la reparación"
-      ]
+      ],
+      "escenas": [
+        {
+          "titulo": "Traes tu vehículo al taller",
+          "texto": "Agenda tu evaluación por WhatsApp y llega a Av. 4 Oriente N° 14."
+        },
+        {
+          "titulo": "Revisión presencial",
+          "texto": "Revisamos tu vehículo; la evaluación dura aprox. 2 horas."
+        },
+        {
+          "titulo": "Tu cotización por WhatsApp",
+          "texto": "Te la enviamos y, con tu aprobación, iniciamos la reparación."
+        }
+      ],
+      "_escenas": "Pasos animados del panel de Cotización (mapa, revisión con lupa y notificación de WhatsApp). Si se borran, se muestra la lista simple."
     },
     "entrega": {
       "titulo": "Entrega",
@@ -223,7 +432,20 @@
         "Te avisamos de cada avance de la reparación",
         "Te confirmamos cuando tu vehículo está listo",
         "Coordinamos contigo la entrega"
-      ]
+      ],
+      "chat": {
+        "_ayuda": "Conversación animada del panel de Entrega. Los mensajes del taller son los puntos de 'lista'; 'respuesta' es el mensaje del cliente antes del último punto; 'foto' acompaña al primer mensaje.",
+        "contacto": "Auto Servicio D&A",
+        "foto": "mustang-12",
+        "fotoAlt": "Foto de avance: Mustang en el banco de enderezado",
+        "respuesta": "¡Excelente! ¿Cuándo puedo pasar por él?",
+        "horas": [
+          "10:24",
+          "17:02",
+          "17:05",
+          "17:06"
+        ]
+      }
     }
   },
   "particular": {
