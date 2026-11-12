@@ -138,7 +138,7 @@
       entries.forEach(function (e) {
         if (e.isIntersecting) activate(stages.indexOf(e.target));
       });
-    }, { rootMargin: "-48% 0px -48% 0px", threshold: 0 });
+    }, { rootMargin: "-38% 0px -52% 0px", threshold: 0 });
     stages.forEach(function (s) { io.observe(s); });
     // Hover o foco dentro de una etapa también la activa (teclado y ratón)
     stages.forEach(function (s, i) {
@@ -182,7 +182,7 @@
       function play() {
         if (state !== "idle") return;
         state = "playing";
-        var t = 350;
+        var t = 120;
         msgs.forEach(function (m, i) {
           if (m.getAttribute("data-from") === "cliente") {
             t += 900;
@@ -190,7 +190,7 @@
             later(function () { m.classList.add("is-read"); }, t + 900);
             t += 700;
           } else {
-            var think = i === 0 ? 900 : 1300;
+            var think = i === 0 ? 650 : 1100;
             later(function () { log.insertBefore(typing, m); setTyping(true); }, t);
             t += think;
             later(function () { setTyping(false); m.classList.add("is-in"); }, t);
@@ -423,6 +423,21 @@
     var data;
     try { data = JSON.parse(dataEl.textContent); } catch (err) { return; }
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Las fotos del panel viven en capas con opacidad 0: el navegador puede posponer su decodificación
+    // hasta que se muestran y se ven tarde o borrosas. Se cargan y decodifican antes de llegar al recorrido.
+    var panel = document.querySelector(".journey__panel");
+    if (panel && "IntersectionObserver" in window) {
+      var pre = new IntersectionObserver(function (entries) {
+        if (!entries.some(function (e) { return e.isIntersecting; })) return;
+        pre.disconnect();
+        Array.prototype.forEach.call(panel.querySelectorAll("img"), function (im) {
+          im.loading = "eager";
+          if (im.decode) im.decode().catch(function () {});
+        });
+      }, { rootMargin: "800px 0px" });
+      pre.observe(panel);
+    }
 
     Array.prototype.forEach.call(roots, function (root) {
       var gal = data[root.getAttribute("data-folio")];

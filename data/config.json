@@ -14,8 +14,10 @@
     "correo": "autoserviciodya@hotmail.com",
     "dominio": "https://auto-servicio-da.vercel.app",
     "zonaHoraria": "America/Mexico_City",
-    "fechaPrivacidad": "9 de noviembre de 2026",
+    "fechaPrivacidad": "12 de noviembre de 2026",
     "responsable": "Auto Servicio D&A",
+    "responsableLegal": "",
+    "_responsableLegal": "Nombre de la persona física o razón social dueña del taller (lo pide la ley para el aviso de privacidad). Si está vacío se muestra solo el nombre comercial.",
     "publicado": false,
     "_publicado": "Déjalo en false mientras se revisan los pendientes. Con true el sitio se vuelve indexable."
   },
@@ -456,5 +458,7 @@
       "Cotización con alcance y condiciones",
       "Avisos de cada avance"
     ]
-  }
+  },
+  "resenasNombreCompleto": false,
+  "_resenasNombreCompleto": "false muestra nombre e inicial del apellido (Armando C.). Cambia a true solo si los autores autorizan su nombre completo."
 }

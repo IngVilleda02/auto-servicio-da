@@ -74,7 +74,7 @@ button { font: inherit; }
 .site-header { position: sticky; top: 0; z-index: 50; background: var(--bg); color: var(--ink); border-bottom: 1px solid var(--line); }
 .site-header .wrap { display: flex; align-items: center; gap: 24px; min-height: 76px; }
 .brand { display: flex; align-items: center; text-decoration: none; }
-.brand img { width: auto; height: 56px; }
+.brand img { width: auto; height: 62px; }
 .brand--plate { background: #fff; padding: 10px 14px; width: fit-content; }
 .brand--plate img { height: 72px; }
 .nav { margin-left: auto; display: flex; align-items: center; gap: 4px; }
@@ -149,8 +149,9 @@ h2 { font-size: clamp(2rem, 4.4vw, 3.5rem); text-transform: uppercase; line-heig
 
 .journey__panel { position: sticky; top: 104px; display: grid; gap: 14px; }
 .journey__frame { position: relative; height: clamp(480px, calc(100vh - 150px), 740px); background: var(--dark); overflow: hidden; }
-.shot { position: absolute; inset: 0; display: grid; opacity: 0; pointer-events: none; transform: scale(1.04); transition: opacity .6s var(--ease), transform .9s var(--ease); }
-.shot.is-active { opacity: 1; pointer-events: auto; transform: none; }
+/* Cruce solo de opacidad: escalar la capa la rasteriza a otro tamaño y se ve borrosa hasta que termina */
+.shot { position: absolute; inset: 0; display: grid; opacity: 0; pointer-events: none; transition: opacity .32s cubic-bezier(.2, 0, 0, 1); }
+.shot.is-active { opacity: 1; pointer-events: auto; }
 .shot--quote { background: var(--dark); color: #fff; }
 
 /* Portafolio de un trabajo real: foto grande, datos, flechas y tira de miniaturas */
@@ -198,7 +199,8 @@ h2 { font-size: clamp(2rem, 4.4vw, 3.5rem); text-transform: uppercase; line-heig
 .chat__back { display: grid; place-items: center; width: 14px; color: var(--ios-blue); }
 .chat__back svg { width: 10px; height: 18px; }
 .chat__avatar { display: grid; place-items: center; flex: none; width: 38px; height: 38px; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08); }
-.chat__avatar img { width: 30px; height: auto; }
+.chat__avatar { overflow: hidden; }
+.chat__avatar img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.18); }
 .chat__who { display: grid; line-height: 1.2; min-width: 0; }
 .chat__who strong { font-size: 15px; font-weight: 600; }
 .chat__who span { font-size: 12px; color: var(--wa-meta); transition: color .2s ease; }
@@ -232,7 +234,7 @@ h2 { font-size: clamp(2rem, 4.4vw, 3.5rem); text-transform: uppercase; line-heig
   .msg--typing i:nth-child(2) { animation-delay: .15s; }
   .msg--typing i:nth-child(3) { animation-delay: .3s; }
 }
-@keyframes msg-in { from { opacity: 0; transform: translateY(10px) scale(.9); } to { opacity: 1; transform: none; } }
+@keyframes msg-in { from { opacity: 0; transform: translateY(8px) scale(.97); } to { opacity: 1; transform: none; } }
 @keyframes typing-dot { 0%, 60%, 100% { transform: translateY(0); opacity: .55; } 30% { transform: translateY(-4px); opacity: 1; } }
 .stage__media--chat .chat { height: 560px; justify-self: start; box-shadow: 0 0 0 1px var(--line), 0 24px 40px -28px rgba(0, 0, 0, .45); }
 
@@ -535,7 +537,7 @@ html:not(.js) .js-only { display: none; }
   .form { padding: 22px 18px; }
   .footer__col, .footer__col--wide { grid-column: 1 / -1; }
   .site-header .wrap { min-height: 64px; }
-  .brand img { height: 44px; }
+  .brand img { height: 48px; }
   .brand--plate img { height: 60px; }
   .map { aspect-ratio: auto; min-height: 300px; }
   .carousel__track { grid-template-columns: minmax(0, 1fr); }
@@ -559,8 +561,8 @@ html:not(.js) .js-only { display: none; }
 .quote-panel--scenes .quote-panel__num { margin-top: 0; font-size: clamp(1.4rem, 2.2vw, 1.9rem); }
 .scenes { display: grid; gap: 14px; }
 .scenes__stage { position: relative; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; background: #17181b; isolation: isolate; }
-.scene { position: absolute; inset: 0; opacity: 0; transform: scale(.985); transition: opacity .5s cubic-bezier(.16, 1, .3, 1), transform .6s cubic-bezier(.16, 1, .3, 1); }
-.scene.is-active { opacity: 1; transform: none; }
+.scene { position: absolute; inset: 0; opacity: 0; transition: opacity .35s cubic-bezier(.2, 0, 0, 1); }
+.scene.is-active { opacity: 1; }
 .scene__svg { display: block; width: 100%; height: 100%; }
 .scene--scan { background: #f5f5f7; }
 .map-pin__label { font: 600 11px -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif; fill: #1d1d1f; paint-order: stroke; stroke: #fff; stroke-width: 3px; stroke-linejoin: round; }
@@ -570,7 +572,7 @@ html:not(.js) .js-only { display: none; }
 .map-car__halo { filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .3)); }
 .map-card { position: absolute; left: 10px; right: 10px; bottom: 10px; display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 14px; background: rgba(255, 255, 255, .9); box-shadow: 0 6px 20px rgba(0, 0, 0, .14); color: #1d1d1f; font: 12px/1.25 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif; }
 .map-card strong { display: block; font-size: 13px; }
-.map-card__icon { flex: none; width: 26px; height: 26px; border-radius: 50%; background: #e3262d; box-shadow: inset 0 0 0 3px #fff, 0 0 0 1px rgba(0, 0, 0, .08); }
+.map-card__icon { flex: none; width: 30px; height: 30px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, .1); object-fit: cover; }
 .map-card__chip { margin-left: auto; padding: 4px 9px; border-radius: 980px; background: #34c759; color: #fff; font-style: normal; font-weight: 600; opacity: 0; transform: scale(.8); transition: opacity .3s ease, transform .45s cubic-bezier(.16, 1, .3, 1); }
 .scene--map.is-arrived .map-card__chip { opacity: 1; transform: none; }
 .scan-checks g { opacity: 0; transform-box: fill-box; transform-origin: center; }
@@ -585,8 +587,10 @@ html:not(.js) .js-only { display: none; }
 .lock .lock__time { color: #fff; font-size: clamp(2.6rem, 6vw, 3.4rem); font-weight: 200; line-height: 1; letter-spacing: -.02em; max-width: none; margin-bottom: 4px; }
 .notif { display: flex; align-items: flex-start; gap: 10px; width: 100%; max-width: 340px; padding: 10px 12px; border-radius: 18px; background: rgba(245, 245, 247, .86); color: #1d1d1f; font-size: 12.5px; line-height: 1.3; box-shadow: 0 8px 24px rgba(0, 0, 0, .25); }
 .notif strong { display: block; font-size: 13.5px; }
-.notif__icon { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 9px; background: linear-gradient(#5be37d, #1fa855); }
-.notif__icon svg { width: 20px; height: 20px; }
+.notif__icon { position: relative; flex: none; width: 36px; height: 36px; }
+.notif__icon img { width: 100%; height: 100%; border-radius: 50%; background: #fff; object-fit: cover; box-shadow: 0 0 0 1px rgba(0, 0, 0, .08); }
+.notif__badge { position: absolute; right: -3px; bottom: -3px; display: grid; place-items: center; width: 17px; height: 17px; border-radius: 5px; background: linear-gradient(#5be37d, #1fa855); box-shadow: 0 0 0 1.5px rgba(245, 245, 247, .95); }
+.notif__badge svg { width: 11px; height: 11px; }
 .notif__body { display: grid; min-width: 0; }
 .notif__app { display: flex; justify-content: space-between; color: #6e6e73; font-size: 10.5px; letter-spacing: .04em; }
 .notif__app em { font-style: normal; letter-spacing: 0; }
@@ -606,14 +610,14 @@ html:not(.js) .js-only { display: none; }
 @media (hover: hover) and (pointer: fine) { .scenes__step:hover { color: #fff; } }
 /* Sin movimiento: las escenas cambian sin desplazarse */
 @media (prefers-reduced-motion: reduce) {
-  .scene, .scene--wa.is-in .notif { transition: opacity .2s ease; transform: none; }
+  .scene--wa.is-in .notif { transition: opacity .2s ease; transform: none; }
   .scene--wa .notif { transform: none; }
 }
 @media (max-width: 719px) {
   .scenes__stage { aspect-ratio: 4 / 3; }
   .map-card { left: 8px; right: 8px; bottom: 8px; padding: 7px 9px; gap: 8px; font-size: 11px; }
   .map-card strong { font-size: 12px; }
-  .map-card__icon { width: 20px; height: 20px; }
+  .map-card__icon { width: 24px; height: 24px; }
   .lock { gap: 8px; padding: 10px 10px 0; }
   .notif { padding: 8px 10px; font-size: 11.5px; }
 }

@@ -4,7 +4,7 @@ Dirección: **showroom de taller**, inspirada en la organización y el ritmo edi
 
 ## Mundo visual
 - Ritmo de secciones (grises y rojo): encabezado blanco → hero oscuro con línea roja de 4px abajo → franja de datos gris → recorrido de servicios en blanco → proceso en carbón → reseñas en banda roja → contacto blanco → ubicación gris → pie carbón con línea roja arriba.
-- Logotipo: `img/logo-da.png` (recorte de `Imagenes/LOGONEW.png`, fondo blanco). Va siempre sobre blanco.
+- Logotipo: `img/logo-dya.png` (de `Imagenes/LOGO_DYA_2026.png`, fondo blanco). Va siempre sobre blanco. Marca cuadrada "D&A" (`img/logo-dya-mark.png`) para avatares de las animaciones, favicon e ícono de iPhone.
 - Ángulos rectos en todo (radio 0). Sin sombras: la profundidad viene del contraste oscuro/claro y de la fotografía.
 - Líneas finas (1px) como estructura: listas, tablas, reseñas y FAQ separan con reglas, no con tarjetas.
 - Paleta roja y gris (preferencia del cliente). El rojo solo marca acciones (botón principal, foco, hover de enlaces); nunca como fondo decorativo. El azul queda solo dentro del logotipo.

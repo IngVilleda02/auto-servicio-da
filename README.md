@@ -50,20 +50,27 @@ Ninguna. No hay servidor, claves ni APIs. El mapa usa el embed público de Googl
 - La versión del sitio incluye CSP por `<meta>` (scripts y estilos solo propios; `frame-src` solo `https://www.google.com`). `vercel.json` añade cabeceras. Si despliegas en otro servidor, replica esas cabeceras. Prueba primero la CSP en `Content-Security-Policy-Report-Only`.
 - No hay analítica. Si se añade después, registrar solo eventos (inicio de cotización, clic en WhatsApp, clic en cómo llegar), sin datos personales.
 
-## Información pendiente del proveedor
+## Antes de lanzar: revisión legal (pendientes del cliente)
 
-1. Correo de contacto (hoy se omite).
-2. Dominio definitivo (canonical, sitemap, imagen social, quitar `noindex`).
-4. Logotipo o imagen de referencia de Qualitas con autorización de uso (hoy solo se menciona en texto).
-5. Confirmar el texto “Refacciones a tu medida” (el original decía “a tu media”).
-6. Validar los textos de “Situación / Servicio / Resultado” de los 4 trabajos: se redactaron solo con lo visible en cada foto. Agregar vehículo, fecha o cliente solo si hay permiso.
-7. Fotografías propias de refacciones (hoy se reutiliza la de suspensión) y del equipo o fachada.
-8. Confirmar que las reseñas de Google pueden mostrarse con nombre.
-9. Revisión legal del aviso de privacidad.
-10. Imagen social para Open Graph.
-11. Portafolios del recorrido: fotos reales de `Taller/Galeria` (Mustang GT, pickup Chevrolet clásica, Mazda CX-5, Chevrolet Cruze). Confirmar con el cliente los modelos, los textos de cada foto y si se difuminan las placas visibles.
-12. Datos de contacto (tarjeta del taller): WhatsApp 427 202 5184, llamadas 427 101 7856, correo autoserviciodya@hotmail.com; domicilio Av. 4 Oriente N° 14, Camino a Santa Cruz Nieto, San Juan del Río, Qro. Falta el código postal si se quiere mostrar.
-13. Autorización para usar el logotipo de Qualitas.
+Revisión hecha el 12 de noviembre de 2026. No sustituye la opinión de un abogado; los puntos 1 a 5 conviene cerrarlos antes de abrir el sitio a Google.
+
+1. **Responsable del aviso de privacidad:** nombre de la persona física o razón social dueña del taller. Ponlo en `negocio.responsableLegal` y ejecuta `py build.py`. Hoy el aviso solo dice el nombre comercial.
+2. **Logotipo de Qualitas:** es una marca registrada. Usarlo requiere autorización por escrito de Qualitas (o del convenio). Si no la hay, vacía `qualitas.logo` y deja solo el texto.
+3. **Convenio con Qualitas:** el sitio dice que trabajan "de la mano con Qualitas". Debe existir el convenio; si no, cambia el texto (Ley Federal de Protección al Consumidor: publicidad veraz).
+4. **Foto de la portada (hero):** confirmar que el taller tiene derecho a usarla (es de `Imagenes/Img3`, de origen desconocido). Si es de un banco de imágenes, guardar la licencia; si no, reemplazarla por una foto propia.
+5. **Fotos de clientes:** las placas ya están difuminadas en todas las fotos donde se leían (`tools` no lo hace solo: si regeneras una foto desde `Galeria`, vuelve a difuminarla). Conviene tener el permiso del dueño de cada vehículo; el aviso ofrece retirar una foto si alguien lo pide.
+6. **Reseñas de Google:** se muestran con nombre e inicial del apellido. Para mostrar el nombre completo, pide permiso a los autores y pon `resenasNombreCompleto` en `true`.
+7. **Plan de Vercel:** el plan Hobby es solo para uso no comercial; un sitio de negocio debe estar en Pro (riesgo de suspensión de la cuenta, no de demanda).
+8. **Opcional (privacidad):** servir la tipografía Archivo desde el propio sitio en lugar de Google Fonts para no enviar la IP de los visitantes a Google.
+9. Código postal del domicilio, si se quiere mostrar.
+
+Ya resuelto en el sitio:
+- Aviso de privacidad con los elementos del artículo 15 de la LFPDPPP (2025): responsable y domicilio, datos, finalidades, transferencias (aseguradora en siniestros), derechos ARCO con requisitos y plazos, revocación, conservación, cookies de terceros y cambios.
+- El formulario no guarda ni envía datos a un servidor; avisa qué pasa al enviarlo y enlaza el aviso.
+- Sin cookies propias ni analítica; el mapa de Google se carga solo si el visitante lo pide.
+- Sin datos estructurados de reseñas (Google no permite marcar reseñas propias).
+- Accesibilidad: un solo H1, navegación con teclado, textos alternativos, contraste revisado con Impeccable, animaciones con alternativa para "reducir movimiento" y carrusel con pausa.
+- No se usan logotipos de Apple ni de WhatsApp; solo se menciona WhatsApp como medio de contacto.
 
 ## Salir en Google (sin dominio propio)
 

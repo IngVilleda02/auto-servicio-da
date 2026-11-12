@@ -116,7 +116,7 @@ def jsonld():
     }
     if N["dominio"]:
         data["url"] = N["dominio"]
-        data["image"] = N["dominio"] + "/img/logo-da-800.jpg"
+        data["image"] = N["dominio"] + "/img/logo-dya-800.jpg"
     if N["correo"]:
         data["email"] = N["correo"]
     return json.dumps(data, ensure_ascii=False)
@@ -125,7 +125,7 @@ def jsonld():
 NAV = [("Servicios y cómo trabajamos", "#servicios"),
        ("Contacto", "#contacto")]
 
-LOGO = f'<img src="img/logo-da.png" width="320" height="170" alt="{esc(N["nombre"])}">'
+LOGO = f'<img src="img/logo-dya.png" width="640" height="327" alt="{esc(N["nombre"])}">'
 
 
 def header(home):
@@ -322,7 +322,7 @@ def scenes_html(q):
     return f'''<div class="scenes" data-scenes>
   <div class="scenes__stage" aria-hidden="true">
     <div class="scene scene--map is-active" data-scene="map" data-ms="3800">{SCENE_MAP}
-      <div class="map-card"><span class="map-card__icon"></span><span><strong>{esc(N["nombre"])}</strong>{esc(calle)}</span><em class="map-card__chip">Llegaste</em></div>
+      <div class="map-card"><img class="map-card__icon" src="img/logo-dya-mark.png" alt="" width="256" height="256" loading="lazy" decoding="async"><span><strong>{esc(N["nombre"])}</strong>{esc(calle)}</span><em class="map-card__chip">Llegaste</em></div>
     </div>
     <div class="scene scene--scan" data-scene="scan" data-ms="4200">{scan}
       <div class="scan-chip"><span class="scan-chip__ring"></span>Revisión · aprox. 2 h</div>
@@ -331,7 +331,7 @@ def scenes_html(q):
       <div class="lock">
         <p class="lock__time">17:30</p>
         <div class="notif">
-          <span class="notif__icon"><svg viewBox="0 0 24 24"><path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1 0 12 3.5Z" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
+          <span class="notif__icon"><img src="img/logo-dya-mark.png" alt="" width="256" height="256" loading="lazy" decoding="async"><span class="notif__badge"><svg viewBox="0 0 24 24"><path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1 0 12 3.5Z" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/></svg></span></span>
           <span class="notif__body"><span class="notif__app">WHATSAPP <em>ahora</em></span><strong>{esc(N["nombre"])}</strong>Tu cotización está lista. Con tu aprobación, iniciamos la reparación.</span>
         </div>
         <div class="notif notif--doc"><span class="notif__doc"></span><span><strong>Cotización</strong>Revisión presencial</span></div>
@@ -396,7 +396,7 @@ def chat_html():
     return f'''<figure class="chat" data-chat aria-label="{esc(e.get('panelTitulo', e['titulo']))}: así te avisamos por WhatsApp">
   <div class="chat__head" aria-hidden="true">
     <span class="chat__back"><svg viewBox="0 0 10 18"><path d="M9 1 1 9l8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-    <span class="chat__avatar"><img src="img/logo-da.png" alt="" width="64" height="34" loading="lazy" decoding="async"></span>
+    <span class="chat__avatar"><img src="img/logo-dya-mark.png" alt="" width="256" height="256" loading="lazy" decoding="async"></span>
     <span class="chat__who"><strong>{esc(ch['contacto'])}</strong><span data-chat-status data-idle="en línea">en línea</span></span>
   </div>
   <ol class="chat__log">
@@ -504,7 +504,7 @@ def title_lines(name):
 
 def particular_media():
     """Logotipo de la empresa para la pestaña de Reparación particular (se anima al mostrarse)."""
-    return f'<img class="badge-logo" src="img/logo-da-800.jpg" width="800" height="426" alt="{esc(N["nombre"])}" loading="lazy" decoding="async">'
+    return f'<img class="badge-logo" src="img/logo-dya-800.jpg" width="800" height="409" alt="{esc(N["nombre"])}" loading="lazy" decoding="async">'
 
 
 def steps(items):
@@ -519,12 +519,22 @@ def stars():
     return f'<svg class="stars" viewBox="0 0 94 18" role="img" aria-label="5 de 5 estrellas" fill="currentColor">{polys}</svg>'
 
 
+def autor_corto(nombre):
+    """Nombre e inicial del apellido ("Armando C."), salvo que la configuración permita el nombre completo."""
+    if CFG.get("resenasNombreCompleto"):
+        return nombre
+    partes = nombre.split()
+    if len(partes) < 2:
+        return nombre.title()
+    return f"{partes[0].title()} {partes[-1][0].upper()}."
+
+
 def reviews_html():
     total = len(CFG["resenas"])
     slides = "\n".join(f"""<figure class="review" role="group" aria-roledescription="opinión" aria-label="{i + 1} de {total}">
   {stars()}
   <blockquote><p>{esc(r['texto'])}</p></blockquote>
-  <figcaption>{esc(r['autor'])}</figcaption>
+  <figcaption>{esc(autor_corto(r['autor']))}</figcaption>
 </figure>""" for i, r in enumerate(CFG["resenas"]))
     prev = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M13 7H2M6.5 2.5 2 7l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>'
     return f"""<div class="carousel" id="reviews-carousel" role="region" aria-roledescription="carrusel" aria-label="Opiniones de clientes">
@@ -717,7 +727,7 @@ def home_body():
           <p class="hint" id="descripcion-hint">Máximo 600 caracteres. Las fotos las adjuntas tú en WhatsApp o en el correo.</p>
           <p class="err" id="descripcion-err" hidden></p>
         </div>
-        <p class="form__privacy">Usamos estos datos solo para armar tu mensaje en este navegador. Consulta el <a href="privacidad.html">aviso de privacidad</a>.</p>
+        <p class="form__privacy">Este formulario no guarda tus datos: arma un mensaje que tú decides enviar. Al enviarlo, el taller usará tus datos para responderte y cotizar, como explica el <a href="privacidad.html">aviso de privacidad</a>.</p>
         <button class="btn btn--primary" type="submit" id="form-submit" disabled>Continuar en WhatsApp</button>
         <p class="form__alt" id="form-help">Se abre WhatsApp con tu mensaje listo; revísalo y pulsa Enviar. Las fotos las adjuntas ahí.</p>
         <p id="form-status" role="alert" class="err"></p>
@@ -760,24 +770,35 @@ def home_body():
 def privacy_body():
     cont = (f'WhatsApp <a href="{WA_LINK}" target="_blank" rel="noopener">{esc(N["whatsappMostrar"])}</a>, '
             f'teléfono <a href="tel:{TEL}">{esc(N["telefonoMostrar"])}</a> o correo <a href="mailto:{esc(N["correo"])}">{esc(N["correo"])}</a>')
+    legal = N.get("responsableLegal", "").strip()
+    quien = f"{esc(legal)}, que opera el taller con el nombre comercial {esc(N['responsable'])}" if legal else esc(N['responsable'])
     return f'''
 {header(False)}
 <main id="contenido" class="wrap legal">
   <h1>Aviso de privacidad</h1>
-  <p>Última actualización: {esc(N['fechaPrivacidad'])}.</p>
-  <section><h2>Responsable</h2>
-    <p>{esc(N['responsable'])}, con domicilio en {esc(N['direccion'])}. Contacto: {cont}.</p></section>
-  <section><h2>Qué datos se capturan en este sitio</h2>
-    <p>El formulario de cotización pide nombre, servicio de interés, vehículo (opcional) y la descripción de lo que necesitas. Eliges si la solicitud sale por WhatsApp o por correo; el taller recibe tu número o tu correo cuando envías el mensaje desde ese medio. Esta página no envía esos datos a un servidor propio ni los guarda: se usan en tu navegador para armar un mensaje de WhatsApp o de correo.</p></section>
-  <section><h2>Para qué se usan</h2>
-    <ul><li>Preparar el mensaje con el que solicitas una cotización.</li><li>Si decides enviarlo por WhatsApp o por correo, el taller lo recibe y lo usa para responderte y cotizar el servicio.</li></ul></section>
-  <section><h2>Con quién se comparten</h2>
-    <p>El mensaje viaja por WhatsApp o por tu servicio de correo solo cuando pulsas Enviar, y queda sujeto a los términos y al aviso de privacidad de esa plataforma. Si cargas el mapa, Google recibe tu visita a ese contenido. Las tipografías se cargan desde Google Fonts.</p></section>
-  <section><h2>Cookies y analítica</h2>
-    <p>Este sitio no usa cookies propias ni herramientas de analítica.</p></section>
-  <section><h2>Tus derechos</h2>
-    <p>Puedes solicitar el acceso, rectificación o cancelación de tus datos, u oponerte a su uso, escribiendo a los medios de contacto indicados arriba.</p></section>
-  <section><h2>Cambios a este aviso</h2>
+  <p>Última actualización: {esc(N['fechaPrivacidad'])}. Este aviso se emite conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares.</p>
+  <section><h2>1. Responsable</h2>
+    <p>{quien}, con domicilio en {esc(N['direccion'])}, es responsable del tratamiento de tus datos personales. Contacto: {cont}.</p></section>
+  <section><h2>2. Datos que tratamos</h2>
+    <p>Cuando nos pides una cotización por el formulario de este sitio, por WhatsApp, por teléfono o en el taller: nombre, número de WhatsApp o teléfono, correo electrónico (si eliges ese medio), datos del vehículo (marca, modelo, año, placas cuando hace falta para el servicio o el siniestro) y la descripción de lo que necesitas. Si la reparación es por siniestro, también el número de siniestro o de póliza.</p>
+    <p>No solicitamos datos personales sensibles. Te pedimos no incluirlos en tus mensajes.</p>
+    <p>El formulario no envía nada a un servidor de este sitio ni guarda información: arma en tu navegador un mensaje que tú decides enviar por WhatsApp o por correo.</p></section>
+  <section><h2>3. Para qué los usamos</h2>
+    <ul><li>Responder tu solicitud y agendar la evaluación presencial.</li><li>Elaborar y enviarte la cotización.</li><li>Realizar la reparación, avisarte de su avance y coordinar la entrega.</li><li>Atender el siniestro con tu aseguradora, cuando aplique.</li></ul>
+    <p>Son finalidades necesarias para darte el servicio. No usamos tus datos para publicidad ni para otras finalidades.</p></section>
+  <section><h2>4. Con quién los compartimos</h2>
+    <p>No vendemos ni compartimos tus datos con terceros para sus propios fines. Si tu reparación es por siniestro, compartimos con tu aseguradora los datos necesarios para atenderlo, porque es indispensable para esa relación. Fuera de ese caso, solo los comunicaríamos en los supuestos que permite la ley o por requerimiento de una autoridad competente.</p>
+    <p>Los mensajes que envías por WhatsApp o por correo viajan por esas plataformas y quedan sujetos a sus propios términos y avisos de privacidad.</p></section>
+  <section><h2>5. Fotografías de trabajos</h2>
+    <p>Las fotos de reparaciones que mostramos en este sitio se publican sin placas legibles ni datos de sus propietarios. Si reconoces tu vehículo y quieres que retiremos una foto, escríbenos y la quitamos.</p></section>
+  <section><h2>6. Tus derechos (ARCO) y cómo ejercerlos</h2>
+    <p>Puedes acceder a tus datos, rectificarlos, cancelarlos u oponerte a su uso; también revocar tu consentimiento o limitar su uso o divulgación. Envía tu solicitud a {esc(N['correo'])} o por WhatsApp al {esc(N['whatsappMostrar'])} con: tu nombre y un medio para responderte, una identificación que acredite tu identidad (o la de tu representante), qué derecho quieres ejercer y sobre qué datos, y cualquier documento que ayude a ubicarlos.</p>
+    <p>Te responderemos en un plazo máximo de 20 días hábiles y, si procede, haremos efectiva tu solicitud dentro de los 15 días hábiles siguientes a la respuesta. Si consideras que no se atendió tu solicitud, puedes acudir a la autoridad de protección de datos personales (la Secretaría Anticorrupción y Buen Gobierno).</p></section>
+  <section><h2>7. Cuánto tiempo los conservamos</h2>
+    <p>Solo el tiempo necesario para el servicio, la garantía y las obligaciones fiscales y legales que correspondan; después los eliminamos.</p></section>
+  <section><h2>8. Cookies y tecnologías de rastreo</h2>
+    <p>Este sitio no usa cookies propias ni herramientas de analítica o publicidad. Usa servicios de terceros que reciben datos técnicos de tu visita (como tu dirección IP): las tipografías se cargan desde Google Fonts y el mapa de Google se carga solo si pulsas el botón para verlo; al hacerlo, Google puede usar sus propias cookies. Puedes bloquear o borrar cookies desde la configuración de tu navegador.</p></section>
+  <section><h2>9. Cambios a este aviso</h2>
     <p>Cualquier cambio se publicará en esta misma página con su fecha de actualización.</p></section>
 </main>
 {footer(False)}
@@ -791,12 +812,17 @@ CSP = ("default-src 'self'; img-src 'self' data:; style-src 'self' https://fonts
        "connect-src 'none'; form-action 'none'; base-uri 'self'; object-src 'none'")
 
 
+def asset_version(rel):
+    import hashlib
+    return hashlib.sha256((ROOT / rel).read_bytes()).hexdigest()[:10]
+
+
 def page(title, desc, body, inline, home):
     live = bool(N["dominio"]) and bool(N.get("publicado"))
     # La página de privacidad no se indexa nunca; la principal solo cuando "publicado" es true
     robots = "" if (live and home) else '<meta name="robots" content="noindex, nofollow">'
     canon = f'<link rel="canonical" href="{esc(N["dominio"])}/">' if (N["dominio"] and home) else ""
-    og_url = (f'<meta property="og:url" content="{esc(N["dominio"])}/"><meta property="og:image" content="{esc(N["dominio"])}/img/logo-da-800.jpg">'
+    og_url = (f'<meta property="og:url" content="{esc(N["dominio"])}/"><meta property="og:image" content="{esc(N["dominio"])}/img/logo-dya-800.jpg">'
               '<meta name="twitter:card" content="summary">') if (N["dominio"] and home) else ""
     css = (ROOT / "css" / "styles.css").read_text(encoding="utf-8")
     js = (ROOT / "js" / "app.js").read_text(encoding="utf-8")
@@ -807,8 +833,9 @@ def page(title, desc, body, inline, home):
         meta_top = ""
         css_pad = ""
     else:
-        head_css = '<link rel="stylesheet" href="css/styles.css">'
-        tail_js = '<script src="js/app.js" defer></script>'
+        # Versión por contenido: cada cambio de CSS o JS cambia la URL y el navegador no usa una copia vieja
+        head_css = f'<link rel="stylesheet" href="css/styles.css?v={asset_version("css/styles.css")}">'
+        tail_js = f'<script src="js/app.js?v={asset_version("js/app.js")}" defer></script>'
         csp = f'<meta http-equiv="Content-Security-Policy" content="{CSP}">'
         meta_top = ""
         css_pad = ""
@@ -819,7 +846,7 @@ def page(title, desc, body, inline, home):
 {robots}{canon}
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-dya-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:locale" content="es_MX">
 <meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(desc)}">{og_url}
