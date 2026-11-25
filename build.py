@@ -822,6 +822,9 @@ def page(title, desc, body, inline, home):
     # La página de privacidad no se indexa nunca; la principal solo cuando "publicado" es true
     robots = "" if (live and home) else '<meta name="robots" content="noindex, nofollow">'
     canon = f'<link rel="canonical" href="{esc(N["dominio"])}/">' if (N["dominio"] and home) else ""
+    # Verificación de Google Search Console (prefijo de URL, método "Etiqueta HTML"): solo el código de content
+    gv = re.sub(r"[^A-Za-z0-9_-]", "", N.get("googleVerificacion", ""))
+    verif = f'<meta name="google-site-verification" content="{gv}">' if (gv and home) else ""
     og_url = (f'<meta property="og:url" content="{esc(N["dominio"])}/"><meta property="og:image" content="{esc(N["dominio"])}/img/logo-dya-800.jpg">'
               '<meta name="twitter:card" content="summary">') if (N["dominio"] and home) else ""
     css = (ROOT / "css" / "styles.css").read_text(encoding="utf-8")
@@ -843,7 +846,7 @@ def page(title, desc, body, inline, home):
 {meta_top}
 {csp}
 <meta name="description" content="{esc(desc)}">
-{robots}{canon}
+{robots}{verif}{canon}
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-dya-32.png">
