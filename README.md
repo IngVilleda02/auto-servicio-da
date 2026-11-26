@@ -50,19 +50,20 @@ Ninguna. No hay servidor, claves ni APIs. El mapa usa el embed público de Googl
 - La versión del sitio incluye CSP por `<meta>` (scripts y estilos solo propios; `frame-src` solo `https://www.google.com`). `vercel.json` añade cabeceras. Si despliegas en otro servidor, replica esas cabeceras. Prueba primero la CSP en `Content-Security-Policy-Report-Only`.
 - No hay analítica. Si se añade después, registrar solo eventos (inicio de cotización, clic en WhatsApp, clic en cómo llegar), sin datos personales.
 
-## Antes de lanzar: revisión legal (pendientes del cliente)
+## Revisión legal
 
-Revisión hecha el 12 de noviembre de 2026. No sustituye la opinión de un abogado; los puntos 1 a 5 conviene cerrarlos antes de abrir el sitio a Google.
+Revisión hecha el 12 de noviembre de 2026 y cerrada con el cliente el 25 de noviembre de 2026. No sustituye la opinión de un abogado.
 
-1. **Responsable del aviso de privacidad:** nombre de la persona física o razón social dueña del taller. Ponlo en `negocio.responsableLegal` y ejecuta `py build.py`. Hoy el aviso solo dice el nombre comercial.
-2. **Logotipo de Qualitas:** es una marca registrada. Usarlo requiere autorización por escrito de Qualitas (o del convenio). Si no la hay, vacía `qualitas.logo` y deja solo el texto.
-3. **Convenio con Qualitas:** el sitio dice que trabajan "de la mano con Qualitas". Debe existir el convenio; si no, cambia el texto (Ley Federal de Protección al Consumidor: publicidad veraz).
-4. **Foto de la portada (hero):** confirmar que el taller tiene derecho a usarla (es de `Imagenes/Img3`, de origen desconocido). Si es de un banco de imágenes, guardar la licencia; si no, reemplazarla por una foto propia.
-5. **Fotos de clientes:** las placas ya están difuminadas en todas las fotos donde se leían (`tools` no lo hace solo: si regeneras una foto desde `Galeria`, vuelve a difuminarla). Conviene tener el permiso del dueño de cada vehículo; el aviso ofrece retirar una foto si alguien lo pide.
-6. **Reseñas de Google:** se muestran con nombre e inicial del apellido. Para mostrar el nombre completo, pide permiso a los autores y pon `resenasNombreCompleto` en `true`.
-7. **Plan de Vercel:** el plan Hobby es solo para uso no comercial; un sitio de negocio debe estar en Pro (riesgo de suspensión de la cuenta, no de demanda).
-8. **Opcional (privacidad):** servir la tipografía Archivo desde el propio sitio en lugar de Google Fonts para no enviar la IP de los visitantes a Google.
-9. Código postal del domicilio, si se quiere mostrar.
+Confirmado por el cliente:
+- Responsable del aviso de privacidad: razón social **Hojalatería y pintura** (`negocio.responsableLegal`).
+- Convenio con Qualitas vigente y autorización para usar su nombre y logotipo, a nombre de la razón social.
+- Fotos de los portafolios con permiso del taller; las placas legibles están difuminadas (si regeneras una foto desde `Galeria`, vuelve a difuminarla).
+- Código postal 76804 (`negocio.codigoPostal`, también en los datos estructurados).
+
+Decisiones abiertas (no bloquean la entrega):
+- Plan de Vercel: se queda en Hobby por ahora; pasar a Pro y conectar dominio propio con el siguiente cliente. Hobby es para uso no comercial, así que hay riesgo de suspensión de la cuenta mientras tanto.
+- Reseñas con nombre e inicial; nombre completo solo con permiso de los autores (`resenasNombreCompleto`).
+- Opcional: servir la tipografía desde el propio sitio en lugar de Google Fonts.
 
 Ya resuelto en el sitio:
 - Aviso de privacidad con los elementos del artículo 15 de la LFPDPPP (2025): responsable y domicilio, datos, finalidades, transferencias (aseguradora en siniestros), derechos ARCO con requisitos y plazos, revocación, conservación, cookies de terceros y cambios.

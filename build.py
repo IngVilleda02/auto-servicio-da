@@ -106,7 +106,7 @@ def jsonld():
         "description": N["descripcionCorta"],
         "telephone": TEL,
         "address": {"@type": "PostalAddress", "streetAddress": "Av. 4 Oriente N° 14, Camino a Santa Cruz Nieto",
-                    "addressLocality": "San Juan del Río", "addressRegion": "Querétaro",
+                    "addressLocality": "San Juan del Río", "addressRegion": "Querétaro", "postalCode": N.get("codigoPostal", ""),
                     "addressCountry": "MX"},
         "geo": {"@type": "GeoCoordinates", "latitude": M["lat"], "longitude": M["lng"]},
         "hasMap": MAP_OPEN,
