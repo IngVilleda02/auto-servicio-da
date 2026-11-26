@@ -887,7 +887,7 @@ def main():
     (art / "index.html").write_text(page(N["nombre"], desc_home, home_body(), True, True), encoding="utf-8")
     (art / "privacidad.html").write_text(page(titles[1], f"Aviso de privacidad de {N['nombre']}.", privacy_body(), True, False), encoding="utf-8")
     live = bool(N["dominio"]) and bool(N.get("publicado"))
-    robots = (f"User-agent: *\nAllow: /\nDisallow: /privacidad.html\nSitemap: {N['dominio']}/sitemap.xml\n" if live
+    robots = (f"User-agent: *\nAllow: /\nSitemap: {N['dominio']}/sitemap.xml\n" if live
               else "User-agent: *\nDisallow: /\n")
     sm = ROOT / "sitemap.xml"
     if live:

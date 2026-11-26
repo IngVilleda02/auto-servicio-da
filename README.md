@@ -74,10 +74,10 @@ Ya resuelto en el sitio:
 
 ## Salir en Google (sin dominio propio)
 
-Está preparado pero **apagado**. En `data/config.json`, `negocio.publicado` está en `false`: el sitio lleva `noindex` y `robots.txt` bloquea todo.
+**Abierto desde el 25 de noviembre de 2026** (`negocio.publicado` en `true`). Search Console verificado con prefijo de URL `https://auto-servicio-da.vercel.app/` (etiqueta HTML: `negocio.googleVerificacion`). Para volver a ocultarlo, pon `publicado` en `false`, genera y publica.
 
-Para abrirlo a Google:
-1. Pon `negocio.publicado` en `true` y ejecuta `py build.py`. Se quita `noindex` de la página principal, `robots.txt` la permite, se crea `sitemap.xml` y quedan activos canonical, `og:url` y `og:image`. El aviso de privacidad sigue sin indexarse.
+Cómo se abrió:
+1. Pon `negocio.publicado` en `true` y ejecuta `py build.py`. Se quita `noindex` de la página principal, `robots.txt` permite todo, se crea `sitemap.xml` y quedan activos canonical, `og:url` y `og:image`. El aviso de privacidad sigue sin indexarse.
 2. `git add -A`, `git commit`, `git push`.
 3. En Google Search Console agrega la propiedad `https://auto-servicio-da.vercel.app`, envía `sitemap.xml` y pide indexar la página principal.
 4. En el Perfil de Empresa de Google (el de Maps) enlaza este sitio.

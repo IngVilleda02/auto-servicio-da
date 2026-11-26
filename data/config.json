@@ -18,7 +18,7 @@
     "responsable": "Auto Servicio D&A",
     "responsableLegal": "",
     "_responsableLegal": "Nombre de la persona física o razón social dueña del taller (lo pide la ley para el aviso de privacidad). Si está vacío se muestra solo el nombre comercial.",
-    "publicado": false,
+    "publicado": true,
     "googleVerificacion": "Hpu9xc0FFQfbi-s_Vld6pSFpJ1WOVYbloiMtwFp1YJU",
     "_googleVerificacion": "Código de Search Console (método Etiqueta HTML): pega solo el valor de content, por ejemplo AbC123xyz. Va en la página principal.",
     "_publicado": "Déjalo en false mientras se revisan los pendientes. Con true el sitio se vuelve indexable."
